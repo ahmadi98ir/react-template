@@ -16,7 +16,7 @@ const page = () => {
             <div className="col-lg-4">
               <div className="contact-page-content rmb-55 wow fadeInUp delay-0-2s">
                 <div className="section-title mb-30">
-                  <span className="sub-title mb-15">Get In Touch</span>
+                  <span className="sub-title mb-15">با من در تماس باشید</span>
                   <h2>
                     Let’s Talk For your <span>Next Projects</span>
                   </h2>
