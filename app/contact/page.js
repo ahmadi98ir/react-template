@@ -10,7 +10,7 @@ const page = () => {
     <NoxfolioLayout>
       <PageBanner pageName={"تماس با من"} />
       {/* Contact Page Area start */}
-      <section className="contact-page pt-40 pb-130 rpb-100 rel z-1">
+      <section dir="rtl" className="contact-page pt-40 pb-130 rpb-100 rel z-1">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-4">
@@ -18,28 +18,27 @@ const page = () => {
                 <div className="section-title mb-30">
                   <span className="sub-title mb-15">با من در تماس باشید</span>
                   <h2>
-                    Let’s Talk For your <span>Next Projects</span>
+                  برای پروژه جدیدتان <span> مشاوره بگیرید .</span>
+                 
                   </h2>
                   <p>
-                    Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
-                    inventore veritatis
+                  نظرات و پیشنهادات شما برای من ارزشمند است.
                   </p>
                 </div>
                 <h6>Main Office</h6>
                 <div className="widget_contact_info mb-35">
                   <ul>
                     <li>
-                      <i className="far fa-map-marker-alt" /> 55 Main Street,
-                      2nd block,
-                      <br /> New York City
+                      <i className="far fa-map-marker-alt" /> تهران، بلوار میرداماد، ابتدای خیابان شنگرف، درب شرقی بانک مرکزی
+                      <br /> 
                     </li>
                     <li>
                       <i className="far fa-envelope" />{" "}
-                      <a href="mailto:support@gmail.com">support@gmail.com</a>
+                      <a href="mailto:support@gmail.com">info@ahmadi98.ir</a>
                     </li>
                     <li>
                       <i className="far fa-phone" />{" "}
-                      <a href="callto:+880(123)45688">+880 (123) 456 88</a>
+                      <a dir="ltr" href="callto:+98 (021) 29985735">+98 (021) 29985735</a>
                     </li>
                   </ul>
                 </div>
@@ -76,16 +75,16 @@ const page = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label htmlFor="name">Full Name</label>
+                        <label htmlFor="name">نام کامل شما</label>
                         <input
                           type="text"
                           id="name"
-                          name="name"
+                          name="نام و نام خانوادگی"
                           className="form-control"
                           defaultValue=""
-                          placeholder="Richard D. Hammond"
+                          placeholder=" "
                           required=""
-                          data-error="Please enter your Name"
+                          data-error="لطفا نام کامل خود راوارد نمایید."
                         />
                         <label htmlFor="name" className="for-icon">
                           <i className="far fa-user" />
@@ -95,11 +94,11 @@ const page = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label htmlFor="email">Email Address</label>
+                        <label htmlFor="email">آدرس ایمیل شما</label>
                         <input
                           type="email"
                           id="email"
-                          name="email"
+                          name="آدرس ایمیل"
                           className="form-control"
                           defaultValue=""
                           placeholder="support@gmail.com"
@@ -118,10 +117,10 @@ const page = () => {
                         <input
                           type="text"
                           id="phone_number"
-                          name="phone_number"
+                          name="تلفن شما"
                           className="form-control"
                           defaultValue=""
-                          placeholder="+880 (123) 456 88"
+                          placeholder="0912xxxxxxx"
                           required=""
                           data-error="Please enter your Phone Number"
                         />
@@ -133,16 +132,16 @@ const page = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label htmlFor="subject">Subject</label>
+                        <label htmlFor="subject">موضوع</label>
                         <input
                           type="text"
                           id="subject"
                           name="subject"
                           className="form-control"
                           defaultValue=""
-                          placeholder="Subject"
+                          placeholder="موضوع"
                           required=""
-                          data-error="Please enter your Subject"
+                          data-error="لطفا موضوع پیام خود را وارد نمایید."
                         />
                         <label htmlFor="subject" className="for-icon">
                           <i className="far fa-text" />
@@ -152,15 +151,15 @@ const page = () => {
                     </div>
                     <div className="col-md-12">
                       <div className="form-group">
-                        <label htmlFor="message">Message</label>
+                        <label htmlFor="message">پیام شما</label>
                         <textarea
                           name="message"
                           id="message"
                           className="form-control"
                           rows={4}
-                          placeholder="write message"
+                          placeholder="چیزی بنویسید"
                           required=""
-                          data-error="Please enter your Message"
+                          data-error="لطفا پیام خود را وارد نمایید."
                           defaultValue={""}
                         />
                         <div className="help-block with-errors" />
@@ -169,7 +168,7 @@ const page = () => {
                     <div className="col-md-12">
                       <div className="form-group mb-0">
                         <button type="submit" className="theme-btn">
-                          Send Us Message <i className="far fa-angle-right" />
+                          ارسال پیام <i className="far fa-angle-right" />
                         </button>
                         <div id="msgSubmit" className="hidden" />
                       </div>
@@ -199,7 +198,7 @@ const page = () => {
         <div className="container">
           <div className="our-location">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m12!1m10!1m3!1d142190.2862584524!2d-74.01298319978558!3d40.721725351435126!2m1!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sbd!4v1663473911885!5m2!1sen!2sbd"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51824.220379336446!2d51.46814961508575!3d35.725879778389086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e041c1fabc95b%3A0x157a53179ef123b3!2z2KjYp9mG2qkg2YXYsdqp2LLbjCDYrNmF2YfZiNix24wg2KfYs9mE2KfZhduMINin24zYsdin2YY!5e0!3m2!1sfa!2sde!4v1730314368653!5m2!1sfa!2sde"
               style={{ border: 0, width: "100%" }}
               allowFullScreen=""
               loading="lazy"
