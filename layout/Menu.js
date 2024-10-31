@@ -21,13 +21,13 @@ const MultiMenu = () => {
         <a href="#">پروژه ها</a>
         <ul>
           <li>
-            <Link href="/projects">project Grid</Link>
+            <Link href="/projects"> خاتمه یافته</Link>
           </li>
           <li>
-            <Link href="/projects-masonry">projects masonry</Link>
+            <Link href="/projects-masonry"> در حال ساخت</Link>
           </li>
           <li>
-            <Link href="/project-details">projects details</Link>
+            <Link href="/project-details"> آتی</Link>
           </li>
         </ul>
         <DropdownBtn />
@@ -36,10 +36,10 @@ const MultiMenu = () => {
         <a href="#">وبلاگ</a>
         <ul>
           <li>
-            <Link href="/blog">blog standard</Link>
+            <Link href="/blog"> هوش مصنوعی</Link>
           </li>
           <li>
-            <Link href="/blog-details">blog details</Link>
+            <Link href="/blog-details">تازه ها</Link>
           </li>
         </ul>
         <DropdownBtn />

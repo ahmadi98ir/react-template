@@ -25,7 +25,7 @@ const page = () => {
                   نظرات و پیشنهادات شما برای من ارزشمند است.
                   </p>
                 </div>
-                <h6>Main Office</h6>
+                <h6>دفتر مرکزی</h6>
                 <div className="widget_contact_info mb-35">
                   <ul>
                     <li>
@@ -42,7 +42,7 @@ const page = () => {
                     </li>
                   </ul>
                 </div>
-                <h5>Follow Me</h5>
+                <h5>شبکه های اجتماعی</h5>
                 <div className="social-style-one mt-10">
                 <a href="https://x.com/ahmadi98ir?t=uAi46M93v5CEwVLcumpZAg&s=09"target="blank">
               <i className="fab fa-twitter" />
@@ -103,7 +103,7 @@ const page = () => {
                           defaultValue=""
                           placeholder="support@gmail.com"
                           required=""
-                          data-error="Please enter your Email"
+                          data-error="لطفا آدرس ایمیل خود را وارد نمایید."
                         />
                         <label htmlFor="email" className="for-icon">
                           <i className="far fa-envelope" />
@@ -113,7 +113,7 @@ const page = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label htmlFor="phone_number">Phone Number</label>
+                        <label htmlFor="phone_number">شماره تماس</label>
                         <input
                           type="text"
                           id="phone_number"
@@ -168,7 +168,7 @@ const page = () => {
                     <div className="col-md-12">
                       <div className="form-group mb-0">
                         <button type="submit" className="theme-btn">
-                          ارسال پیام <i className="far fa-angle-right" />
+                          ارسال پیام 
                         </button>
                         <div id="msgSubmit" className="hidden" />
                       </div>

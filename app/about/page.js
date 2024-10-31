@@ -7,15 +7,15 @@ import NoxfolioLayout from "@/layout/NoxfolioLayout";
 import Link from "next/link";
 
 export const metadata = {
-  title: "About Me",
+  title: "درباره من",
 };
 
 const About = () => {
   return (
     <NoxfolioLayout>
-      <PageBanner pageName={"About Me"} />
+      <PageBanner pageName={"درباره من"} />
 
-      <div className="about-main-image-area pt-40">
+      <div dir="rtl" className="about-main-image-area pt-40">
         <div className="container">
           <div className="about-main-image wow fadeInUp delay-0-5s">
             <img src="assets/images/about/about-page.jpg" alt="About Page" />
@@ -23,33 +23,29 @@ const About = () => {
         </div>
       </div>
       {/* About Page Area start */}
-      <section className="about-page-area py-130 rpy-100 rel z-1">
+      <section dir="rtl" className="about-page-area py-130 rpy-100 rel z-1">
         <div className="container">
           <div className="row align-items-center justify-content-between">
             <div className="col-lg-6">
               <div className="about-page-content-part rel z-2 rmb-55">
                 <div className="section-title mb-35 wow fadeInUp delay-0-2s">
-                  <span className="sub-title mb-15">About Me</span>
+                  <span className="sub-title mb-15">درباره من</span>
                   <h2>
-                    Professional <span>Problem Solutions</span> For Digital
-                    Products
+                  تخصص ما، رفع چالش‌های دیجیتال شماست.
                   </h2>
                   <p>
-                    At vero eos et accusamus etodio dignissimos ducimus
-                    praesentium voluptatum corrupti quos dolores quas molestias
-                    excepturi sint occaecati cupiditate provident qui officia
-                    deserunt mollitia animi, id est laborum et dolorum
+                  با هم، ایده‌ها را به واقعیت تبدیل می‌کنیم.
                   </p>
                 </div>
                 <ul className="list-style-one two-column pb-30 wow fadeInUp delay-0-2s">
-                  <li>Branding &amp; Design</li>
-                  <li>Digital Marketing</li>
-                  <li>Web Development</li>
-                  <li>Product Design</li>
+                  <li>برندینگ</li>
+                  <li>دیجیتال مارکتینگ</li>
+                  <li>توسعه دهنده وب</li>
+                  <li>طراح و مجری پروژه ها</li>
                 </ul>
                 <Link legacyBehavior href="/">
                   <a className="theme-btn wow fadeInUp delay-0-2s">
-                    Learn More <i className="far fa-angle-right" />
+                    جزئیات بیشتر  
                   </a>
                 </Link>
               </div>
@@ -57,22 +53,22 @@ const About = () => {
             <div className="col-xl-5 col-lg-6">
               <div className="about-right-part wow fadeInLeft delay-0-3s">
                 <div className="experience-years">
-                  <b>25+</b>
-                  <h5>Years Of Experience</h5>
+                  <b>13+ سال</b>
+                  <h5> تجربه کاری موثر</h5>
                 </div>
                 <div className="about-btn one wow fadeInRight delay-0-4s">
                   <img src="assets/images/about/btn-image1.png" alt="Image" />
-                  <h6>Experience Designer</h6>
+                  <h6>طراحی حرفه ای</h6>
                   <i className="fas fa-arrow-right" />
                 </div>
                 <div className="about-btn two wow fadeInRight delay-0-5s">
                   <img src="assets/images/about/btn-image2.png" alt="Image" />
-                  <h6>Mark J. Collins</h6>
+                  <h6>کنترل پروژه</h6>
                   <i className="fas fa-arrow-right" />
                 </div>
                 <div className="about-btn three wow fadeInRight delay-0-4s">
                   <img src="assets/images/about/btn-image1.png" alt="Image" />
-                  <h6>Experience Designer</h6>
+                  <h6>تیم قدرتمند</h6>
                   <i className="fas fa-arrow-right" />
                 </div>
                 <div className="dot-shape one">
@@ -127,8 +123,7 @@ const About = () => {
               <div className="faq-content-part rel z-2">
                 <div className="section-title mb-40 wow fadeInUp delay-0-4s">
                   <h2>
-                    Professional Solutions For Your <span>Digital Product</span>{" "}
-                    Design and development
+                   برای توسعه کسب و کار شما، راهکار های ویژه ای داریم.
                   </h2>
                 </div>
                 <Faq />

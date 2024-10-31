@@ -2,7 +2,7 @@ import Counter from "./Counter";
 
 const About = () => {
   return (
-    <section id="about" className="about-area rel z-1">
+    <section dir="rtl" id="about" className="about-area rel z-1">
       <div className="for-bgc-black py-130 rpy-100">
         <div className="container">
           <div className="row gap-100 align-items-center">
@@ -11,8 +11,7 @@ const About = () => {
                 <div className="section-title mb-35 wow fadeInUp delay-0-2s">
                   <span className="sub-title mb-15">About Me</span>
                   <h2>
-                    Professional <span>Problem Solutions</span> For Digital
-                    Products
+                  تخصص ما، رفع چالش‌های دیجیتال شماست.
                   </h2>
                   <p>
                     At vero eos et accusamus etodio dignissimos ducimus
