@@ -4,14 +4,14 @@ import NoxfolioLayout from "@/layout/NoxfolioLayout";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Blog Standard",
+  title: "هوش مصنوعی",
 };
 
 const BlogPage = () => {
   return (
     <NoxfolioLayout>
-      <PageBanner pageName={"Blog Standard"} />
-      <section className="blog-standard-area pb-70 rpb-40 pb-130 rpb-100 rel z-1">
+      <PageBanner pageName={"وبلاگ"} />
+      <section dir="rtl" className="blog-standard-area pb-70 rpb-40 pb-130 rpb-100 rel z-1">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">

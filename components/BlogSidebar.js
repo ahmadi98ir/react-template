@@ -4,55 +4,55 @@ const BlogSidebar = () => {
   return (
     <div className="main-sidebar rmt-65">
       <div className="widget widget-search wow fadeInUp delay-0-2s">
-        <h4 className="widget-title">Search</h4>
+        <h4 className="widget-title">جستجو</h4>
         <form action="#" className="default-search-form">
           <input type="text" placeholder="Keywords" required="" />
           <button type="submit" className="searchbutton far fa-search" />
         </form>
       </div>
       <div className="widget widget-category wow fadeInUp delay-0-4s">
-        <h4 className="widget-title">Category</h4>
+        <h4 className="widget-title">دسته بندی اصلی</h4>
         <ul>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Web Design
+              طراحی وب
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Mobile Apps Design
+              اپلیکیشن موبایل
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Brand Identity Design
+              داده کاوی
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Motion Graphic Design
+              هوش مصنوعی
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Web Development
+              توسعه وب
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
             <Link legacyBehavior href="blog">
-              Digital Marketing
+              دیجیتال مارکتینگ
             </Link>
           </li>
         </ul>
       </div>
       <div className="widget widget-recent-news wow fadeInUp delay-0-2s">
-        <h4 className="widget-title">Latest News</h4>
+        <h4 className="widget-title">تازه ها</h4>
         <ul>
           <li>
             <div className="image">
@@ -107,7 +107,7 @@ const BlogSidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="widget widget-tag-cloud wow fadeInUp delay-0-2s">
+      {/* <div className="widget widget-tag-cloud wow fadeInUp delay-0-2s">
         <h4 className="widget-title">Popular Tags</h4>
         <div className="tag-coulds">
           <Link legacyBehavior href="blog">
@@ -132,8 +132,8 @@ const BlogSidebar = () => {
             Mobile Apps
           </Link>
         </div>
-      </div>
-      <div className="widget widget-cta wow fadeInUp delay-0-2s">
+      </div> */}
+      {/* <div className="widget widget-cta wow fadeInUp delay-0-2s">
         <div
           className="cta-widget"
           style={{
@@ -148,7 +148,7 @@ const BlogSidebar = () => {
             </a>
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
