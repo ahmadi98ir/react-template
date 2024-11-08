@@ -17,7 +17,7 @@ export const metadata = {
 const ProjectsPage = () => {
   return (
     <NoxfolioLayout>
-      <PageBanner pageName={"Project Grid View"} />
+      <PageBanner pageName={"پروژه  های تکمیل شده"} />
       <section className="projects-area pt-40 pb-130 rpb-100 rel z-1">
         <div className="container">
           <ProjectGridIsotop />

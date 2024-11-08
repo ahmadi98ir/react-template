@@ -108,11 +108,11 @@ const Footer1 = () => {
             <div className="col-lg-6">
               <div className="copyright-text">
                 <p>
-                  Copyright @{date},{" "}
-                  <Link legacyBehavior href="/">
-                    MahdiAhmadi
+                . این وب سایت متعلق به 
+                 {" "} <Link legacyBehavior href="/">
+                    مهدی احمدی
                   </Link>{" "}
-                  All Rights Reserved
+                  می باشد
                 </p>
               </div>
             </div>
