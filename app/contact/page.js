@@ -29,7 +29,7 @@ const page = () => {
                 <div className="widget_contact_info mb-35">
                   <ul>
                     <li>
-                      <i className="far fa-map-marker-alt" /> تهران، بلوار میرداماد، ابتدای خیابان شنگرف، درب شرقی بانک مرکزی
+                      <i className="far fa-map-marker-alt" /> تهران، بلوار میرداماد، ابتدای خیابان شنگرف
                       <br /> 
                     </li>
                     <li>
@@ -38,7 +38,7 @@ const page = () => {
                     </li>
                     <li>
                       <i className="far fa-phone" />{" "}
-                      <a dir="ltr" href="callto:+98 (021) 29985735">+98 (021) 29985735</a>
+                      <a dir="ltr" href="callto:+98 910213207">+98 9102413207</a>
                     </li>
                   </ul>
                 </div>
@@ -197,13 +197,13 @@ const page = () => {
       <div className="contact-page-map pb-120 rpb-90 wow fadeInUp delay-0-2s">
         <div className="container">
           <div className="our-location">
-            <iframe
+            {/* <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51824.220379336446!2d51.46814961508575!3d35.725879778389086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e041c1fabc95b%3A0x157a53179ef123b3!2z2KjYp9mG2qkg2YXYsdqp2LLbjCDYrNmF2YfZiNix24wg2KfYs9mE2KfZhduMINin24zYsdin2YY!5e0!3m2!1sfa!2sde!4v1730314368653!5m2!1sfa!2sde"
               style={{ border: 0, width: "100%" }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            />
+            /> */}
           </div>
         </div>
       </div>

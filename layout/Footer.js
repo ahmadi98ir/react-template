@@ -86,7 +86,7 @@ const Footer1 = () => {
                 <h6 className="footer-title">نشانی</h6>
                 <ul>
                   <li>
-                    <i className="far fa-map-marker-alt" /> تهران، بلوار میرداماد، ابتدای خیابان شنگرف، درب شرقی بانک مرکزی 
+                    <i className="far fa-map-marker-alt" /> تهران، بلوار میرداماد، ابتدای خیابان شنگرف 
                   </li>
                   <li>
                     <i className="far fa-envelope" />{" "}
@@ -94,7 +94,7 @@ const Footer1 = () => {
                   </li>
                   <li>
                     <i className="far fa-phone" />{" "}
-                    <a dir="ltr" href="callto:+880(123)45688">+98 (021) 29985735</a>
+                    <a dir="ltr" href="callto:+98 9102413207">+98 9102413207</a>
                   </li>
                 </ul>
               </div>

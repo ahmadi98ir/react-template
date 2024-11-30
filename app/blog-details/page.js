@@ -66,7 +66,7 @@ const BlogDetails = () => {
                     </div>
                     <div className="text">
                       <span>Post By</span>
-                      <h5>Martin D. Rubio</h5>
+                      <h5>Mahdi Ahmadi</h5>
                     </div>
                     <div className="text">
                       <span>Published</span>

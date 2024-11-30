@@ -45,7 +45,7 @@ export default function Home() {
 {/*       <Blog /> */}
       {/* Blog Area end */}
       {/* Client Log start */}
-      <Clients />
+      {/* <Clients /> */}
       {/* Client Log end */}
     </NoxfolioLayout>
   );
