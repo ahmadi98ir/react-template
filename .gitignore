@@ -1,4 +1,8 @@
-node_modules
+node_modules/
+build/
+dist/
+.env
+.DS_Store
 .next
 public/uploads
 public/uploads/*
