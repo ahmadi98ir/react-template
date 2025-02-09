@@ -1,0 +1,23 @@
+name: Setup Nginx Configuration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+      
+      - name: Copy Nginx config and restart
+        run: |
+          echo "${{ secrets.NGINX_CONFIG }}" > ahmadi98.ir
+          sshpass -p "HajiY021mm" scp -P 8443 -o StrictHostKeyChecking=no ahmadi98.ir root@cool.ahmadi98.ir:/etc/nginx/sites-available/
+          sshpass -p "HajiY021mm" ssh -p 8443 -o StrictHostKeyChecking=no root@cool.ahmadi98.ir '
+            ln -sf /etc/nginx/sites-available/ahmadi98.ir /etc/nginx/sites-enabled/
+            nginx -t
+            systemctl restart nginx
+          '
