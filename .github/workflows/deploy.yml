@@ -18,17 +18,35 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+          echo "Dependencies installed successfully"
         
       - name: Build
-        run: npm run build
+        run: |
+          echo "Starting build process..."
+          npm run build
+          echo "Build completed successfully"
         
       - name: Trigger Coolify Deployment
         run: |
-          curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          -d '{"force": true}' \
-          "http://cool.ahmadi98.ir/api/v1/services/deploy"
+          echo "Triggering Coolify deployment..."
+          response=$(curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"force": true}' \
+            -w "\n%{http_code}" \
+            "http://cool.ahmadi98.ir/api/v1/services/deploy")
+          status_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          echo "Response body: $body"
+          echo "Status code: $status_code"
+          if [ "$status_code" -ge 200 ] && [ "$status_code" -lt 300 ]; then
+            echo "Deployment triggered successfully"
+          else
+            echo "Failed to trigger deployment"
+            exit 1
+          fi
         env:
           COOLIFY_TOKEN: 2|Qrt3JGyGGXz8GNq3LH9pCgb3i1bKMuUWh2kmT4Vr24660458
