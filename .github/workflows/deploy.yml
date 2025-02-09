@@ -12,41 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
-          npm ci
-          echo "Dependencies installed successfully"
-        
-      - name: Build
-        run: |
-          echo "Starting build process..."
-          npm run build
-          echo "Build completed successfully"
-        
-      - name: Trigger Coolify Deployment
-        run: |
-          echo "Triggering Coolify deployment..."
-          response=$(curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"force": true}' \
-            -w "\n%{http_code}" \
-            "http://cool.ahmadi98.ir/api/v1/deployments/webhook")
-          status_code=$(echo "$response" | tail -n1)
-          body=$(echo "$response" | sed '$d')
-          echo "Response body: $body"
-          echo "Status code: $status_code"
-          if [ "$status_code" -ge 200 ] && [ "$status_code" -lt 300 ]; then
-            echo "Deployment triggered successfully"
-          else
-            echo "Failed to trigger deployment"
-            exit 1
-          fi
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+      
+      - name: Deploy with SSH
         env:
-          COOLIFY_TOKEN: 2|Qrt3JGyGGXz8GNq3LH9pCgb3i1bKMuUWh2kmT4Vr24660458
+          SSH_PASS: HajiY021mm
+        run: |
+          echo "Connecting to Coolify server..."
+          sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no root@cool.ahmadi98.ir -p 8443 << 'ENDSSH'
+            cd /opt/coolify/source
+            docker ps
+            docker-compose pull
+            docker-compose up -d
+            echo "Waiting for services to start..."
+            sleep 10
+            docker ps
+            echo "Deployment completed!"
+          ENDSSH
