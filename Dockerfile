@@ -13,11 +13,15 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Build the app
-RUN npm run build
+# Set environment variables
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Expose port
+# Build the Next.js application
+RUN npx next build
+
+# Expose the listening port
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Run the application
+CMD ["npx", "next", "start"]
