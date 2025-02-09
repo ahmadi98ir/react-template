@@ -1,4 +1,4 @@
-name: Setup Nginx Configuration
+name: Setup Nginx Configuration with SSL
 
 on:
   workflow_dispatch:
@@ -12,12 +12,30 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
       
-      - name: Copy Nginx config and restart
+      - name: Setup Nginx and SSL
         run: |
+          # Create Nginx config
           echo "${{ secrets.NGINX_CONFIG }}" > ahmadi98.ir
+          
+          # Copy config to server
           sshpass -p "HajiY021mm" scp -P 8443 -o StrictHostKeyChecking=no ahmadi98.ir root@cool.ahmadi98.ir:/etc/nginx/sites-available/
+          
+          # Setup Nginx and SSL
           sshpass -p "HajiY021mm" ssh -p 8443 -o StrictHostKeyChecking=no root@cool.ahmadi98.ir '
+            # Install certbot if not installed
+            if ! command -v certbot &> /dev/null; then
+              apt-get update
+              apt-get install -y certbot python3-certbot-nginx
+            fi
+            
+            # Setup Nginx config
             ln -sf /etc/nginx/sites-available/ahmadi98.ir /etc/nginx/sites-enabled/
+            rm -f /etc/nginx/sites-enabled/default
             nginx -t
+            
+            # Get SSL certificate
+            certbot --nginx --non-interactive --agree-tos --email info@ahmadi98.ir -d ahmadi98.ir -d www.ahmadi98.ir
+            
+            # Restart Nginx
             systemctl restart nginx
           '
