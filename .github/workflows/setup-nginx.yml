@@ -14,11 +14,8 @@ jobs:
       
       - name: Setup Nginx and SSL
         run: |
-          # Create Nginx config
-          echo "${{ secrets.NGINX_CONFIG }}" > ahmadi98.ir
-          
           # Copy config to server
-          sshpass -p "HajiY021mm" scp -P 8443 -o StrictHostKeyChecking=no ahmadi98.ir root@cool.ahmadi98.ir:/etc/nginx/sites-available/
+          sshpass -p "HajiY021mm" scp -P 8443 -o StrictHostKeyChecking=no nginx.conf root@cool.ahmadi98.ir:/etc/nginx/sites-available/ahmadi98.ir
           
           # Setup Nginx and SSL
           sshpass -p "HajiY021mm" ssh -p 8443 -o StrictHostKeyChecking=no root@cool.ahmadi98.ir '
@@ -38,4 +35,10 @@ jobs:
             
             # Restart Nginx
             systemctl restart nginx
+            
+            # Show status
+            echo "Nginx configuration:"
+            nginx -T | grep -A 10 "ahmadi98.ir"
+            echo "Certificate status:"
+            certbot certificates
           '
