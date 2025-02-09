@@ -12,8 +12,18 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
       
+      - name: Check server connection
+        run: |
+          sshpass -p "HajiY021mm" ssh -p 8443 -o StrictHostKeyChecking=no root@cool.ahmadi98.ir 'echo "Server connection successful"'
+      
       - name: Setup Nginx and SSL
         run: |
+          # Check if nginx.conf exists
+          if [ ! -f nginx.conf ]; then
+            echo "Error: nginx.conf not found"
+            exit 1
+          fi
+          
           # Copy config to server
           sshpass -p "HajiY021mm" scp -P 8443 -o StrictHostKeyChecking=no nginx.conf root@cool.ahmadi98.ir:/etc/nginx/sites-available/ahmadi98.ir
           
@@ -21,24 +31,32 @@ jobs:
           sshpass -p "HajiY021mm" ssh -p 8443 -o StrictHostKeyChecking=no root@cool.ahmadi98.ir '
             # Install certbot if not installed
             if ! command -v certbot &> /dev/null; then
+              echo "Installing certbot..."
               apt-get update
               apt-get install -y certbot python3-certbot-nginx
             fi
             
             # Setup Nginx config
+            echo "Setting up Nginx configuration..."
             ln -sf /etc/nginx/sites-available/ahmadi98.ir /etc/nginx/sites-enabled/
             rm -f /etc/nginx/sites-enabled/default
+            
+            echo "Testing Nginx configuration..."
             nginx -t
             
             # Get SSL certificate
+            echo "Getting SSL certificate..."
             certbot --nginx --non-interactive --agree-tos --email info@ahmadi98.ir -d ahmadi98.ir -d www.ahmadi98.ir
             
             # Restart Nginx
+            echo "Restarting Nginx..."
             systemctl restart nginx
             
             # Show status
-            echo "Nginx configuration:"
+            echo "Current Nginx configuration:"
             nginx -T | grep -A 10 "ahmadi98.ir"
             echo "Certificate status:"
             certbot certificates
+            
+            echo "Setup completed successfully!"
           '
