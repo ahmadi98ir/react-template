@@ -1,9 +1,10 @@
 import React from 'react'
+import { config } from '../config'
 
 async function fetchPosts() {
   try {
-    // Use environment variable for API URL with a fallback
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
+    // Use config for API URL
+    const API_URL = config.apiBaseUrl
     
     // Create fetch options
     const fetchOptions = {
