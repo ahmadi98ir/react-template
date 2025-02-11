@@ -1,34 +1,16 @@
 import React from 'react'
-import { config } from '../config'
 
 async function fetchPosts() {
   try {
-    // Use config for API URL
-    const API_URL = config.apiBaseUrl
-    
-    // Create fetch options
+    // Use relative URL for API calls
     const fetchOptions = {
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
+      headers: {
+        'Accept': 'application/json',
+      }
     }
 
-    // Handle SSL certificate issues for both development and production
-    if (typeof window === 'undefined') {
-      // Server-side: Use NODE_TLS_REJECT_UNAUTHORIZED
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-    } else if (process.env.NODE_ENV === 'development') {
-      // Client-side development: Use https.Agent
-      const https = require('https')
-      fetchOptions.agent = new https.Agent({
-        rejectUnauthorized: false
-      })
-    }
-
-    const res = await fetch(`${API_URL}/api/posts`, fetchOptions)
-    
-    // Re-enable SSL verification if on server-side
-    if (typeof window === 'undefined') {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'
-    }
+    const res = await fetch('/api/posts', fetchOptions)
     
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`)
