@@ -3,6 +3,7 @@ FROM node:18-alpine AS builder
 
 # Add necessary packages for build
 RUN apk add --no-cache libc6-compat
+
 # Set working directory
 WORKDIR /app
 
@@ -50,23 +51,3 @@ EXPOSE 3000
 
 # Start application
 CMD ["node", "server.js"]
-
-version: '3.8'
-services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NODE_ENV=production
-    restart: always
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
