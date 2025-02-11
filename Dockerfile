@@ -9,8 +9,8 @@ WORKDIR /app
 
 # Install dependencies only when needed
 COPY package*.json ./
-RUN npm ci
-
+# Changed from npm ci to npm install
+RUN npm install --frozen-lockfile
 # Copy source files
 COPY . .
 
