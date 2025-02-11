@@ -10,17 +10,25 @@ async function fetchPosts() {
       next: { revalidate: 3600 }
     }
 
-    // Temporarily disable SSL verification for server-side requests 
+    // Handle SSL certificate issues for both development and production
     if (typeof window === 'undefined') {
+      // Server-side: Use NODE_TLS_REJECT_UNAUTHORIZED
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    } else if (process.env.NODE_ENV === 'development') {
+      // Client-side development: Use https.Agent
+      const https = require('https')
+      fetchOptions.agent = new https.Agent({
+        rejectUnauthorized: false
+      })
     }
+
     const res = await fetch(`${API_URL}/api/posts`, fetchOptions)
     
-    // Re-enable SSL verification
+    // Re-enable SSL verification if on server-side
     if (typeof window === 'undefined') {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'
-  }
-  
+    }
+    
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`)
     }
@@ -56,9 +64,9 @@ export default async function Blog() {
                   <h5 className="card-title">{post.title}</h5>
                   <p className="card-text">{post.excerpt || post.content?.substring(0, 150)}...</p>
                   <a href={`/blog/${post.id}`} className="btn btn-primary">Read More</a>
-          </div>
-      </div>
-    </div>
+                </div>
+              </div>
+            </div>
           ))
         ) : (
           <div className="col-12">
