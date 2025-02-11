@@ -9,11 +9,12 @@ WORKDIR /app
 
 # Install dependencies only when needed
 COPY package*.json ./
-# Changed from npm ci to npm install
-RUN npm install --frozen-lockfile
+RUN npm install
 # Copy source files
 COPY . .
 
+# Move _app.js to correct location
+RUN mkdir -p pages && mv cms/_app.js pages/ || true
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production

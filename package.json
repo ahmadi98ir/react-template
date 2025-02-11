@@ -1,6 +1,6 @@
 {
   "name": "ahmadi98",
-  "version": "1.0.0",
+  "version": "3.8.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -15,7 +15,11 @@
     "next-auth": "4.23.2",
     "@prisma/client": "5.4.2",
     "axios": "1.5.1",
-    "sass": "1.69.0"
+    "sass": "1.69.0",
+    "react-bootstrap": "^2.10.1",
+    "react-countup": "^6.5.0",
+    "react-visibility-sensor": "^5.1.1",
+    "bootstrap": "^5.3.2"
   },
   "devDependencies": {
     "eslint": "8.51.0",
@@ -29,7 +33,6 @@
     "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}",
     "DATABASE_URL": "${DATABASE_URL}"
   },
-  "version": "3.8",
   "services": {
     "web": {
       "build": ".",
