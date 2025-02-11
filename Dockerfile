@@ -9,12 +9,10 @@ WORKDIR /app
 
 # Install dependencies only when needed
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 # Copy source files
 COPY . .
 
-# Move _app.js to correct location
-RUN mkdir -p pages && mv cms/_app.js pages/ || true
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
