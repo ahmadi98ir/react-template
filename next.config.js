@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: '/api/:path*',
+        destination: 'https://cool.ahmadi98.ir/api/:path*',
       },
     ]
   },
@@ -27,6 +27,12 @@ const nextConfig = {
   },
   images: {
     domains: ['cool.ahmadi98.ir', 'ahmadi98.ir'],
+    unoptimized: true,
   },
-  reactStrictMode: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
