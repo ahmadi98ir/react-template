@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   web:
     build: 
@@ -7,5 +7,8 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - NODE_ENV=production
     restart: always

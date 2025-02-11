@@ -1,46 +1,47 @@
 {
-  "name": "react-template",
+  "name": "ahmadi98",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "pg": "^8.13.1",
-    "pg-hstore": "^2.3.4",
-    "pg-cloudflare": "^1.1.1",
-    "pg-pool": "^3.7.0",
-    "pg-protocol": "^1.7.0",
-    "pg-types": "^2.2.0",
-    "pgpass": "1.0.5",
-    "underscore": "^1.13.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "react-bootstrap": "^2.10.0",
-    "react-countup": "^6.5.0",
-    "react-visibility-sensor": "^5.1.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "next": "13.5.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "next-auth": "4.23.2",
+    "@prisma/client": "5.4.2",
+    "axios": "1.5.1",
+    "sass": "1.69.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "eslint": "8.51.0",
+    "eslint-config-next": "13.5.4",
+    "prisma": "5.4.2",
+    "@types/node": "20.8.4",
+    "@types/react": "18.2.28"
+  },
+  "env": {
+    "NEXTAUTH_URL": "${NEXTAUTH_URL}",
+    "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}",
+    "DATABASE_URL": "${DATABASE_URL}"
+  },
+  "version": "3.8",
+  "services": {
+    "web": {
+      "build": ".",
+      "ports": [
+        "3000:3000"
+      ],
+      "environment": {
+        "DATABASE_URL": "${DATABASE_URL}",
+        "NEXTAUTH_URL": "${NEXTAUTH_URL}",
+        "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}"
+      },
+      "restart": "always"
+    }
   }
 }
