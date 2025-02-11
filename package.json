@@ -26,7 +26,9 @@
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "html-react-parser": "^5.1.1",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "mysql2": "^3.9.1",
+    "sequelize": "^6.37.0"
   },
   "devDependencies": {
     "eslint": "8.51.0",
@@ -34,24 +36,5 @@
     "prisma": "5.4.2",
     "@types/node": "20.8.4",
     "@types/react": "18.2.28"
-  },
-  "env": {
-    "NEXTAUTH_URL": "${NEXTAUTH_URL}",
-    "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}",
-    "DATABASE_URL": "${DATABASE_URL}"
-  },
-  "services": {
-    "web": {
-      "build": ".",
-      "ports": [
-        "3000:3000"
-      ],
-      "environment": {
-        "DATABASE_URL": "${DATABASE_URL}",
-        "NEXTAUTH_URL": "${NEXTAUTH_URL}",
-        "NEXTAUTH_SECRET": "${NEXTAUTH_SECRET}"
-      },
-      "restart": "always"
-    }
   }
 }
