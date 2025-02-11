@@ -5,12 +5,13 @@ async function fetchPosts() {
     // Use environment variable for API URL with a fallback
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'
     
-    // Add process.env.NODE_ENV check for development
+    // Create fetch options
     const fetchOptions = {
       next: { revalidate: 3600 }
     }
-    
-    if (process.env.NODE_ENV === 'development') {
+
+    // Add SSL certificate handling for both development and production
+    if (typeof window === 'undefined') { // Server-side
       const https = require('https')
       fetchOptions.agent = new https.Agent({
         rejectUnauthorized: false
