@@ -2,14 +2,12 @@
 const nextConfig = {
   output: 'standalone',
   async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/api/:path*',
-          destination: 'https://cool.ahmadi98.ir/api/:path*',
-        },
-      ],
-    }
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://cool.ahmadi98.ir/api/:path*',
+      },
+    ]
   },
   async headers() {
     return [
@@ -24,4 +22,10 @@ const nextConfig = {
       },
     ]
   },
+  // Add hostname configuration
+  images: {
+    domains: ['cool.ahmadi98.ir', 'ahmadi98.ir'],
+  },
+  // Disable strict mode for testing
+  reactStrictMode: false,
 }
