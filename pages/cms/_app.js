@@ -1,9 +1,9 @@
 import { SessionProvider } from 'next-auth/react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function CMSApp({ Component, pageProps: { session, ...pageProps } }) {
+function CMSApp({ Component, pageProps }) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps?.session}>
       <Component {...pageProps} />
     </SessionProvider>
   )

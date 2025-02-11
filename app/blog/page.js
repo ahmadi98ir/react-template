@@ -1,109 +1,30 @@
-import BlogSidebar from "@/components/BlogSidebar";
-import PageBanner from "@/components/PageBanner";
-import NoxfolioLayout from "@/layout/NoxfolioLayout";
-import Link from "next/link";
+import React from 'react'
 
-export const metadata = {
-  title: "هوش مصنوعی",
-};
-
-// Fetch posts server-side
 async function fetchPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
-    cache: "no-store", // Ensures the latest data is fetched (disable caching)
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch posts");
+  try {
+    const res = await fetch('YOUR_API_URL/posts', {
+      next: { revalidate: 3600 }, // Revalidate every hour
+      // Add this to ignore SSL certificate issues in development
+      ...(process.env.NODE_ENV === 'development' && {
+        agent: new (require('https').Agent)({
+          rejectUnauthorized: false
+        })
+      })
+    })
+    return res.json()
+  } catch (error) {
+    console.error('Error fetching posts:', error)
+    return []
   }
-  return res.json();
 }
 
-const BlogPage = async () => {
-  const posts = await fetchPosts();
-
+export default async function Blog() {
+  const posts = await fetchPosts()
+  
   return (
-    <NoxfolioLayout>
-      <PageBanner pageName={"وبلاگ"} />
-      <section
-        dir="rtl"
-        className="blog-standard-area pb-70 rpb-40 pb-130 rpb-100 rel z-1"
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="blog-standard-wrap">
-                <div className="row">
-                  {posts.map((post) => (
-                    <div key={post.id} className="col-md-6 item">
-                      <div className="blog-item style-two wow fadeInUp delay-0-2s">
-                        <div className="image">
-                          <img src={post.image} alt={post.title} />
-                        </div>
-                        <div className="content">
-                          <div className="blog-meta mb-20">
-                           {/*  {post.tags.map((tag, index) => (
-                              <Link
-                                key={index}
-                                legacyBehavior
-                                className="tag"
-                                href={`/blog?tag=${tag}`}
-                              >
-                                {tag}
-                              </Link>
-                            ))} */}
-                          </div>
-                          <h5>
-                            <Link legacyBehavior href={`/blog/${post.id}`}>
-                              {post.title}
-                            </Link>
-                          </h5>
-                          <hr />
-                          <div className="blog-meta mb-5">
-                            <span className="date">
-                              <i className="far fa-calendar-alt" />{" "}
-                              {new Date(post.created_at).toLocaleDateString(
-                                "fa-IR"
-                              )}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="col-md-6 item offset-md-6">
-                    <div className="news-more-btn text-center mt-35 wow fadeInUp delay-0-2s">
-                      <Link legacyBehavior href="/blog">
-                        <a className="theme-btn">
-                          View More Projects{" "}
-                          <i className="far fa-angle-right" />
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <BlogSidebar />
-            </div>
-          </div>
-        </div>
-        <div className="bg-lines">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </section>
-    </NoxfolioLayout>
-  );
-};
-
-export default BlogPage;
+    <div>
+      <h1>Blog Page</h1>
+      {/* Add your blog content here */}
+    </div>
+  )
+}
