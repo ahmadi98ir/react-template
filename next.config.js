@@ -4,6 +4,14 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/proxy/:path*'
+      }
+    ]
+  },
   async headers() {
     return [
       {
@@ -26,19 +34,5 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        https: false,
-        http: false,
-        crypto: false,
-        os: false,
-        stream: false,
-        url: false,
-      }
-    }
-    return config
   },
 }
