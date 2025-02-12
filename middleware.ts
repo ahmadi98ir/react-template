@@ -2,35 +2,29 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // Get hostname (e.g. vercel.com, test.vercel.app, etc.)
-  const hostname = request.headers.get('host')
-  const requestHeaders = new Headers(request.headers)
-  
-  // If accessing the API routes, bypass the middleware
-  if (request.nextUrl.pathname.startsWith('/api/')) {
-    return NextResponse.next()
+  // Get the pathname from the URL
+  const pathname = request.nextUrl.pathname
+
+  // If it's an API request, handle it differently
+  if (pathname.startsWith('/api/')) {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir'
+    const newUrl = new URL(pathname, apiUrl)
+    
+    // Copy all search parameters
+    request.nextUrl.searchParams.forEach((value, key) => {
+      newUrl.searchParams.append(key, value)
+    })
+
+    return NextResponse.rewrite(newUrl)
   }
 
-  // Forward the request headers
-  requestHeaders.set('x-forwarded-host', hostname || '')
-
-  // Return response
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
+  // For all other requests, continue normally
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/api/:path*',
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }

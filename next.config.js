@@ -5,12 +5,7 @@ const nextConfig = {
     serverActions: true,
   },
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://cool.ahmadi98.ir/api/:path*',
-      },
-    ]
+    return []
   },
   async headers() {
     return [
