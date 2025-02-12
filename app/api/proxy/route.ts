@@ -11,13 +11,22 @@ async function proxyRequest(request: NextRequest) {
     
     let body: BodyInit | null = null
     if (request.method !== 'GET' && request.method !== 'HEAD') {
-      body = await request.text()
+      try {
+        // Try to parse and stringify to ensure valid JSON
+        const jsonBody = await request.json()
+        body = JSON.stringify(jsonBody)
+      } catch (e) {
+        // If parsing fails, use raw body
+        body = await request.text()
+      }
     }
 
     // Disable SSL verification on server side
     if (typeof window === 'undefined') {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
+
+    console.log(`Proxying ${request.method} request to: ${url}`)
 
     const response = await fetch(url, {
       method: request.method,
@@ -33,20 +42,33 @@ async function proxyRequest(request: NextRequest) {
 
     // Handle redirects manually
     if (response.redirected) {
-      return NextResponse.redirect(response.url)
+      const newUrl = new URL(response.url)
+      newUrl.protocol = request.nextUrl.protocol
+      newUrl.host = request.nextUrl.host
+      return NextResponse.redirect(newUrl)
     }
 
-    const responseData = await response.text()
-    
-    return new NextResponse(responseData, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-    })
+    let responseData
+    const contentType = response.headers.get('content-type')
+    if (contentType?.includes('application/json')) {
+      responseData = await response.json()
+      return NextResponse.json(responseData, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      })
+    } else {
+      responseData = await response.text()
+      return new NextResponse(responseData, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      })
+    }
   } catch (error) {
     console.error('Proxy Error:', error)
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'Internal Server Error', details: error.message },
       { status: 500 }
     )
   }
