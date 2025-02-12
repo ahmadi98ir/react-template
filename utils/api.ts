@@ -29,8 +29,8 @@ export async function handleApiResponse(response: Response) {
 }
 
 export function getApiUrl(path: string): string {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir';
-  return `${baseUrl}/api/${path.replace(/^\//, '')}`;
+  // Always use relative path for API calls
+  return `/api/proxy/${path.replace(/^\//, '')}`;
 }
 
 export function getHeaders(): HeadersInit {
@@ -50,21 +50,16 @@ export async function fetchApi<T = any>(
     ...options.headers,
   };
 
-  const isServer = typeof window === 'undefined';
-  if (isServer) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-  }
-
   try {
     const response = await fetch(url, {
       ...options,
       headers,
+      credentials: 'same-origin',
     });
 
     return handleApiResponse(response);
-  } finally {
-    if (isServer) {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
-    }
+  } catch (error) {
+    console.error('API request failed:', error);
+    throw error;
   }
 }
