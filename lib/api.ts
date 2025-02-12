@@ -1,10 +1,12 @@
+import type { Post, ApiResponse } from '@/types'
+
 interface FetchOptions extends RequestInit {
   next?: {
     revalidate?: number;
   };
 }
 
-async function fetchAPI(endpoint: string, options: FetchOptions = {}) {
+async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
   const defaultOptions: FetchOptions = {
     headers: {
       'Accept': 'application/json',
@@ -42,30 +44,30 @@ async function fetchAPI(endpoint: string, options: FetchOptions = {}) {
 }
 
 export const api = {
-  async getPosts() {
-    return fetchAPI('posts');
+  async getPosts(): Promise<Post[]> {
+    return fetchAPI<Post[]>('posts');
   },
   
-  async getPost(id: string) {
-    return fetchAPI(`posts/${id}`);
+  async getPost(id: string): Promise<Post> {
+    return fetchAPI<Post>(`posts/${id}`);
   },
   
-  async createPost(data: any) {
-    return fetchAPI('posts', {
+  async createPost(data: Partial<Post>): Promise<Post> {
+    return fetchAPI<Post>('posts', {
       method: 'POST',
       body: JSON.stringify(data),
     });
   },
   
-  async updatePost(id: string, data: any) {
-    return fetchAPI(`posts/${id}`, {
+  async updatePost(id: string, data: Partial<Post>): Promise<Post> {
+    return fetchAPI<Post>(`posts/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
   },
   
-  async deletePost(id: string) {
-    return fetchAPI(`posts/${id}`, {
+  async deletePost(id: string): Promise<void> {
+    return fetchAPI<void>(`posts/${id}`, {
       method: 'DELETE',
     });
   },

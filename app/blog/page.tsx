@@ -1,14 +1,15 @@
 import React from 'react'
 import { api } from '@/lib/api'
+import type { Post } from '@/types'
 
 export default async function Blog() {
-  const posts = await api.getPosts().catch(() => [])
+  const posts = await api.getPosts().catch((): Post[] => [])
   
   return (
     <div className="container py-5">
       <h1 className="mb-4">Blog</h1>
       <div className="row">
-        {Array.isArray(posts) && posts.length > 0 ? (
+        {posts.length > 0 ? (
           posts.map((post) => (
             <div key={post.id} className="col-md-4 mb-4">
               <div className="card h-100">
