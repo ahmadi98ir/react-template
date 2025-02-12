@@ -31,11 +31,12 @@ const nextConfig = {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
-        net: false,
-        dns: false,
-        tls: false,
-        fs: false,
-        http2: false,
+        https: false,
+        http: false,
+        crypto: false,
+        os: false,
+        stream: false,
+        url: false,
       }
     }
     return config

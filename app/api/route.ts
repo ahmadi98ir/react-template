@@ -1,57 +1,65 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { apiClient } from '@/lib/apiClient'
+import { httpClient } from '@/lib/httpClient'
 
 async function handler(request: NextRequest) {
   try {
+    // Get the path without /api prefix
     const path = request.nextUrl.pathname.replace('/api/', '')
-    const method = request.method.toLowerCase()
+    
+    // Get query parameters
+    const searchParams = Object.fromEntries(request.nextUrl.searchParams)
+    
+    // Get request body for POST/PUT/PATCH requests
+    let body = null
+    if (!['GET', 'HEAD', 'DELETE'].includes(request.method)) {
+      body = await request.json().catch(() => null)
+    }
 
-    let result
-    switch (method) {
-      case 'get':
-        if (path === 'posts') {
-          result = await apiClient.getPosts()
-        } else if (path.startsWith('posts/')) {
-          const id = path.replace('posts/', '')
-          result = await apiClient.getPost(id)
-        } else if (path === 'health') {
-          result = await apiClient.health()
-        }
+    console.log(`[API] ${request.method} ${path}`, { searchParams, body })
+
+    let response
+    switch (request.method) {
+      case 'GET':
+        response = await httpClient.get(`/api/${path}`, { params: searchParams })
         break
-
-      case 'post':
-        if (path === 'posts') {
-          const data = await request.json()
-          result = await apiClient.createPost(data)
-        }
+      case 'POST':
+        response = await httpClient.post(`/api/${path}`, body, { params: searchParams })
         break
-
-      case 'put':
-        if (path.startsWith('posts/')) {
-          const id = path.replace('posts/', '')
-          const data = await request.json()
-          result = await apiClient.updatePost(id, data)
-        }
+      case 'PUT':
+        response = await httpClient.put(`/api/${path}`, body, { params: searchParams })
         break
-
-      case 'delete':
-        if (path.startsWith('posts/')) {
-          const id = path.replace('posts/', '')
-          result = await apiClient.deletePost(id)
-        }
+      case 'DELETE':
+        response = await httpClient.delete(`/api/${path}`, { params: searchParams })
         break
-
+      case 'PATCH':
+        response = await httpClient.patch(`/api/${path}`, body, { params: searchParams })
+        break
       default:
         return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
     }
 
-    return NextResponse.json(result)
+    return NextResponse.json(response)
   } catch (error) {
     console.error('API Error:', error)
-    return NextResponse.json(
-      { error: 'Internal Server Error', message: error.message },
-      { status: 500 }
-    )
+    
+    // Handle axios errors
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      return NextResponse.json(error.response.data, { status: error.response.status })
+    } else if (error.request) {
+      // The request was made but no response was received
+      return NextResponse.json(
+        { error: 'No response from server', message: error.message },
+        { status: 503 }
+      )
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      return NextResponse.json(
+        { error: 'Request configuration error', message: error.message },
+        { status: 500 }
+      )
+    }
   }
 }
 
