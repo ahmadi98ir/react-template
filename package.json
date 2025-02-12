@@ -14,12 +14,12 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "https-browserify": "^1.0.0",
-    "stream-http": "^3.2.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "https": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/node-fetch": "^2.6.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",

@@ -1,63 +1,62 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { apiClient } from '@/lib/apiClient'
 
-async function handleRequest(request: NextRequest, method: string) {
+async function handler(request: NextRequest) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir'
-    const pathname = request.nextUrl.pathname
-    const searchParams = request.nextUrl.searchParams.toString()
-    const url = `${apiUrl}${pathname}${searchParams ? `?${searchParams}` : ''}`
+    const path = request.nextUrl.pathname.replace('/api/', '')
+    const method = request.method.toLowerCase()
 
-    let body
-    if (method !== 'GET' && method !== 'HEAD') {
-      body = await request.text()
+    let result
+    switch (method) {
+      case 'get':
+        if (path === 'posts') {
+          result = await apiClient.getPosts()
+        } else if (path.startsWith('posts/')) {
+          const id = path.replace('posts/', '')
+          result = await apiClient.getPost(id)
+        } else if (path === 'health') {
+          result = await apiClient.health()
+        }
+        break
+
+      case 'post':
+        if (path === 'posts') {
+          const data = await request.json()
+          result = await apiClient.createPost(data)
+        }
+        break
+
+      case 'put':
+        if (path.startsWith('posts/')) {
+          const id = path.replace('posts/', '')
+          const data = await request.json()
+          result = await apiClient.updatePost(id, data)
+        }
+        break
+
+      case 'delete':
+        if (path.startsWith('posts/')) {
+          const id = path.replace('posts/', '')
+          result = await apiClient.deletePost(id)
+        }
+        break
+
+      default:
+        return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
     }
 
-    const headers = new Headers()
-    headers.set('Content-Type', 'application/json')
-    
-    // Disable SSL verification on server side
-    if (typeof window === 'undefined') {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-    }
-
-    const response = await fetch(url, {
-      method,
-      headers,
-      body,
-    })
-
-    // Re-enable SSL verification
-    if (typeof window === 'undefined') {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'
-    }
-
-    const data = await response.json()
-    return NextResponse.json(data, { status: response.status })
+    return NextResponse.json(result)
   } catch (error) {
     console.error('API Error:', error)
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'Internal Server Error', message: error.message },
       { status: 500 }
     )
   }
 }
 
-export async function GET(request: NextRequest) {
-  return handleRequest(request, 'GET')
-}
-
-export async function POST(request: NextRequest) {
-  return handleRequest(request, 'POST')
-}
-
-export async function PUT(request: NextRequest) {
-  return handleRequest(request, 'PUT')
-}
-
-export async function DELETE(request: NextRequest) {
-  return handleRequest(request, 'DELETE')
-}
-
-export async function PATCH(request: NextRequest) {
-  return handleRequest(request, 'PATCH')
-}
+export const GET = handler
+export const POST = handler
+export const PUT = handler
+export const DELETE = handler
+export const PATCH = handler
