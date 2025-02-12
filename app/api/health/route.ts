@@ -13,28 +13,48 @@ const api = axios.create({
     'Host': 'cool.ahmadi98.ir',
     'Authorization': `Bearer 5|XbczczYRQR6qTGOQpWoY4Q2W3vCcxSQTpCVo0yyS55ec3496`
   },
-  httpsAgent
+  httpsAgent,
+  validateStatus: (status) => status < 500
 })
 
 export async function GET() {
   try {
+    const startTime = Date.now()
+    
     // Check API health
     const apiHealth = await api.get('/api/v1/health').catch(() => null)
     
     // Check deployment status
     const deployment = await api.get(
-      '/api/v1/deployments/gk04gwkok8cg04s4gscg80ko'
+      '/api/v1/deployments/p4gksw8okokco8g0g044go44'
     ).catch(() => null)
+    
+    // Check server status
+    const server = await api.get(
+      '/api/v1/resources/f0ooskcss8wc0ws8sckskco8'
+    ).catch(() => null)
+    
+    const responseTime = Date.now() - startTime
 
     return NextResponse.json({
       status: 'healthy',
-      api: apiHealth ? 'connected' : 'error',
-      deployment: deployment?.data || 'pending'
+      timestamp: new Date().toISOString(),
+      responseTime: `${responseTime}ms`,
+      components: {
+        api: apiHealth ? 'connected' : 'error',
+        deployment: deployment?.data || 'pending',
+        server: server?.data || 'unknown'
+      }
     })
   } catch (error) {
     console.error('Health check failed:', error)
     return NextResponse.json(
-      { status: 'unhealthy', error: error.message },
+      {
+        status: 'unhealthy',
+        timestamp: new Date().toISOString(),
+        error: error.message,
+        details: error.response?.data || null
+      },
       { status: 500 }
     )
   }
