@@ -11,32 +11,47 @@ class HttpClient {
       rejectUnauthorized: false
     })
 
+    // Get base URL and API version
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://91.107.131.43'
+    
     // Initialize axios instance
     this.client = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir',
+      baseURL,
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Host': 'cool.ahmadi98.ir'
       },
       httpsAgent,
-      validateStatus: (status) => status < 500, // Don't reject if status is < 500
+      validateStatus: (status) => status < 500,
     })
 
-    // Add request interceptor for logging
+    // Add request interceptor
     this.client.interceptors.request.use((config) => {
+      // Add API version to URL if not present
+      if (!config.url?.startsWith('/api/v1/')) {
+        config.url = `/api/v1${config.url}`
+      }
+      
       console.log(`[API Request] ${config.method?.toUpperCase()} ${config.url}`)
       return config
     })
 
-    // Add response interceptor for logging
+    // Add response interceptor
     this.client.interceptors.response.use(
       (response) => {
         console.log(`[API Response] ${response.status} ${response.statusText}`)
         return response
       },
       (error) => {
-        console.error('[API Error]', error.message)
+        if (error.response) {
+          console.error(`[API Error] ${error.response.status}:`, error.response.data)
+        } else if (error.request) {
+          console.error('[API Error] No response:', error.message)
+        } else {
+          console.error('[API Error]:', error.message)
+        }
         return Promise.reject(error)
       }
     )
@@ -74,5 +89,3 @@ class HttpClient {
     return response.data
   }
 }
-
-export const httpClient = HttpClient.getInstance()

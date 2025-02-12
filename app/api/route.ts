@@ -1,62 +1,72 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { httpClient } from '@/lib/httpClient'
+import axios from 'axios'
+import https from 'https'
+
+// Create HTTPS agent for SSL
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+})
 
 async function handler(request: NextRequest) {
   try {
-    // Get the path without /api prefix
+    // Get base URL and path
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://91.107.131.43'
     const path = request.nextUrl.pathname.replace('/api/', '')
     
     // Get query parameters
     const searchParams = Object.fromEntries(request.nextUrl.searchParams)
     
-    // Get request body for POST/PUT/PATCH requests
+    // Get request body
     let body = null
     if (!['GET', 'HEAD', 'DELETE'].includes(request.method)) {
       body = await request.json().catch(() => null)
     }
 
+    // Create axios instance for this request
+    const api = axios.create({
+      baseURL,
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Host': 'cool.ahmadi98.ir'
+      },
+      httpsAgent,
+      validateStatus: (status) => status < 500
+    })
+
+    // Log request details
     console.log(`[API] ${request.method} ${path}`, { searchParams, body })
 
-    let response
-    switch (request.method) {
-      case 'GET':
-        response = await httpClient.get(`/api/${path}`, { params: searchParams })
-        break
-      case 'POST':
-        response = await httpClient.post(`/api/${path}`, body, { params: searchParams })
-        break
-      case 'PUT':
-        response = await httpClient.put(`/api/${path}`, body, { params: searchParams })
-        break
-      case 'DELETE':
-        response = await httpClient.delete(`/api/${path}`, { params: searchParams })
-        break
-      case 'PATCH':
-        response = await httpClient.patch(`/api/${path}`, body, { params: searchParams })
-        break
-      default:
-        return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
-    }
+    // Make the request
+    const response = await api.request({
+      method: request.method as any,
+      url: `/api/v1/${path}`,
+      params: searchParams,
+      data: body,
+    })
 
-    return NextResponse.json(response)
+    // Return response
+    return NextResponse.json(response.data, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers as any
+    })
   } catch (error) {
     console.error('API Error:', error)
     
-    // Handle axios errors
     if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      return NextResponse.json(error.response.data, { status: error.response.status })
+      return NextResponse.json(error.response.data, { 
+        status: error.response.status 
+      })
     } else if (error.request) {
-      // The request was made but no response was received
       return NextResponse.json(
         { error: 'No response from server', message: error.message },
         { status: 503 }
       )
     } else {
-      // Something happened in setting up the request that triggered an Error
       return NextResponse.json(
-        { error: 'Request configuration error', message: error.message },
+        { error: 'Request failed', message: error.message },
         { status: 500 }
       )
     }
