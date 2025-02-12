@@ -27,4 +27,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Add webpack configuration for https-agent
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        https: require.resolve('https-browserify'),
+        http: require.resolve('stream-http'),
+      }
+    }
+    return config
+  },
 }

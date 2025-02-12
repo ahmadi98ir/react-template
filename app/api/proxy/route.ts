@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import https from 'https'
+
+// Create a custom HTTPS agent that ignores SSL errors
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+})
 
 async function proxyRequest(request: NextRequest) {
   try {
@@ -12,35 +18,30 @@ async function proxyRequest(request: NextRequest) {
     let body: BodyInit | null = null
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       try {
-        // Try to parse and stringify to ensure valid JSON
         const jsonBody = await request.json()
         body = JSON.stringify(jsonBody)
-      } catch (e) {
-        // If parsing fails, use raw body
+      } catch {
         body = await request.text()
       }
     }
 
-    // Disable SSL verification on server side
-    if (typeof window === 'undefined') {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-    }
+    console.log(`[Proxy] ${request.method} ${url}`)
 
-    console.log(`Proxying ${request.method} request to: ${url}`)
-
-    const response = await fetch(url, {
+    const fetchOptions: RequestInit = {
       method: request.method,
       headers,
       body,
       redirect: 'follow',
-    })
-
-    // Re-enable SSL verification
-    if (typeof window === 'undefined') {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'
     }
 
-    // Handle redirects manually
+    // Add custom HTTPS agent for server-side requests
+    if (typeof window === 'undefined') {
+      fetchOptions.agent = httpsAgent
+    }
+
+    const response = await fetch(url, fetchOptions)
+
+    // Handle redirects
     if (response.redirected) {
       const newUrl = new URL(response.url)
       newUrl.protocol = request.nextUrl.protocol
@@ -48,25 +49,25 @@ async function proxyRequest(request: NextRequest) {
       return NextResponse.redirect(newUrl)
     }
 
-    let responseData
+    // Handle response based on content type
     const contentType = response.headers.get('content-type')
     if (contentType?.includes('application/json')) {
-      responseData = await response.json()
-      return NextResponse.json(responseData, {
+      const data = await response.json()
+      return NextResponse.json(data, {
         status: response.status,
         statusText: response.statusText,
         headers: response.headers,
       })
     } else {
-      responseData = await response.text()
-      return new NextResponse(responseData, {
+      const text = await response.text()
+      return new NextResponse(text, {
         status: response.status,
         statusText: response.statusText,
         headers: response.headers,
       })
     }
   } catch (error) {
-    console.error('Proxy Error:', error)
+    console.error('[Proxy Error]:', error)
     return NextResponse.json(
       { error: 'Internal Server Error', details: error.message },
       { status: 500 }
@@ -74,22 +75,8 @@ async function proxyRequest(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
-  return proxyRequest(request)
-}
-
-export async function POST(request: NextRequest) {
-  return proxyRequest(request)
-}
-
-export async function PUT(request: NextRequest) {
-  return proxyRequest(request)
-}
-
-export async function DELETE(request: NextRequest) {
-  return proxyRequest(request)
-}
-
-export async function PATCH(request: NextRequest) {
-  return proxyRequest(request)
-}
+export const GET = proxyRequest
+export const POST = proxyRequest
+export const PUT = proxyRequest
+export const DELETE = proxyRequest
+export const PATCH = proxyRequest
