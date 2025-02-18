@@ -1,16 +1,46 @@
-"use client";
-import { noxfolioUtilits } from "@/utility";
-import { useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const ScrollTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Show button when page is scrolled up to given distance
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  // Set the top cordinate to 0
+  // make scrolling smooth
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
   useEffect(() => {
-    noxfolioUtilits.scrollTop();
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
   }, []);
 
   return (
-    <a href="#" className="scroll-top scroll-to-target" data-target="html">
-      <span className="fas fa-angle-double-up" />
-    </a>
+    <>
+      {isVisible && 
+        <button
+          onClick={scrollToTop}
+          className="scroll-top scroll-to-target"
+          aria-label="Scroll to top"
+        >
+          <span className="fas fa-angle-double-up"></span>
+        </button>
+      }
+    </>
   );
 };
+
 export default ScrollTop;

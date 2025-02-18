@@ -1,28 +1,17 @@
-"use client";
-import { noxfolioUtilits } from "@/utility";
-import { useEffect } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
-import SideBar from "./SideBar";
+ import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import Preloader from './Preloader';
 
-const NoxfolioLayout = ({
-  children,
-  header,
-  footer,
-  noFooter,
-  onePageMenu,
-}) => {
-  useEffect(() => {
-    noxfolioUtilits.animaiton();
-  }, []);
-
+const NoxfolioLayout = ({ children, header = 1, footer = 1, onePageMenu }) => {
   return (
-    <div className="page-wrapper">
-      <Header header={header} onePageMenu={onePageMenu} />
-      <SideBar />
-      {children}
-      {!noFooter && <Footer footer={footer} />}
-    </div>
+    <>
+      <Preloader />
+      <Header type={header} onePageMenu={onePageMenu} />
+      <main>{children}</main>
+      <Footer type={footer} />
+    </>
   );
 };
+
 export default NoxfolioLayout;

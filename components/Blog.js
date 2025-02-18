@@ -1,213 +1,75 @@
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-const Blog = () => {
-  return (
-    <section id="blog" className="blog-area rel z-1">
-      <div className="for-bgc-black pt-130 pb-100 rpt-100 rpb-70">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-xl-12">
-              <div className="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                <span className="sub-title mb-15">News &amp; Blog</span>
-                <h2>
-                  Latest News &amp; <span>Blog</span>
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="blog-item wow fadeInUp delay-0-2s">
-                <div className="image">
-                  <img src="assets/images/blog/blog1.png" alt="Blog" />
-                </div>
-                <div className="content">
-                  <div className="blog-meta mb-35">
-                    <Link legacyBehavior className="tag" href="blog">
-                      Design
-                    </Link>
-                    <Link legacyBehavior className="tag" href="blog">
-                      Figma
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="blog-details">
-                      Tips For Conductin See Usability Studies
-                    </Link>
-                  </h5>
-                  <hr />
-                  <div className="blog-meta mt-35">
-                    <a className="date" href="#">
-                      <i className="far fa-calendar-alt" /> September 25, 2023
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="blog-item wow fadeInUp delay-0-2s">
-                <div className="image">
-                  <img src="assets/images/blog/blog2.png" alt="Blog" />
-                </div>
-                <div className="content">
-                  <div className="blog-meta mb-35">
-                    <Link legacyBehavior className="tag" href="blog">
-                      Design
-                    </Link>
-                    <Link legacyBehavior className="tag" href="blog">
-                      Figma
-                    </Link>
-                  </div>
-                  <h5>
-                    <Link legacyBehavior href="blog-details">
-                      Keyboard-Only Suppor Assistive Technology
-                    </Link>
-                  </h5>
-                  <hr />
-                  <div className="blog-meta mt-35">
-                    <a className="date" href="#">
-                      <i className="far fa-calendar-alt" /> September 25, 2023
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-    </section>
-  );
-};
-export default Blog;
+const blogPosts = [
+  {
+    image: '/assets/images/blog/blog1.jpg',
+    category: 'Development',
+    date: 'March 15, 2024',
+    title: 'The Future of Web Development',
+    excerpt: 'Exploring upcoming trends and technologies in web development.'
+  },
+  {
+    image: '/assets/images/blog/blog2.jpg',
+    category: 'Design',
+    date: 'March 12, 2024',
+    title: 'UI/UX Best Practices',
+    excerpt: 'Essential design principles for better user experience.'
+  },
+  {
+    image: '/assets/images/blog/blog3.jpg',
+    category: 'Technology',
+    date: 'March 10, 2024',
+    title: 'Mobile App Development Trends',
+    excerpt: 'Latest trends in mobile application development.'
+  }
+];
 
-export const Blog2 = () => {
+export const Blog = () => {
   return (
-    <section
-      id="blog"
-      className="blog-area bgc-black pt-110 rpt-80 pb-100 rpb-70 rel z-1"
-    >
-      <div className="container container-1200">
+    <section id="blog" className="blog-area pt-130 rpt-100 pb-100 rpb-70 rel z-1">
+      <div className="container">
         <div className="row justify-content-center">
-          <div className="col-xl-12">
-            <div className="section-title text-center mb-55 wow fadeInUp delay-0-2s">
-              <span className="sub-title mb-15">
-                <i className="flaticon-asterisk-1" /> Introduction about me
-              </span>
-              <h2>Leatest News &amp; Blogs</h2>
+          <div className="col-lg-7">
+            <div className="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+              <span className="sub-title mb-15">Latest News & Blog</span>
+              <h2>Latest Insights & Articles</h2>
             </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-4 col-md-6">
-            <div className="blog-item-two wow fadeInUp delay-0-2s">
-              <div className="image">
-                <img src="assets/images/blog/blog-two1.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
-              </div>
-              <div className="content">
-                <h4 className="title">
-                  <Link legacyBehavior href="project-details">
-                    Trending code settings for a nice portfolio
+          {blogPosts.map((post, index) => (
+            <div key={index} className="col-lg-4 col-md-6">
+              <div className="blog-item wow fadeInUp delay-0-2s">
+                <div className="image">
+                  <img src={post.image} alt={post.title} />
+                </div>
+                <div className="content">
+                  <ul className="blog-meta">
+                    <li>
+                      <i className="far fa-folder-open"></i>
+                      <Link href="/blog">{post.category}</Link>
+                    </li>
+                    <li>
+                      <i className="far fa-calendar-alt"></i>
+                      <Link href="/blog">{post.date}</Link>
+                    </li>
+                  </ul>
+                  <h4>
+                    <Link href="/blog-details">{post.title}</Link>
+                  </h4>
+                  <p>{post.excerpt}</p>
+                  <Link href="/blog-details" className="read-more">
+                    Read More <i className="fas fa-arrow-right"></i>
                   </Link>
-                </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
-                    Read More{" "}
-                    <img
-                      src="assets/images/shape/details-arrow.png"
-                      alt="Arrow"
-                    />
-                  </a>
-                </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="blog-item-two wow fadeInUp delay-0-4s">
-              <div className="image">
-                <img src="assets/images/blog/blog-two2.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
-              </div>
-              <div className="content">
-                <h4 className="title">
-                  <Link legacyBehavior href="project-details">
-                    Trending code settings for a nice portfolio
-                  </Link>
-                </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
-                    Read More{" "}
-                    <img
-                      src="assets/images/shape/details-arrow.png"
-                      alt="Arrow"
-                    />
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="blog-item-two wow fadeInUp delay-0-6s">
-              <div className="image">
-                <img src="assets/images/blog/blog-two3.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
-                    <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
-              </div>
-              <div className="content">
-                <h4 className="title">
-                  <Link legacyBehavior href="project-details">
-                    Trending code settings for a nice portfolio
-                  </Link>
-                </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
-                    Read More{" "}
-                    <img
-                      src="assets/images/shape/details-arrow.png"
-                      alt="Arrow"
-                    />
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </div>
-      <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
       </div>
     </section>
   );
 };
+
+export default Blog;

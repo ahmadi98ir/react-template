@@ -1,21 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  experimental: {
-    serverActions: true,
+  images: {
+    domains: ['your-domain.com'],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/proxy/:path*'
-      }
-    ]
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
+  swcMinify: true,
+  poweredByHeader: false,
+  // CORS settings
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
           { key: 'Access-Control-Allow-Origin', value: '*' },
@@ -23,16 +20,17 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version' },
         ],
       },
-    ]
+    ];
   },
-  images: {
-    domains: ['cool.ahmadi98.ir', 'ahmadi98.ir'],
-    unoptimized: true,
+  // Rewrites for API proxy
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:3000/api/:path*',
+      },
+    ];
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-}
+};
+
+module.exports = nextConfig;

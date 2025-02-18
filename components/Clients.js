@@ -1,187 +1,121 @@
-import Link from "next/link";
+import React from 'react';
 
-const Clients = () => {
+const clients = [
+  {
+    name: 'Client 1',
+    logo: '/assets/images/clients/client1.png',
+    link: '#'
+  },
+  {
+    name: 'Client 2',
+    logo: '/assets/images/clients/client2.png',
+    link: '#'
+  },
+  {
+    name: 'Client 3',
+    logo: '/assets/images/clients/client3.png',
+    link: '#'
+  },
+  {
+    name: 'Client 4',
+    logo: '/assets/images/clients/client4.png',
+    link: '#'
+  },
+  {
+    name: 'Client 5',
+    logo: '/assets/images/clients/client5.png',
+    link: '#'
+  },
+  {
+    name: 'Client 6',
+    logo: '/assets/images/clients/client6.png',
+    link: '#'
+  }
+];
+
+const testimonials = [
+  {
+    name: 'John Doe',
+    position: 'CEO, Tech Company',
+    image: '/assets/images/testimonials/testi1.jpg',
+    text: 'Excellent work! Very professional and delivered beyond expectations.'
+  },
+  {
+    name: 'Jane Smith',
+    position: 'Marketing Director',
+    image: '/assets/images/testimonials/testi2.jpg',
+    text: 'Great communication and outstanding results. Highly recommended!'
+  },
+  {
+    name: 'Mike Johnson',
+    position: 'Project Manager',
+    image: '/assets/images/testimonials/testi3.jpg',
+    text: 'Very reliable and professional service. Will definitely work together again.'
+  }
+];
+
+export const Clients = () => {
   return (
-    <div className="client-logo-area rel z-1 pt-130 rpt-100 pb-60  __className_228ac9 ">
+    <section className="clients-area pt-130 rpt-100 pb-100 rpb-70">
+      {/* Client Logos */}
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-xl-12">
-            <div className="section-title text-center pt-5 mb-65 wow fadeInUp delay-0-2s">
-              <h4>
-                در حال همکاری با سازمان های 
-              </h4>
+          <div className="col-lg-7">
+            <div className="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+              <span className="sub-title mb-15">Popular Clients</span>
+              <h2>Trusted by Companies</h2>
             </div>
           </div>
         </div>
-        <div className="client-logo-wrap">
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-2s">
-              <img
-                src="assets/images/client-logos/client-logo1.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-3s">
-              <img
-                src="assets/images/client-logos/client-logo2.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-4s">
-              <img
-                src="assets/images/client-logos/client-logo3.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-5s">
-              <img
-                src="assets/images/client-logos/client-logo4.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-6s">
-              <img
-                src="assets/images/client-logos/client-logo5.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-2s">
-              <img
-                src="assets/images/client-logos/client-logo6.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-3s">
-              <img
-                src="assets/images/client-logos/client-logo7.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-4s">
-              <img
-                src="assets/images/client-logos/client-logo8.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-5s">
-              <img
-                src="assets/images/client-logos/client-logo9.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-6s">
-              <img
-                src="assets/images/client-logos/client-logo10.png"
-                alt="Client Logo"
-              />
-            </a>
-          </Link>
+        <div className="row row-cols-xl-6 row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center">
+          {clients.map((client, index) => (
+            <div key={index} className="col">
+              <a href={client.link} className="client-item wow fadeInUp delay-0-2s">
+                <img src={client.logo} alt={client.name} />
+              </a>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-    </div>
-  );
-};
-export default Clients;
 
-export const Clients2 = () => {
-  return (
-    <div className="client-logo-area bgc-black rel z-1 pt-25 pb-60">
-      <div className="container">
-        <div className="client-logo-wrap style-two">
-          <Link
-            legacyBehavior
-            className="client-logo-item wow fadeInUp delay-0-2s"
-            href="contact"
-          >
-            <img
-              src="assets/images/client-logos/client-logo-two1.png"
-              alt="Client Logo"
-            />
-          </Link>
-          <Link
-            legacyBehavior
-            className="client-logo-item wow fadeInUp delay-0-3s"
-            href="contact"
-          >
-            <img
-              src="assets/images/client-logos/client-logo-two2.png"
-              alt="Client Logo"
-            />
-          </Link>
-          <Link
-            legacyBehavior
-            className="client-logo-item wow fadeInUp delay-0-4s"
-            href="contact"
-          >
-            <img
-              src="assets/images/client-logos/client-logo-two3.png"
-              alt="Client Logo"
-            />
-          </Link>
-          <Link
-            legacyBehavior
-            className="client-logo-item wow fadeInUp delay-0-5s"
-            href="contact"
-          >
-            <img
-              src="assets/images/client-logos/client-logo-two4.png"
-              alt="Client Logo"
-            />
-          </Link>
-          <Link
-            legacyBehavior
-            className="client-logo-item wow fadeInUp delay-0-6s"
-            href="contact"
-          >
-            <img
-              src="assets/images/client-logos/client-logo-two5.png"
-              alt="Client Logo"
-            />
-          </Link>
+      {/* Testimonials */}
+      <div className="testimonials-area pt-100 rpt-70">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-7">
+              <div className="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                <span className="sub-title mb-15">Testimonials</span>
+                <h2>What Clients Say</h2>
+              </div>
+            </div>
+          </div>
+          <div className="row testimonials-wrap">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="col-lg-4 col-md-6">
+                <div className="testimonial-item wow fadeInUp delay-0-2s">
+                  <div className="author-speech">
+                    <p>{testimonial.text}</p>
+                  </div>
+                  <div className="testimonial-footer">
+                    <div className="author-image">
+                      <img src={testimonial.image} alt={testimonial.name} />
+                    </div>
+                    <div className="author-info">
+                      <h4>{testimonial.name}</h4>
+                      <span>{testimonial.position}</span>
+                    </div>
+                    <div className="quote">
+                      <i className="fas fa-quote-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-    </div>
+    </section>
   );
 };
+
+export default Clients;
