@@ -1,40 +1,63 @@
 import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { DataTypes } from 'sequelize';
-import sequelize from '../../../config/database';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcryptjs';
+import { Sequelize } from 'sequelize';
+import { User } from '../../../models/User';
 
-// Initialize User model
-const User = sequelize.define('User', {
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
+// Initialize Sequelize
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'mysql',
+  logging: false
 });
 
-// Ensure the table exists
-await User.sync();
+// Initialize User model
+User.init(sequelize);
+
+// Function to sync database
+const syncDatabase = async () => {
+  try {
+    await User.sync();
+    console.log('Database synced successfully');
+  } catch (error) {
+    console.error('Error syncing database:', error);
+  }
+};
+
+// Call sync function
+syncDatabase();
 
 export default NextAuth({
-    providers: [
-        Credentials({
-            name: 'Credentials',
-            credentials: {
-                username: { label: 'Username', type: 'text' },
-                password: { label: 'Password', type: 'password' },
-            },
-            authorize: async (credentials) => {
-                const user = await User.findOne({ where: { username: credentials.username } });
-                if (user && user.password === credentials.password) {
-                    return user;
-                }
-                return null;
-            },
-        }),
-    ],
-    database: process.env.DATABASE_URL,
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        try {
+          const user = await User.findOne({ where: { email: credentials.email } });
+          
+          if (user && await bcrypt.compare(credentials.password, user.password)) {
+            return {
+              id: user.id,
+              email: user.email,
+              name: user.name
+            };
+          }
+          return null;
+        } catch (error) {
+          console.error('Auth error:', error);
+          return null;
+        }
+      }
+    })
+  ],
+  session: {
+    strategy: 'jwt'
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: '/auth/signin',
+  }
 });
