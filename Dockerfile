@@ -13,7 +13,7 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 # Install additional packages
-RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js react-countup react-visibility-sensor
+RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js react-countup react-visibility-sensor bootstrap react-bootstrap next-auth
 
 # Copy all files
 COPY . .
