@@ -1,82 +1,104 @@
-import { NextRequest, NextResponse } from 'next/server'
-import https from 'https'
+import { NextResponse } from 'next/server';
+import https from 'https';
+import type { RequestInit } from 'node-fetch';
 
-// Create a custom HTTPS agent that ignores SSL errors
+// Create a custom HTTPS agent that ignores SSL certificate errors (for development only)
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false
-})
+});
 
-async function proxyRequest(request: NextRequest) {
+interface CustomRequestInit extends RequestInit {
+  agent?: https.Agent;
+}
+
+async function proxyRequest(url: string, options: CustomRequestInit = {}) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir'
-    const path = request.nextUrl.pathname.replace('/api/proxy', '')
-    const url = `${apiUrl}/api${path}`
-    
-    const headers = new Headers(request.headers)
-    headers.set('host', new URL(apiUrl).host)
-    
-    let body: BodyInit | null = null
-    if (request.method !== 'GET' && request.method !== 'HEAD') {
-      try {
-        const jsonBody = await request.json()
-        body = JSON.stringify(jsonBody)
-      } catch {
-        body = await request.text()
-      }
-    }
-
-    console.log(`[Proxy] ${request.method} ${url}`)
-
-    const fetchOptions: RequestInit = {
-      method: request.method,
-      headers,
-      body,
-      redirect: 'follow',
-    }
+    const fetchOptions: CustomRequestInit = {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    };
 
     // Add custom HTTPS agent for server-side requests
     if (typeof window === 'undefined') {
-      fetchOptions.agent = httpsAgent
+      fetchOptions.agent = httpsAgent;
     }
 
-    const response = await fetch(url, fetchOptions)
-
-    // Handle redirects
-    if (response.redirected) {
-      const newUrl = new URL(response.url)
-      newUrl.protocol = request.nextUrl.protocol
-      newUrl.host = request.nextUrl.host
-      return NextResponse.redirect(newUrl)
-    }
-
-    // Handle response based on content type
-    const contentType = response.headers.get('content-type')
-    if (contentType?.includes('application/json')) {
-      const data = await response.json()
-      return NextResponse.json(data, {
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-      })
-    } else {
-      const text = await response.text()
-      return new NextResponse(text, {
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-      })
-    }
-  } catch (error) {
-    console.error('[Proxy Error]:', error)
+    const response = await fetch(url, fetchOptions);
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error: any) {
     return NextResponse.json(
-      { error: 'Internal Server Error', details: error.message },
+      { error: 'Internal server error', message: error?.message || 'Unknown error' },
       { status: 500 }
-    )
+    );
   }
 }
 
-export const GET = proxyRequest
-export const POST = proxyRequest
-export const PUT = proxyRequest
-export const DELETE = proxyRequest
-export const PATCH = proxyRequest
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+  
+  if (!url) {
+    return NextResponse.json(
+      { error: 'URL parameter is required' },
+      { status: 400 }
+    );
+  }
+
+  return proxyRequest(url);
+}
+
+export async function POST(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+  
+  if (!url) {
+    return NextResponse.json(
+      { error: 'URL parameter is required' },
+      { status: 400 }
+    );
+  }
+
+  const body = await request.json();
+  return proxyRequest(url, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+export async function PUT(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+  
+  if (!url) {
+    return NextResponse.json(
+      { error: 'URL parameter is required' },
+      { status: 400 }
+    );
+  }
+
+  const body = await request.json();
+  return proxyRequest(url, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+  });
+}
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+  
+  if (!url) {
+    return NextResponse.json(
+      { error: 'URL parameter is required' },
+      { status: 400 }
+    );
+  }
+
+  return proxyRequest(url, {
+    method: 'DELETE',
+  });
+}
