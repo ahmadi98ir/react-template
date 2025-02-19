@@ -19,6 +19,7 @@
     "react": "latest",
     "react-bootstrap": "^2.10.9",
     "react-dom": "latest",
+    "react-quill": "^2.0.0",
     "sass": "^1.45.0"
   },
   "devDependencies": {
