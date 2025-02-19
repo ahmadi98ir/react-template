@@ -1,12 +1,19 @@
 "use client";
-import { noxfolioUtilits } from "@/utility";
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { wowInit } from '../utility';
 
 const Preloader = () => {
   useEffect(() => {
-    noxfolioUtilits.preloader();
+    wowInit();
   }, []);
 
-  return <div className="preloader" />;
+  return (
+    <div className="preloader">
+      <div className="loader">
+        <div className="loader-inner"></div>
+      </div>
+    </div>
+  );
 };
+
 export default Preloader;
