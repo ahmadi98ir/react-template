@@ -1,5 +1,6 @@
 FROM node:18-alpine AS builder
 
+# Set working directory
 WORKDIR /app
 
 # Install dependencies
@@ -8,39 +9,36 @@ RUN apk add --no-cache libc6-compat git
 # Copy package files
 COPY package*.json ./
 
-# Install ALL dependencies including dev dependencies
+# Install dependencies
 RUN npm install --legacy-peer-deps
-RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js
 
-# Copy project files
+# Install additional packages
+RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js react-countup react-visibility-sensor
+
+# Copy all files
 COPY . .
 
-# Set environment variables
-ENV DB_HOST=localhost
-ENV DB_USER=root
-ENV DB_PASSWORD=
-ENV DB_NAME=myapp
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
-
-# Build the project
+# Build
 RUN npm run build
 
 # Production image
 FROM node:18-alpine AS runner
+
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# Copy built assets
+# Copy necessary files from builder
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
 
+# Expose port
 EXPOSE 3000
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
+# Set environment variables
+ENV PORT 3000
+ENV NODE_ENV production
+ENV HOSTNAME "0.0.0.0"
 
+# Start the application
 CMD ["node", "server.js"]
