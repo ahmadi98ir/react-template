@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server';
 import https from 'https';
-import type { RequestInit } from 'node-fetch';
+
+interface CustomRequestInit extends RequestInit {
+  agent?: https.Agent;
+}
 
 // Create a custom HTTPS agent that ignores SSL certificate errors (for development only)
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false
 });
-
-interface CustomRequestInit extends RequestInit {
-  agent?: https.Agent;
-}
 
 async function proxyRequest(url: string, options: CustomRequestInit = {}) {
   try {
@@ -26,7 +25,7 @@ async function proxyRequest(url: string, options: CustomRequestInit = {}) {
       fetchOptions.agent = httpsAgent;
     }
 
-    const response = await fetch(url, fetchOptions);
+    const response = await fetch(url, fetchOptions as RequestInit);
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error: any) {
