@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'react-quill$': 'react-quill/dist/react-quill.js',
-    };
-    return config;
+  images: {
+    domains: ['localhost', 'cool.ahmadi98.ir'],
+  },
+  // Disable automatic static optimization
+  experimental: {
+    // This will disable static page generation
+    isrMemoryCacheSize: 0,
   },
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig
