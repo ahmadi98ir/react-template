@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { isBrowser } from '@/utils/environment';
+import type WOW from 'wow.js';
 
 export function useClientInit() {
   useEffect(() => {
     if (isBrowser) {
       // Dynamic import WOW.js only on client side
-      import('wow.js').then((WOW) => {
-        const wow = new WOW.default({
+      import('wow.js').then((WowModule) => {
+        const wow = new WowModule.default({
           boxClass: 'wow',
           animateClass: 'animated',
           offset: 0,
