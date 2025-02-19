@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 
-const Contact = () => {
+export const Contact = () => {
   return (
     <section id="contact" className="contact-section">
       <div className="container">
@@ -10,11 +10,27 @@ const Contact = () => {
         </div>
         <div className="contact-content">
           <div className="contact-info">
-            {/* Add contact information */}
+            <div className="info-item">
+              <h3>Email</h3>
+              <p>example@domain.com</p>
+            </div>
+            <div className="info-item">
+              <h3>Phone</h3>
+              <p>+1234567890</p>
+            </div>
           </div>
           <div className="contact-form">
             <form>
-              {/* Add form fields */}
+              <div className="form-group">
+                <input type="text" placeholder="Your Name" />
+              </div>
+              <div className="form-group">
+                <input type="email" placeholder="Your Email" />
+              </div>
+              <div className="form-group">
+                <textarea placeholder="Your Message"></textarea>
+              </div>
+              <button type="submit">Send Message</button>
             </form>
           </div>
         </div>

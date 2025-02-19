@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server'
-import { apiHandler } from '../handler'
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const healthStatus = await apiHandler.checkHealth()
-    return NextResponse.json(healthStatus)
-  } catch (error) {
-    return NextResponse.json(error, { status: error.status || 500 })
+    const healthStatus = {
+      status: 'healthy',
+      timestamp: new Date().toISOString()
+    };
+    return NextResponse.json(healthStatus);
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

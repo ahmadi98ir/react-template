@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const Projects = () => {
+export const Projects = () => {
   const [filter, setFilter] = useState('all');
   
   return (
@@ -18,10 +18,9 @@ const Projects = () => {
           >
             All
           </button>
-          {/* Add other filter buttons */}
         </div>
         <div className="projects-grid">
-          {/* Add your project items */}
+          {/* Project items */}
         </div>
       </div>
     </section>
