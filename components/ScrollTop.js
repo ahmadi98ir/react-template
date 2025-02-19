@@ -1,9 +1,16 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button when page is scrolled up to given distance
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, []);
+
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
       setIsVisible(true);
@@ -12,33 +19,20 @@ const ScrollTop = () => {
     }
   };
 
-  // Set the top cordinate to 0
-  // make scrolling smooth
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: 'smooth',
     });
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
-  }, []);
-
   return (
     <>
-      {isVisible && 
-        <button
-          onClick={scrollToTop}
-          className="scroll-top scroll-to-target"
-          aria-label="Scroll to top"
-        >
-          <span className="fas fa-angle-double-up"></span>
-        </button>
-      }
+      {isVisible && (
+        <div onClick={scrollToTop} className="scroll-top">
+          <i className="fas fa-arrow-up"></i>
+        </div>
+      )}
     </>
   );
 };
