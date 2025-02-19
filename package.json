@@ -18,6 +18,7 @@
     "https-browserify": "^1.0.0",
     "isotope-layout": "^3.0.6",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0",
     "next": "latest",
     "next-auth": "^4.24.5",
     "react": "latest",
@@ -25,7 +26,8 @@
     "react-dom": "latest",
     "react-quill": "^2.0.0",
     "react-slick": "^0.30.3",
-    "sass": "^1.45.0"
+    "sass": "^1.45.0",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@types/node": "^20",
