@@ -1,4 +1,5 @@
 import https from 'https';
+import { isBrowser } from '@/utils/environment';
 
 // Create HTTPS agent for SSL handling
 const agent = new https.Agent({
@@ -34,7 +35,7 @@ class ApiClient {
     };
 
     // Only add agent on server-side
-    if (typeof window === 'undefined') {
+    if (!isBrowser) {
       fetchOptions.agent = agent;
     }
 
