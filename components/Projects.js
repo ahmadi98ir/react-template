@@ -2,16 +2,29 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const projects = [
-  // Your projects data
-];
-
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   
   return (
-    // Your component JSX
-    <div>Projects Component</div>
+    <section id="projects" className="projects-section">
+      <div className="container">
+        <div className="section-title">
+          <h2>My Projects</h2>
+        </div>
+        <div className="projects-filter">
+          <button 
+            className={filter === 'all' ? 'active' : ''} 
+            onClick={() => setFilter('all')}
+          >
+            All
+          </button>
+          {/* Add other filter buttons */}
+        </div>
+        <div className="projects-grid">
+          {/* Add your project items */}
+        </div>
+      </div>
+    </section>
   );
 };
 
