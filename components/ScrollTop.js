@@ -1,40 +1,38 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { isBrowser } from '@/utils/environment';
 
-const ScrollTop = () => {
+export default function ScrollTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+    if (!isBrowser) return;
+
+    const toggleVisibility = () => {
+      setIsVisible(window.pageYOffset > 300);
     };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
   const scrollToTop = () => {
+    if (!isBrowser) return;
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: 'smooth'
     });
   };
 
-  return (
-    <>
-      {isVisible && (
-        <div onClick={scrollToTop} className="scroll-top">
-          <i className="fas fa-arrow-up"></i>
-        </div>
-      )}
-    </>
-  );
-};
+  if (!isVisible) return null;
 
-export default ScrollTop;
+  return (
+    <button
+      className="scroll-top show"
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      <i className="fas fa-angle-up"></i>
+    </button>
+  );
+}

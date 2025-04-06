@@ -4,55 +4,46 @@ import type WOW from 'wow.js';
 
 export function useClientInit() {
   useEffect(() => {
-    if (isBrowser) {
-      // Dynamic import WOW.js only on client side
-      import('wow.js').then((WowModule) => {
-        const wow = new WowModule.default({
-          boxClass: 'wow',
-          animateClass: 'animated',
-          offset: 0,
-          mobile: false,
-          live: true
-        });
-        wow.init();
-      });
+    if (!isBrowser) return;
 
-      // Other client-side initializations
-      const preloader = document.getElementById("preloader");
-      if (preloader) {
-        setTimeout(() => {
-          preloader.style.display = "none";
-        }, 1000);
+    const initWow = async () => {
+      try {
+        const WOW = (await import('wow.js')).default;
+        new WOW().init();
+      } catch (error) {
+        console.error('Error initializing WOW.js:', error);
       }
+    };
 
-      // Sticky nav
-      const header = document.querySelector(".main-header");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 100) {
-            header.classList.add("fixed-header");
-          } else {
-            header.classList.remove("fixed-header");
-          }
-        });
+    initWow();
+
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        document.querySelector(".main-header")?.classList.add("fixed-header");
+      } else {
+        document.querySelector(".main-header")?.classList.remove("fixed-header");
       }
+    };
 
-      // Scroll to top
-      const scrollTop = document.querySelector(".scroll-top");
-      if (scrollTop) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 400) {
-            scrollTop.classList.add("show");
-          } else {
-            scrollTop.classList.remove("show");
-          }
-        });
-
-        scrollTop.addEventListener("click", (e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+    const handleScrollToTop = () => {
+      if (window.scrollY > 400) {
+        document.querySelector(".scroll-top")?.classList.add("show");
+      } else {
+        document.querySelector(".scroll-top")?.classList.remove("show");
       }
-    }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollToTop);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollToTop);
+    };
   }, []);
+}
+
+export function scrollTop() {
+  if (!isBrowser) return;
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
