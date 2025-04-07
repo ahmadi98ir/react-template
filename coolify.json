@@ -20,6 +20,12 @@
       "POSTGRES_PASSWORD": "postgres",
       "POSTGRES_DB": "ahmadi98",
       "DATABASE_URL": "postgresql://postgres:postgres@postgres:5432/ahmadi98"
+    },
+    "healthcheck": {
+      "path": "/api/health",
+      "interval": "30s",
+      "timeout": "10s",
+      "retries": 3
     }
   }
 } 

@@ -9,11 +9,8 @@ RUN apk add --no-cache libc6-compat git
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --legacy-peer-deps
-
-# Install additional packages
-RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js react-countup react-visibility-sensor bootstrap react-bootstrap next-auth
+# Install all dependencies at once
+RUN npm install --legacy-peer-deps react-quill@latest isotope-layout react-slick bcryptjs jsonwebtoken html-react-parser mysql2 sequelize wow.js react-countup react-visibility-sensor bootstrap react-bootstrap next-auth
 
 # Copy all files
 COPY . .
@@ -23,7 +20,7 @@ ARG NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NODE_ENV=production
 
-# Build
+# Build with caching
 RUN npm run build
 
 # Production image

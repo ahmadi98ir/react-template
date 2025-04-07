@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['ahmadi98.ir', 'cool.ahmadi98.ir'],
+    domains: ['ahmadi98.ir'],
     unoptimized: true
   },
   experimental: {
@@ -18,10 +18,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  staticPageGenerationTimeout: 60,
+  staticPageGenerationTimeout: 30,
   // Remove invalid properties and handle static generation properly
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://cool.ahmadi98.ir'
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://ahmadi98.ir'
   }
 };
 
