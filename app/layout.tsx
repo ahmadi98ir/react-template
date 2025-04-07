@@ -1,4 +1,5 @@
 import ClientLayout from '@/components/ClientLayout';
+import { isBrowser } from '@/utils/environment';
 
 export default function RootLayout({
   children,

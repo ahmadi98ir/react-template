@@ -13,6 +13,7 @@ export function useClientInit() {
     if (!isClient || !isBrowser) return;
 
     const handleScroll = () => {
+      if (!isBrowser) return;
       const mainHeader = document.querySelector(".main-header");
       if (window.scrollY > 100) {
         mainHeader?.classList.add("fixed-header");
@@ -22,6 +23,7 @@ export function useClientInit() {
     };
 
     const handleScrollToTop = () => {
+      if (!isBrowser) return;
       const scrollTop = document.querySelector(".scroll-top");
       if (window.scrollY > 400) {
         scrollTop?.classList.add("show");
@@ -31,6 +33,7 @@ export function useClientInit() {
     };
 
     const initWow = async () => {
+      if (!isBrowser) return;
       try {
         const WOW = (await import('wow.js')).default;
         new WOW().init();
@@ -41,12 +44,16 @@ export function useClientInit() {
 
     initWow();
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("scroll", handleScrollToTop);
+    if (isBrowser) {
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScrollToTop);
+    }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scroll", handleScrollToTop);
+      if (isBrowser) {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", handleScrollToTop);
+      }
     };
   }, [isClient]);
 

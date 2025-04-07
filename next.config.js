@@ -18,12 +18,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   staticPageGenerationTimeout: 60,
-  // Disable static optimization for pages that use client-side features
-  unstable_runtimeJS: false,
-  // Enable dynamic rendering for all pages
-  unstable_includeFiles: ['node_modules/**'],
-  // Disable static page generation
-  unstable_disableStaticGeneration: false,
+  // Remove invalid properties and handle static generation properly
+  env: {
+    // Add other environment variables here if needed
+  }
 };
 
 module.exports = nextConfig;
