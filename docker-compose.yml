@@ -5,7 +5,7 @@ services:
     image: ahmadi98ir/react-template:latest
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:

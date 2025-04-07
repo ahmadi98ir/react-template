@@ -1,7 +1,14 @@
 node_modules
-.next
+npm-debug.log
+Dockerfile
+.dockerignore
 .git
+.gitignore
+README.md
 .env
+.env.local
+.next
+dist
 DB_HOST=x08ck488ogck404wgg84sgcc
 DB_USER=ahmadi98
 DB_PASSWORD=ahmadi98
