@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["nodejs_18", "npm-9_x"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm start"
+
+[environment]
+NODE_ENV = "production"
+NEXT_PUBLIC_API_URL = "https://cool.ahmadi98.ir" 
