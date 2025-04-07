@@ -1,11 +1,21 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+'use client';
+
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import ClientOnly from '@/components/ClientOnly';
 import Header from '@/layout/Header';
 import ScrollTop from '@/components/ScrollTop';
 
 export default function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
     <>
       <ClientOnly>
