@@ -2,10 +2,13 @@ version: '3.8'
 
 services:
   web:
-    image: ahmadi98ir/react-template:latest
+    image: ahmadi98ir/react-template:main
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - DOCKER_USERNAME=${DOCKER_USERNAME}
+        - DOCKER_PASSWORD=${DOCKER_PASSWORD}
     ports:
       - "3000:3000"
     environment:
