@@ -15,12 +15,12 @@
     "ports": ["3000"],
     "environment": {
       "NODE_ENV": "production",
-      "NEXT_PUBLIC_API_URL": "https://cool.ahmadi98.ir"
+      "NEXT_PUBLIC_API_URL": "https://ahmadi98.ir"
     },
     "registry": {
       "url": "registry.coolify.io",
-      "username": "${info@ahmadi98.ir}",
-      "password": "${HajiY021mm@}"
+      "username": "${COOLIFY_REGISTRY_USERNAME}",
+      "password": "${COOLIFY_REGISTRY_PASSWORD}"
     }
   }
 } 
