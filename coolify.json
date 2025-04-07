@@ -11,16 +11,16 @@
     }
   },
   "deploy": {
-    "image": "registry.coolify.io/${COOLIFY_RESOURCE_UUID}",
+    "image": "ahmadi98ir/react-template:${COOLIFY_RESOURCE_UUID}",
     "ports": ["3000"],
     "environment": {
       "NODE_ENV": "production",
       "NEXT_PUBLIC_API_URL": "https://ahmadi98.ir"
     },
     "registry": {
-      "url": "registry.coolify.io",
-      "username": "${COOLIFY_REGISTRY_USERNAME}",
-      "password": "${COOLIFY_REGISTRY_PASSWORD}"
+      "url": "docker.io",
+      "username": "ahmadi98ir",
+      "password": "HajiY021mm@"
     }
   }
 } 
