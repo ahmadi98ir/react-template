@@ -46,10 +46,5 @@ ENV NODE_ENV production
 ENV HOSTNAME "0.0.0.0"
 ENV NODE_TLS_REJECT_UNAUTHORIZED 0
 
-# Add Docker registry authentication
-ARG DOCKER_USERNAME
-ARG DOCKER_PASSWORD
-RUN echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
 # Start the application
 CMD ["node", "server.js"]
