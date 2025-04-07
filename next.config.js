@@ -25,9 +25,9 @@ const nextConfig = {
   },
   // Enable static generation for all pages
   staticPageGenerationTimeout: 60,
-  // Handle self-signed certificates
-  httpAgentOptions: {
-    rejectUnauthorized: false
+  // Disable SSL verification for development
+  env: {
+    NODE_TLS_REJECT_UNAUTHORIZED: '0'
   }
 }
 

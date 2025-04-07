@@ -9,28 +9,26 @@ export function useClientInit() {
     setIsClient(true);
   }, []);
 
-  const handleScroll = () => {
-    if (!isClient || !isBrowser) return;
-    const mainHeader = document.querySelector(".main-header");
-    if (window.scrollY > 100) {
-      mainHeader?.classList.add("fixed-header");
-    } else {
-      mainHeader?.classList.remove("fixed-header");
-    }
-  };
-
-  const handleScrollToTop = () => {
-    if (!isClient || !isBrowser) return;
-    const scrollTop = document.querySelector(".scroll-top");
-    if (window.scrollY > 400) {
-      scrollTop?.classList.add("show");
-    } else {
-      scrollTop?.classList.remove("show");
-    }
-  };
-
   useEffect(() => {
     if (!isClient || !isBrowser) return;
+
+    const handleScroll = () => {
+      const mainHeader = document.querySelector(".main-header");
+      if (window.scrollY > 100) {
+        mainHeader?.classList.add("fixed-header");
+      } else {
+        mainHeader?.classList.remove("fixed-header");
+      }
+    };
+
+    const handleScrollToTop = () => {
+      const scrollTop = document.querySelector(".scroll-top");
+      if (window.scrollY > 400) {
+        scrollTop?.classList.add("show");
+      } else {
+        scrollTop?.classList.remove("show");
+      }
+    };
 
     const initWow = async () => {
       try {
