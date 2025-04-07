@@ -22,6 +22,12 @@ const nextConfig = {
   unstable_disableStaticGeneration: true,
   typescript: {
     ignoreBuildErrors: true,
+  },
+  // Enable static generation for all pages
+  staticPageGenerationTimeout: 60,
+  // Handle self-signed certificates
+  httpAgentOptions: {
+    rejectUnauthorized: false
   }
 }
 

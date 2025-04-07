@@ -1,10 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { isBrowser } from '@/utils/environment';
 import type WOW from 'wow.js';
 
 export function useClientInit() {
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
-    if (!isBrowser) return;
+    setIsClient(true);
+  }, []);
+
+  const handleScroll = () => {
+    if (!isClient) return;
+    if (window.scrollY > 100) {
+      document.querySelector(".main-header")?.classList.add("fixed-header");
+    } else {
+      document.querySelector(".main-header")?.classList.remove("fixed-header");
+    }
+  };
+
+  const handleScrollToTop = () => {
+    if (!isClient) return;
+    if (window.scrollY > 400) {
+      document.querySelector(".scroll-top")?.classList.add("show");
+    } else {
+      document.querySelector(".scroll-top")?.classList.remove("show");
+    }
+  };
+
+  useEffect(() => {
+    if (!isClient) return;
 
     const initWow = async () => {
       try {
@@ -17,22 +41,6 @@ export function useClientInit() {
 
     initWow();
 
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        document.querySelector(".main-header")?.classList.add("fixed-header");
-      } else {
-        document.querySelector(".main-header")?.classList.remove("fixed-header");
-      }
-    };
-
-    const handleScrollToTop = () => {
-      if (window.scrollY > 400) {
-        document.querySelector(".scroll-top")?.classList.add("show");
-      } else {
-        document.querySelector(".scroll-top")?.classList.remove("show");
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("scroll", handleScrollToTop);
 
@@ -40,10 +48,15 @@ export function useClientInit() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", handleScrollToTop);
     };
-  }, []);
-}
+  }, [isClient]);
 
-export function scrollTop() {
-  if (!isBrowser) return;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () => {
+    if (!isClient) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return {
+    isClient,
+    scrollToTop
+  };
 }

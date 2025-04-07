@@ -2,3 +2,11 @@ node_modules
 .next
 .git
 .env
+DB_HOST=x08ck488ogck404wgg84sgcc
+DB_USER=ahmadi98
+DB_PASSWORD=ahmadi98
+DB_NAME=postgres
+JWT_SECRET=AcxCRH5fWBufmuK0jzsIeMHFVMdT2wrLiOh3IuLOXVo=
+NEXTAUTH_URL=https://ahmadi98.ir
+NEXTAUTH_SECRET=<یک رشته تصادفی و امن>
+NODE_ENV=production
