@@ -18,6 +18,10 @@ RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebto
 # Copy all files
 COPY . .
 
+# Set environment variables for build
+ENV NEXT_PUBLIC_API_URL=https://cool.ahmadi98.ir
+ENV NODE_ENV=production
+
 # Build
 RUN npm run build
 
@@ -31,6 +35,7 @@ COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/package.json ./package.json
 
 # Expose port
 EXPOSE 3000

@@ -1,27 +1,36 @@
-version: '3'
+version: '3.8'
+
 services:
   web:
-    build: 
+    build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=your_password
-      - DB_NAME=myapp
+      - NEXT_PUBLIC_API_URL=https://cool.ahmadi98.ir
+      - DATABASE_URL=mysql://root:password@db:3306/myapp
+    networks:
+      - app-network
     depends_on:
       - db
 
   db:
-    image: mysql:8
+    image: mysql:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD=your_password
+      - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=myapp
+    ports:
+      - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  mysql_data:
+  mysql-data:
