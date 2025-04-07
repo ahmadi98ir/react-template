@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+      args:
+        - DOCKER_USERNAME=${DOCKER_USERNAME}
+        - DOCKER_PASSWORD=${DOCKER_PASSWORD}
     ports:
       - "3000:3000"
     environment:
