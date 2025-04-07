@@ -7,7 +7,7 @@
     }
   },
   "deploy": {
-    "image": "coolify/${COOLIFY_RESOURCE_UUID}",
+    "image": "registry.coolify.io/${COOLIFY_RESOURCE_UUID}",
     "ports": ["3000"],
     "environment": {
       "NODE_ENV": "production",
