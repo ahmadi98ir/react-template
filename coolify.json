@@ -15,7 +15,11 @@
     "ports": ["3000"],
     "environment": {
       "NODE_ENV": "production",
-      "NEXT_PUBLIC_API_URL": "https://ahmadi98.ir"
+      "NEXT_PUBLIC_API_URL": "https://ahmadi98.ir",
+      "POSTGRES_USER": "postgres",
+      "POSTGRES_PASSWORD": "postgres",
+      "POSTGRES_DB": "ahmadi98",
+      "DATABASE_URL": "postgresql://postgres:postgres@postgres:5432/ahmadi98"
     }
   }
 } 
