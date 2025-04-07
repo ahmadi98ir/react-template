@@ -11,7 +11,7 @@
     }
   },
   "deploy": {
-    "image": "coolify/${COOLIFY_RESOURCE_UUID}",
+    "image": "ahmadi98ir/react-template:${COOLIFY_RESOURCE_UUID}",
     "ports": ["3000"],
     "environment": {
       "NODE_ENV": "production",
