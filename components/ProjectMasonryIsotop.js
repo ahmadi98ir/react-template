@@ -3,11 +3,16 @@
 import Isotope from "isotope-layout";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import { isBrowser } from '@/utils/environment';
+
 const ProjectMasonryIsotop = () => {
   // Isotope
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
+
   useEffect(() => {
+    if (!isBrowser) return;
+
     setTimeout(() => {
       isotope.current = new Isotope(".project-masonry-active", {
         itemSelector: ".item",
@@ -22,18 +27,28 @@ const ProjectMasonryIsotop = () => {
         },
       });
     }, 500);
+
+    return () => {
+      if (isotope.current) {
+        isotope.current.destroy();
+      }
+    };
   }, []);
+
   useEffect(() => {
-    if (isotope.current) {
-      filterKey === "*"
-        ? isotope.current.arrange({ filter: `*` })
-        : isotope.current.arrange({ filter: `.${filterKey}` });
-    }
+    if (!isBrowser || !isotope.current) return;
+
+    filterKey === "*"
+      ? isotope.current.arrange({ filter: `*` })
+      : isotope.current.arrange({ filter: `.${filterKey}` });
   }, [filterKey]);
+
   const handleFilterKeyChange = (key) => () => {
     setFilterKey(key);
   };
+
   const activeBtn = (value) => (value === filterKey ? "current" : "");
+
   return (
     <Fragment>
       <ul className="project-filter filter-btns-one justify-content-center pb-35 wow fadeInUp delay-0-2s">
@@ -292,4 +307,5 @@ const ProjectMasonryIsotop = () => {
     </Fragment>
   );
 };
+
 export default ProjectMasonryIsotop;

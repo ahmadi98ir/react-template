@@ -2,12 +2,15 @@
 
 import { useEffect, useRef } from 'react'
 import Isotope from 'isotope-layout'
+import { isBrowser } from '@/utils/environment'
 
 export default function IsotopeComponent({ children }) {
   const isotope = useRef()
   const containerRef = useRef()
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     isotope.current = new Isotope(containerRef.current, {
       itemSelector: '.grid-item',
       layoutMode: 'fitRows'
@@ -17,7 +20,8 @@ export default function IsotopeComponent({ children }) {
   }, [])
 
   const handleFilterKeyChange = (key) => {
-    isotope.current?.arrange({ filter: key })
+    if (!isBrowser || !isotope.current) return;
+    isotope.current.arrange({ filter: key })
   }
 
   return (

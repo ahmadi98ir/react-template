@@ -1,18 +1,16 @@
-'use client';
-
-import { useClientInit } from '@/hooks/useClientInit';
+import ClientLayout from '@/components/ClientLayout';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  useClientInit();
-
   return (
     <html lang="fa" dir="rtl">
       <body>
-        {children}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   )

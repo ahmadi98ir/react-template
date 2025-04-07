@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import ClientOnly from './ClientOnly';
+import { isBrowser } from '@/utils/environment';
 
 export default function ScrollTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     const toggleVisibility = () => {
       setIsVisible(window.pageYOffset > 300);
     };
@@ -15,6 +18,7 @@ export default function ScrollTop() {
   }, []);
 
   const scrollToTop = () => {
+    if (!isBrowser) return;
     window.scrollTo({
       top: 0,
       behavior: 'smooth'

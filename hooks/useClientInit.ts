@@ -10,25 +10,27 @@ export function useClientInit() {
   }, []);
 
   const handleScroll = () => {
-    if (!isClient) return;
+    if (!isClient || !isBrowser) return;
+    const mainHeader = document.querySelector(".main-header");
     if (window.scrollY > 100) {
-      document.querySelector(".main-header")?.classList.add("fixed-header");
+      mainHeader?.classList.add("fixed-header");
     } else {
-      document.querySelector(".main-header")?.classList.remove("fixed-header");
+      mainHeader?.classList.remove("fixed-header");
     }
   };
 
   const handleScrollToTop = () => {
-    if (!isClient) return;
+    if (!isClient || !isBrowser) return;
+    const scrollTop = document.querySelector(".scroll-top");
     if (window.scrollY > 400) {
-      document.querySelector(".scroll-top")?.classList.add("show");
+      scrollTop?.classList.add("show");
     } else {
-      document.querySelector(".scroll-top")?.classList.remove("show");
+      scrollTop?.classList.remove("show");
     }
   };
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || !isBrowser) return;
 
     const initWow = async () => {
       try {
@@ -51,7 +53,7 @@ export function useClientInit() {
   }, [isClient]);
 
   const scrollToTop = () => {
-    if (!isClient) return;
+    if (!isClient || !isBrowser) return;
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

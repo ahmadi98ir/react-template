@@ -8,6 +8,8 @@ export default function Header() {
   const [isFixed, setIsFixed] = useState(false);
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     const handleScroll = () => {
       setIsFixed(window.scrollY > 100);
     };
