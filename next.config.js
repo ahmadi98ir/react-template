@@ -14,22 +14,16 @@ const nextConfig = {
     };
     return config;
   },
-  // Disable static optimization for pages that use client-side features
-  unstable_runtimeJS: true,
-  // Enable dynamic rendering for all pages
-  unstable_includeFiles: ['node_modules/**'],
-  // Disable static page generation
-  unstable_disableStaticGeneration: true,
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Enable static generation for all pages
   staticPageGenerationTimeout: 60,
-  // Remove NODE_TLS_REJECT_UNAUTHORIZED from env as it's not allowed
-  // Instead, we'll handle SSL verification through environment variables
-  env: {
-    // Add other environment variables here if needed
-  }
+  // Disable static optimization for pages that use client-side features
+  unstable_runtimeJS: false,
+  // Enable dynamic rendering for all pages
+  unstable_includeFiles: ['node_modules/**'],
+  // Disable static page generation
+  unstable_disableStaticGeneration: false,
 };
 
 module.exports = nextConfig;
