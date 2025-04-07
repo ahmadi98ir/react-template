@@ -7,12 +7,12 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.experiments = {
       ...config.experiments,
-      topLevelAwait: true
-    }
-    return config
+      topLevelAwait: true,
+    };
+    return config;
   },
   // Disable static optimization for pages that use client-side features
   unstable_runtimeJS: true,
@@ -25,10 +25,11 @@ const nextConfig = {
   },
   // Enable static generation for all pages
   staticPageGenerationTimeout: 60,
-  // Disable SSL verification for development
+  // Remove NODE_TLS_REJECT_UNAUTHORIZED from env as it's not allowed
+  // Instead, we'll handle SSL verification through environment variables
   env: {
-    NODE_TLS_REJECT_UNAUTHORIZED: '0'
+    // Add other environment variables here if needed
   }
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
