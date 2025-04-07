@@ -19,7 +19,8 @@ RUN npm install react-quill@latest isotope-layout react-slick bcryptjs jsonwebto
 COPY . .
 
 # Set environment variables for build
-ENV NEXT_PUBLIC_API_URL=https://cool.ahmadi98.ir
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NODE_ENV=production
 
 # Build

@@ -2,23 +2,19 @@ version: '3.8'
 
 services:
   web:
-    image: ahmadi98ir/react-template:main
+    image: ${COOLIFY_RESOURCE_UUID}
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - DOCKER_USERNAME=${DOCKER_USERNAME}
-        - DOCKER_PASSWORD=${DOCKER_PASSWORD}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=https://cool.ahmadi98.ir
-      - DATABASE_URL=mysql://root:password@db:3306/myapp
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     networks:
       - app-network
-    depends_on:
-      - db
 
   db:
     image: mysql:8.0
