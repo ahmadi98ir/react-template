@@ -9,11 +9,11 @@ docker build \
   --add-host x08ck488ogck404wgg84sgcc:10.0.1.7 \
   --network host \
   -f Dockerfile \
-  --build-arg SOURCE_COMMIT='c4ab0545c1acda50c9ef5cb9a3f53d285d3973a0' \
+  --build-arg SOURCE_COMMIT='2d03b2a11e5aee5a7fda24eb9d276f3e9ec3a8d0' \
   --build-arg 'COOLIFY_URL=https://ahmadi98.ir' \
   --build-arg 'COOLIFY_FQDN=ahmadi98.ir' \
   --build-arg 'COOLIFY_BRANCH="main"' \
   --build-arg 'COOLIFY_RESOURCE_UUID=k4og4swwww8w8ckw8c04c0g4' \
-  --build-arg 'COOLIFY_CONTAINER_NAME=k4og4swwww8w8ckw8c04c0g4-000509792025' \
+  --build-arg 'COOLIFY_CONTAINER_NAME=k4og4swwww8w8ckw8c04c0g4-000857891777' \
   --progress plain \
-  -t ahmadi98ir/react-template:main . 
+  -t ahmadi98ir/react-template:2d03b2a11e5aee5a7fda24eb9d276f3e9ec3a8d0 . 
