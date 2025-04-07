@@ -14,5 +14,5 @@ export default function RootLayout({
         </ClientLayout>
       </body>
     </html>
-  )
+  );
 } 
