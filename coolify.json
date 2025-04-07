@@ -4,10 +4,6 @@
     "context": ".",
     "args": {
       "NEXT_PUBLIC_API_URL": "https://ahmadi98.ir"
-    },
-    "git": {
-      "url": "https://github.com/ahmadi98ir/react-template.git",
-      "branch": "main"
     }
   },
   "deploy": {
@@ -27,5 +23,9 @@
       "timeout": "10s",
       "retries": 3
     }
+  },
+  "git": {
+    "repository": "https://github.com/ahmadi98ir/react-template.git",
+    "branch": "main"
   }
 } 
