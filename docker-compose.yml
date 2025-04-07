@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - COOLIFY_RESOURCE_UUID=${COOLIFY_RESOURCE_UUID}
     ports:
       - "3000:3000"
     environment:
