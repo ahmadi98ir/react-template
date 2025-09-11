@@ -3,22 +3,21 @@
 import BlogSidebar from "@/components/BlogSidebar";
 import NoxfolioLayout from "@/layout/NoxfolioLayout";
 import Link from "next/link";
-import parse from "html-react-parser";
 
 export async function generateMetadata({ params }) {
   // Fetch the blog data for meta title, description, etc.
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${params.id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${params.id}`);
   const post = await res.json();
 
   return {
     title: post.title,
-    description: post.content.substring(0, 150), // Example meta description
+    description: (post.excerpt || post.contentMarkdown || '').substring(0, 150),
   };
 }
 
 const BlogDetails = async ({ params }) => {
   const { id } = params; // Get the post ID from URL parameters
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${id}`);
   const post = await res.json();
 console.log(1)
   return (
@@ -79,7 +78,7 @@ console.log(1)
                     </div>
                     <div className="text">
                       <span>Published</span>
-                      <h5>{new Date(post.created_at).toLocaleDateString()}</h5>
+                      <h5>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('fa-IR') : ''}</h5>
                     </div>
                     <a href="#" className="details-btn">
                       <i className="far fa-share-alt" />
@@ -87,15 +86,14 @@ console.log(1)
                   </div>
                 </div>
                 <div className="image mb-35 wow fadeInUp delay-0-5s">
-                  <img
-                    src={post.image}
-                    alt="Blog Details"
-                  />
+                  {post.coverImageUrl ? (
+                    <img src={post.coverImageUrl} alt={post.title} />
+                  ) : null}
                 </div>
                 <div className="content wow fadeInUp delay-0-2s">
-                  <p className="">
-                    {parse(post.content)}
-                  </p>
+                  <div className="">
+                    {post.contentMarkdown}
+                  </div>
                 </div>
                
               </div>

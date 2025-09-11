@@ -1,31 +1,36 @@
 'use client';
 import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+    setError('');
+    const res = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      token,
     });
-    if (response.ok) {
-      alert('Login successful');
+    if (res?.ok) {
+      window.location.href = '/admin';
     } else {
-      alert('Invalid credentials');
+      setError('ورود ناموفق. اطلاعات را بررسی کنید.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
@@ -33,7 +38,14 @@ const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <input
+        type="text"
+        placeholder="2FA Token (if enabled)"
+        value={token}
+        onChange={(e) => setToken(e.target.value)}
+      />
       <button type="submit">Login</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 };

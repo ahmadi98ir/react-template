@@ -17,7 +17,7 @@ export default function EditForm({ onSubmit, initialData = {} }) {
     // Server accepts 'files' (and also supports 'image' for compatibility)
     formData.append('files', file);
 
-    const response = await fetch('/api/posts/upload', {
+    const response = await fetch('/api/media/upload', {
       method: 'POST',
       body: formData,
     });
@@ -58,7 +58,7 @@ export default function EditForm({ onSubmit, initialData = {} }) {
       </Form.Group>
 
       <Form.Group controlId="image" className="mt-3">
-        <Form.Label>Image</Form.Label>
+        <Form.Label>Cover Image</Form.Label>
         <Form.Control type="file" onChange={handleImageUpload} />
         {imageUrl && <img src={imageUrl} alt="Preview" className="mt-3" width="100" />}
       </Form.Group>

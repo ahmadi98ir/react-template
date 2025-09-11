@@ -15,7 +15,7 @@ export default function PostForm({ onSubmit }) {
     const formdata = new FormData();
     formdata.append('files', e.target.files[0]);
 
-    const response = await fetch('/api/posts/upload', { method: 'POST', body: formdata });
+    const response = await fetch('/api/media/upload', { method: 'POST', body: formdata });
     const data = await response.json();
     if (response.ok) {
       setImageUrl(data.imageUrl);
@@ -66,7 +66,7 @@ export default function PostForm({ onSubmit }) {
       </Form.Group>
 
       <Form.Group controlId="image" className="mt-3">
-        <Form.Label>Image</Form.Label>
+        <Form.Label>Cover Image</Form.Label>
         <Form.Control type="file" onChange={handleImageUpload} />
       </Form.Group>
 

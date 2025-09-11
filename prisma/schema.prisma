@@ -1,0 +1,136 @@
+// PostgreSQL Prisma schema for ahmadi98.ir
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  avatarUrl    String?
+  role         Role     @default(ADMIN)
+  totpSecret   String?  // null when 2FA disabled
+  createdAt    DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model Profile {
+  id         String   @id @default(cuid())
+  fullName   String
+  title      String?
+  bioMarkdown String?
+  location   String?
+  resumeUrl  String?
+  avatarUrl  String?
+  socials    Json?
+  updatedAt  DateTime @updatedAt
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String
+  level    Int
+  category String?
+  order    Int      @default(0)
+}
+
+model Project {
+  id                 String   @id @default(cuid())
+  title              String
+  slug               String   @unique
+  summary            String?
+  descriptionMarkdown String?
+  tags               String[]
+  repoUrl            String?
+  demoUrl            String?
+  coverImageUrl      String?
+  galleryUrls        String[]
+  featured           Boolean  @default(false)
+  published          Boolean  @default(false)
+  order              Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model BlogPost {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  excerpt         String?
+  contentMarkdown String?
+  coverImageUrl   String?
+  tags            String[]
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  updatedAt       DateTime @updatedAt
+  seoTitle        String?
+  seoDescription  String?
+  ogImageUrl      String?
+}
+
+model Media {
+  id      String   @id @default(cuid())
+  url     String
+  alt     String?
+  width   Int?
+  height  Int?
+  bytes   Int?
+  kind    MediaKind @default(image)
+  createdAt DateTime @default(now())
+}
+
+enum MediaKind {
+  image
+  video
+  pdf
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    ContactStatus @default(new)
+  createdAt DateTime @default(now())
+}
+
+enum ContactStatus {
+  new
+  read
+  archived
+}
+
+model SiteSetting {
+  id              String  @id @default(cuid())
+  theme           Theme   @default(system)
+  primaryColor    String? 
+  faviconUrl      String?
+  sitemapEnabled  Boolean @default(true)
+  robotsPolicy    RobotsPolicy @default(allow)
+  gtagId          String?
+  ogDefaultImageUrl String?
+}
+
+enum Theme {
+  dark
+  light
+  system
+}
+
+enum RobotsPolicy {
+  allow
+  disallow
+}
+

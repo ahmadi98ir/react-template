@@ -2,7 +2,8 @@
 import { useState } from 'react';
 
 const RegisterForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -10,7 +11,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!email || !password) {
       setError('Please fill in both fields.');
       return;
     }
@@ -21,7 +22,7 @@ const RegisterForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password, name }),
       });
 
       if (!res.ok) {
@@ -29,7 +30,8 @@ const RegisterForm = () => {
       }
 
       setSuccess('User registered successfully!');
-      setUsername('');
+      setEmail('');
+      setName('');
       setPassword('');
     } catch (error) {
       setError(error.message);
@@ -43,13 +45,22 @@ const RegisterForm = () => {
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div>

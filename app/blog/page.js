@@ -9,7 +9,7 @@ export const metadata = {
 
 // Fetch posts server-side (internal API with ISR)
 async function fetchPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? ''}/api/posts`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? ''}/api/blog`, {
     next: { revalidate: 60 },
   });
   if (!res.ok) {
@@ -37,7 +37,9 @@ const BlogPage = async () => {
                     <div key={post.id} className="col-md-6 item">
                       <div className="blog-item style-two wow fadeInUp delay-0-2s">
                         <div className="image">
-                          <img src={post.image} alt={post.title} />
+                          {post.coverImageUrl ? (
+                            <img src={post.coverImageUrl} alt={post.title} />
+                          ) : null}
                         </div>
                         <div className="content">
                           <div className="blog-meta mb-20">
@@ -61,9 +63,7 @@ const BlogPage = async () => {
                           <div className="blog-meta mb-5">
                             <span className="date">
                               <i className="far fa-calendar-alt" />{" "}
-                              {new Date(post.created_at).toLocaleDateString(
-                                "fa-IR"
-                              )}
+                              {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('fa-IR') : ''}
                             </span>
                           </div>
                         </div>
