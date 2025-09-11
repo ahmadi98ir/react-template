@@ -7,10 +7,10 @@ export const metadata = {
   title: "هوش مصنوعی",
 };
 
-// Fetch posts server-side
+// Fetch posts server-side (internal API with ISR)
 async function fetchPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
-    cache: "no-store", // Ensures the latest data is fetched (disable caching)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? ''}/api/posts`, {
+    next: { revalidate: 60 },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch posts");

@@ -11,32 +11,11 @@ export default function PostForm({ onSubmit }) {
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-  const handleImageUpload2 = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
-
-    const response = await fetch('/api/posts/upload', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      setImageUrl(data.imageUrl);
-    } else {
-      console.error('Image upload failed:', data.error);
-    }
-  };
-  
-
   async function handleImageUpload(e) {
-    var formdata = new FormData();
-    formdata.append("files", e.target.files[0]);
+    const formdata = new FormData();
+    formdata.append('files', e.target.files[0]);
 
-    var requestOptions = {method: 'POST', body: formdata };
-
-    const response = await fetch("/api/posts/upload", requestOptions);
+    const response = await fetch('/api/posts/upload', { method: 'POST', body: formdata });
     const data = await response.json();
     if (response.ok) {
       setImageUrl(data.imageUrl);

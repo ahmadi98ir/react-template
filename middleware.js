@@ -1,18 +1,30 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const token = req.cookies.get('token'); // Example: check for an authentication token.
+  const { pathname } = req.nextUrl;
+  const method = req.method?.toUpperCase();
+  const token = req.cookies.get('token');
 
-  if (!token) {
-    // Redirect to login page if no token is found
-    return NextResponse.redirect(new URL('/auth/login', req.url));
+  // Protect the UI under /posts always
+  if (pathname.startsWith('/posts')) {
+    if (!token) {
+      return NextResponse.redirect(new URL('/auth/login', req.url));
+    }
+    return NextResponse.next();
   }
 
-  // Allow the request if the user is authenticated
+  // Protect write operations on /api/posts
+  if (pathname.startsWith('/api/posts')) {
+    if (method && method !== 'GET') {
+      if (!token) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+    }
+  }
+
   return NextResponse.next();
 }
 
-// Apply middleware only to the /posts route
 export const config = {
-  matcher: '/posts/:path*',
+  matcher: ['/posts/:path*', '/api/posts/:path*'],
 };

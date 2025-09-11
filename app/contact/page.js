@@ -69,7 +69,7 @@ const page = () => {
                   id="contactForm"
                   className="contactForm"
                   name="contactForm"
-                  action="assets/php/form-process.php"
+                  action="/api/contact"
                   method="post"
                 >
                   <div className="row">

@@ -18,34 +18,34 @@ export default function Home() {
       <Hero />
       {/* Hero Section End */}
       {/* About Area start */}
-     {/*  <About /> */}
+      <About />
       {/* About Area end */}
       {/* Resume Area start */}
-      {/* <Resume /> */}
+      <Resume />
       {/* Resume Area end */}
       {/* Services Area start */}
-      {/* <Services /> */}
+      <Services />
       {/* Services Area end */}
       {/* Skill Area start */}
-      {/* <Skill /> */}
+      <Skill />
       {/* Skill Area end */}
       {/* Projects Area start */}
-      {/* <Projects /> */}
+      <Projects />
       {/* Projects Area end */}
       {/* Testimonial Area start */}
-      {/* <Testimonial /> */}
+      <Testimonial />
       {/* Testimonial Area end */}
       {/* Pricing Area start */}
-     {/*  <Pricing /> */}
+      <Pricing />
       {/* Pricing Area end */}
       {/* Contact Area start */}
-    {/*   <Contact /> */}
+      <Contact />
       {/* Contact Area end */}
       {/* Blog Area start */}
-{/*       <Blog /> */}
+      <Blog />
       {/* Blog Area end */}
       {/* Client Log start */}
-      {/* <Clients /> */}
+      <Clients />
       {/* Client Log end */}
     </NoxfolioLayout>
   );

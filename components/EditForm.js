@@ -14,7 +14,8 @@ export default function EditForm({ onSubmit, initialData = {} }) {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('image', file);
+    // Server accepts 'files' (and also supports 'image' for compatibility)
+    formData.append('files', file);
 
     const response = await fetch('/api/posts/upload', {
       method: 'POST',

@@ -4,10 +4,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
-const JWT_SECRET = 'your_jwt_secret'; // Use environment variables in production
-
 export async function POST(req) {
   const { username, password } = await req.json();
+
+  const JWT_SECRET = process.env.JWT_SECRET;
+  if (!JWT_SECRET) {
+    return NextResponse.json({ error: 'Server misconfigured: JWT_SECRET missing' }, { status: 500 });
+  }
 
   // Find the admin in the database
   const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
@@ -28,9 +31,16 @@ export async function POST(req) {
     expiresIn: '1h',
   });
 
-  // Set JWT as a cookie
+  // Set JWT as a cookie (secure flags)
+  const isProd = process.env.NODE_ENV === 'production';
   const response = NextResponse.json({ message: 'Login successful' });
-  response.cookies.set('token', token, { httpOnly: true, maxAge: 60 * 60 });
+  response.cookies.set('token', token, {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: 'strict',
+    path: '/',
+    maxAge: 60 * 60, // 1 hour
+  });
 
   return response;
 }
