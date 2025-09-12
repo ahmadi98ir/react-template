@@ -6,9 +6,9 @@ import { prisma } from '@/lib/prisma'
 
 export async function POST(req: Request) {
   const session = (await getServerSession(authOptions as any)) as Session | null
-  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!session?.user?.email) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const { token } = await req.json()
-  const user = await prisma.user.findUnique({ where: { id: session.user.id as string } })
+  const user = await prisma.user.findUnique({ where: { email: session.user.email as string } })
   if (!user?.totpSecret) return NextResponse.json({ error: '2FA not enabled' }, { status: 400 })
   const { authenticator } = await import('otplib')
   const valid = authenticator.verify({ token, secret: user.totpSecret })
