@@ -3,8 +3,10 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
+import type { Session } from 'next-auth'
+
 export async function POST() {
-  const session = await getServerSession(authOptions as any)
+  const session = (await getServerSession(authOptions as any)) as Session | null
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { authenticator } = await import('otplib')
@@ -16,4 +18,3 @@ export async function POST() {
   await prisma.user.update({ where: { id: session.user.id as string }, data: { totpSecret: secret } })
   return NextResponse.json({ otpauth })
 }
-
