@@ -10,6 +10,7 @@ import "@css/slick.min.css";
 import "@css/style.css";
 import "./globals.css";
 import localFont from 'next/font/local';
+import Script from 'next/script';
 
 
 //font
@@ -75,6 +76,19 @@ export default function RootLayout({ children }) {
     return (
         <html lang="fa" dir="rtl" className={`${fontFamily} scroll-smooth`}>
             <body>
+                {process.env.GTAG_ID ? (
+                    <>
+                        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GTAG_ID}`} />
+                        <Script id="gtag-init" strategy="afterInteractive">
+                            {`
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);} 
+                            gtag('js', new Date());
+                            gtag('config', '${process.env.GTAG_ID}');
+                            `}
+                        </Script>
+                    </>
+                ) : null}
                 <Preloader />
                 {children}
             </body>
