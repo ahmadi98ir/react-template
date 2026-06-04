@@ -1,4 +1,9 @@
-export async function GET() {
-  return new Response(JSON.stringify({ ok: true }), { status: 200 })
-}
+export const runtime = 'edge';
 
+export function GET() {
+  return Response.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    version: process.env.npm_package_version ?? '1.0.0',
+  });
+}

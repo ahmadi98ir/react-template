@@ -11,8 +11,8 @@ const Hero = () => {
     {
       id: 1,
       text: t("experienceLabel"),
-      valueType: "plus",
       value: "13",
+      valueType: "plus",
       valueType2: t("experienceSuffix"),
     },
     {
@@ -37,10 +37,18 @@ const Hero = () => {
         <div className="row align-items-center">
           <div className="col-lg-4 col-sm-7">
             <div className="hero-content rmb-55 wow fadeInUp delay-0-2s">
-              <span className="h2">{t("greeting")} </span>
+              <span className="sub-title mb-15">{t("greeting")}</span>
               <h1>
-                <b>{t("name")}</b> {t("welcome")}
+                <b>{t("name")}</b>
               </h1>
+              <p className="tagline-text mb-20" style={{
+                fontWeight: 500,
+                fontSize: "0.95rem",
+                letterSpacing: "0.02em",
+                opacity: 0.8,
+              }}>
+                {t("tagline")}
+              </p>
               <p style={{ textAlign: "justify" }}>
                 {t("description")}
               </p>
@@ -73,7 +81,7 @@ const Hero = () => {
           <div className="col-lg-5">
             <div className="author-image-part wow fadeIn delay-0-3s">
               <div className="bg-circle" />
-              <img src="/assets/images/hero/me.png" alt="Author" />
+              <img src="/assets/images/hero/me.png" alt="Mahdi Ahmadi" />
               <div className="progress-shape">
                 <img
                   src="/assets/images/hero/progress-shape.png"
@@ -99,21 +107,21 @@ export const Hero2 = () => {
       <div className="container rel z-3">
         <div className="hero-two-content">
           <span className="sub-title wow fadeInLeft delay-0-1s">
-            <i className="flaticon-asterisk-1" /> UI/UX Designer
+            <i className="flaticon-asterisk-1" /> Tech Lead & Full-Stack Architect
           </span>
           <span className="title wow fadeInLeft delay-0-2s">
             Hello <small>I&apos;m</small>
           </span>
-          <span className="name wow fadeInRight delay-0-4s">henry gayle</span>
+          <span className="name wow fadeInRight delay-0-4s">Mahdi Ahmadi</span>
           <span className="designations wow fadeInLeft delay-0-6s">
-            <span>Ux</span> Designer
+            <span>MSc</span> Bank Accounting
           </span>
         </div>
         <div className="row justify-content-center">
           <div className="col-xl-6 col-lg-7">
             <div className="author-image-part wow fadeIn delay-0-3s">
               <div className="bg-circle" />
-              <img src="/assets/images/hero/hero-two.png" alt="Author" />
+              <img src="/assets/images/hero/hero-two.png" alt="Mahdi Ahmadi" />
             </div>
           </div>
         </div>

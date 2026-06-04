@@ -3,6 +3,10 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  experimental: {
+    ppr: 'incremental',
+  },
   async headers() {
     return [
       {

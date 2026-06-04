@@ -4,7 +4,6 @@ import Script from 'next/script';
 import { cookies } from 'next/headers';
 import Preloader from "@/layout/Preloader";
 import "@css/animate.min.css";
-import "@css/bootstrap.min.css";
 import "@css/flaticon.min.css";
 import "@css/fontawesome-5.14.0.min.css";
 import "@css/nice-select.min.css";
