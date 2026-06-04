@@ -1,9 +1,9 @@
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm ci"]
 
 [phases.build]
 cmds = ["npm run build"]
 
 [start]
-cmd = "npm run start"
-
+# Next.js standalone output boots via node server.js, not npm start
+cmd = "node .next/standalone/server.js"
