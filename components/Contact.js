@@ -1,4 +1,9 @@
+"use client";
+import { useTranslations } from "next-intl";
+
 const Contact = () => {
+  const t = useTranslations("contact");
+
   return (
     <section
       id="contact"
@@ -9,20 +14,15 @@ const Contact = () => {
           <div className="col-lg-4">
             <div className="contact-content-part pt-5 rpt-0 rmb-55 wow fadeInUp delay-0-2s">
               <div className="section-title mb-40">
-                <span className="sub-title mb-15">Get In Touch</span>
-                <h2>
-                  Let’s Talk For your <span>Next Projects</span>
-                </h2>
-                <p>
-                  Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
-                  inventore veritatis
-                </p>
+                <span className="sub-title mb-15">{t("subTitle")}</span>
+                <h2>{t("title")}</h2>
+                <p>{t("description")}</p>
               </div>
               <ul className="list-style-two">
-                <li>5+ Years Of Experience</li>
-                <li>Professional Web Designer</li>
-                <li>Mobile Apps Design</li>
-                <li>Custom Design Support</li>
+                <li>{t("feature1")}</li>
+                <li>{t("feature2")}</li>
+                <li>{t("feature3")}</li>
+                <li>{t("feature4")}</li>
               </ul>
             </div>
           </div>
@@ -32,108 +32,97 @@ const Contact = () => {
                 id="contactForm"
                 className="contactForm"
                 name="contactForm"
-                action="assets/php/form-process.php"
+                action="/api/contacts"
                 method="post"
               >
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="name">Full Name</label>
+                      <label htmlFor="name">{t("fullName")}</label>
                       <input
                         type="text"
                         id="name"
                         name="name"
                         className="form-control"
                         defaultValue=""
-                        placeholder="Richard D. Hammond"
+                        placeholder={t("namePlaceholder")}
                         required=""
-                        data-error="Please enter your Name"
                       />
                       <label htmlFor="name" className="for-icon">
                         <i className="far fa-user" />
                       </label>
-                      <div className="help-block with-errors" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="email">Email Address</label>
+                      <label htmlFor="email">{t("email")}</label>
                       <input
                         type="email"
                         id="email"
                         name="email"
                         className="form-control"
                         defaultValue=""
-                        placeholder="support@gmail.com"
+                        placeholder={t("emailPlaceholder")}
                         required=""
-                        data-error="Please enter your Email"
                       />
                       <label htmlFor="email" className="for-icon">
                         <i className="far fa-envelope" />
                       </label>
-                      <div className="help-block with-errors" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="phone_number">Phone Number</label>
+                      <label htmlFor="phone_number">{t("phone")}</label>
                       <input
                         type="text"
                         id="phone_number"
                         name="phone_number"
                         className="form-control"
                         defaultValue=""
-                        placeholder="+880 (123) 456 88"
+                        placeholder={t("phonePlaceholder")}
                         required=""
-                        data-error="Please enter your Phone Number"
                       />
                       <label htmlFor="phone_number" className="for-icon">
                         <i className="far fa-phone" />
                       </label>
-                      <div className="help-block with-errors" />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label htmlFor="subject">Subject</label>
+                      <label htmlFor="subject">{t("subject")}</label>
                       <input
                         type="text"
                         id="subject"
                         name="subject"
                         className="form-control"
                         defaultValue=""
-                        placeholder="Subject"
+                        placeholder={t("subjectPlaceholder")}
                         required=""
-                        data-error="Please enter your Subject"
                       />
                       <label htmlFor="subject" className="for-icon">
                         <i className="far fa-text" />
                       </label>
-                      <div className="help-block with-errors" />
                     </div>
                   </div>
                   <div className="col-md-12">
                     <div className="form-group">
-                      <label htmlFor="message">Message</label>
+                      <label htmlFor="message">{t("message")}</label>
                       <textarea
                         name="message"
                         id="message"
                         className="form-control"
                         rows={4}
-                        placeholder="write message"
+                        placeholder={t("messagePlaceholder")}
                         required=""
-                        data-error="Please enter your Message"
                         defaultValue={""}
                       />
-                      <div className="help-block with-errors" />
                     </div>
                   </div>
                   <div className="col-md-12">
                     <div className="form-group mb-0">
                       <button type="submit" className="theme-btn">
-                        Send Us Message <i className="far fa-angle-right" />
+                        {t("submit")} <i className="far fa-angle-right" />
                       </button>
-                      <div id="msgSubmit" className="hidden" />
                     </div>
                   </div>
                 </div>
@@ -143,16 +132,8 @@ const Contact = () => {
         </div>
       </div>
       <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
+        <span /><span /><span /><span /><span />
+        <span /><span /><span /><span /><span />
       </div>
     </section>
   );
@@ -168,18 +149,18 @@ export const Contact2 = () => {
             <div className="contact-two-content pt-5 rpt-0 rmb-55 wow fadeInUp delay-0-2s">
               <div className="section-title mb-25">
                 <span className="sub-title mb-15">
-                  <i className="flaticon-asterisk-1" /> let’s work together
+                  <i className="flaticon-asterisk-1" /> let&apos;s work together
                 </span>
-                <h2>let’s Work Together</h2>
+                <h2>Let&apos;s Work Together</h2>
               </div>
               <div className="row align-items-center">
                 <div className="col-sm-8">
-                  <h3>i,m avaiable at</h3>
+                  <h3>I&apos;m available at</h3>
                   <h5>
-                    <i className="far fa-envelope" /> bill.sanders@example.com
+                    <i className="far fa-envelope" /> info@ahmadi98.ir
                   </h5>
                   <h5>
-                    <i className="far fa-phone" /> 239) 555-0108
+                    <i className="far fa-phone" /> +98 910 241 3207
                   </h5>
                 </div>
                 <div className="col-sm-4">
@@ -189,23 +170,23 @@ export const Contact2 = () => {
                 </div>
               </div>
               <div className="social-flow">
-                <h4>Follow :</h4>
+                <h4>Follow:</h4>
                 <div className="social-style-one">
-            <a href="https://x.com/ahmadi98ir?t=uAi46M93v5CEwVLcumpZAg&s=09"target="blank">
-              <i className="fab fa-twitter" />
-            </a>
-            <a href="https://wa.me/989102413207">
-              <i className="fab fa-whatsapp-f" />
-            </a>
-            <a href="https://www.instagram.com/ahmadi98.ir/profilecard/?igsh=YmN1YzUzbTBtZG81"target="blank">
-              <i className="fab fa-instagram-f" />
-            </a>
-            <a href="https://github.com/ahmadi98ir"target="blank">
-              <i className="fab fa-github-f" />
-            </a>
-            <a href="https://www.linkedin.com/in/mahdi-ahmadi-a2454a146/"target="blank">
-              <i className="fab fa-linkedin-f" />
-            </a>
+                  <a href="https://x.com/ahmadi98ir" target="_blank" rel="noreferrer">
+                    <i className="fab fa-twitter" />
+                  </a>
+                  <a href="https://wa.me/989102413207">
+                    <i className="fab fa-whatsapp-f" />
+                  </a>
+                  <a href="https://www.instagram.com/ahmadi98.ir/" target="_blank" rel="noreferrer">
+                    <i className="fab fa-instagram-f" />
+                  </a>
+                  <a href="https://github.com/ahmadi98ir" target="_blank" rel="noreferrer">
+                    <i className="fab fa-github-f" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/mahdi-ahmadi-a2454a146/" target="_blank" rel="noreferrer">
+                    <i className="fab fa-linkedin-f" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -213,64 +194,57 @@ export const Contact2 = () => {
           <div className="col-lg-4">
             <div className="contact-form-two form-style-one wow fadeInUp delay-0-4s">
               <form
-                id="contactForm"
+                id="contactForm2"
                 className="contactForm"
                 name="contactForm"
-                action="assets/php/form-process.php"
+                action="/api/contacts"
                 method="post"
               >
                 <div className="form-group">
-                  <label className="for-title" htmlFor="email">
+                  <label className="for-title" htmlFor="email2">
                     Email Address
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    id="email2"
                     name="email"
                     className="form-control"
                     required=""
-                    data-error="Please enter your Email"
                   />
-                  <label htmlFor="email" className="for-icon">
+                  <label htmlFor="email2" className="for-icon">
                     <i className="far fa-envelope" />
                   </label>
-                  <div className="help-block with-errors" />
                 </div>
                 <div className="form-group">
-                  <label className="for-title" htmlFor="name">
+                  <label className="for-title" htmlFor="name2">
                     Your Name
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="name2"
                     name="name"
                     className="form-control"
                     required=""
-                    data-error="Please enter your Name"
                   />
-                  <label htmlFor="name" className="for-icon">
+                  <label htmlFor="name2" className="for-icon">
                     <i className="far fa-user" />
                   </label>
-                  <div className="help-block with-errors" />
                 </div>
                 <div className="form-group">
                   <textarea
                     name="message"
-                    id="message"
+                    id="message2"
                     className="form-control"
                     rows={7}
-                    placeholder="Write Messege....."
+                    placeholder="Write Message..."
                     required=""
-                    data-error="Please enter your Message"
                     defaultValue={""}
                   />
-                  <div className="help-block with-errors" />
                 </div>
                 <div className="form-group mb-0">
                   <button type="submit" className="theme-btn">
-                    <i className="far fa-envelope" /> Messege me
+                    <i className="far fa-envelope" /> Message me
                   </button>
-                  <div id="msgSubmit" className="hidden" />
                 </div>
               </form>
             </div>

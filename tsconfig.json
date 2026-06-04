@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["dom", "es2020"],
+    "lib": [
+      "dom",
+      "es2020"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@css/*": ["./public/assets/css/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@css/*": [
+        "./public/assets/css/*"
+      ]
     },
     "jsx": "preserve",
     "allowJs": true,
@@ -15,9 +22,24 @@
     "isolatedModules": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": false,
+    "incremental": true,
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
-

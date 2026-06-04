@@ -1,52 +1,58 @@
+"use client";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
 const DropdownBtn = () => (
   <div className="dropdown-btn">
     <span className="fas fa-chevron-down" />
   </div>
 );
+
 const MultiMenu = () => {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const base = `/${locale}`;
+
   return (
     <ul className="navigation clearfix">
       <li className="dropdown">
-        <Link href="contact"> تماس با من</Link>
+        <Link href={`${base}/contact`}>{t("contact")}</Link>
       </li>
       <li>
-        <Link href="/about">درباره من</Link>
+        <Link href={`${base}/about`}>{t("about")}</Link>
       </li>
       <li>
-        <Link href="/services">خدمات</Link>
+        <Link href={`${base}/services`}>{t("services")}</Link>
       </li>
       <li className="dropdown">
-        <a href="#">پروژه ها</a>
+        <a href="#">{t("projects")}</a>
         <ul>
           <li>
-            <Link href="/projects"> خاتمه یافته</Link>
+            <Link href={`${base}/projects`}>{t("projectsCompleted")}</Link>
           </li>
           <li>
-            <Link href="/projects-masonry"> در حال ساخت</Link>
+            <Link href={`${base}/projects-masonry`}>{t("projectsInProgress")}</Link>
           </li>
           <li>
-            <Link href="/project-details"> آتی</Link>
+            <Link href={`${base}/project-details`}>{t("projectsFuture")}</Link>
           </li>
         </ul>
         <DropdownBtn />
       </li>
       <li className="dropdown">
-        <a href="#">وبلاگ</a>
+        <a href="#">{t("blog")}</a>
         <ul>
           <li>
-            <Link href="/blog"> هوش مصنوعی</Link>
+            <Link href={`${base}/blog`}>{t("blogAI")}</Link>
           </li>
           <li>
-            <Link href="/blog-details">تازه ها</Link>
+            <Link href={`${base}/blog-details`}>{t("blogLatest")}</Link>
           </li>
         </ul>
         <DropdownBtn />
       </li>
-     
       <li>
-        <Link href="/">صفحه اصلی</Link>
+        <Link href={`${base}`}>{t("home")}</Link>
       </li>
     </ul>
   );
@@ -54,32 +60,18 @@ const MultiMenu = () => {
 export default MultiMenu;
 
 export const OnePageMenu = () => {
+  const t = useTranslations("nav");
+
   return (
     <ul className="navigation onepage clearfix">
-      <li>
-        <a href="#home">Home</a>
-      </li>
-      <li>
-        <a href="#about">about</a>
-      </li>
-      <li>
-        <a href="#resume">Resume</a>
-      </li>
-      <li>
-        <a href="#services">services</a>
-      </li>
-      <li>
-        <a href="#skills">skills</a>
-      </li>
-      <li>
-        <a href="#portfolio">projects</a>
-      </li>
-      <li>
-        <a href="#blog">blog</a>
-      </li>
-      <li>
-        <a href="#contact">Contact</a>
-      </li>
+      <li><a href="#home">{t("home")}</a></li>
+      <li><a href="#about">{t("about")}</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#services">{t("services")}</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">{t("projects")}</a></li>
+      <li><a href="#blog">{t("blog")}</a></li>
+      <li><a href="#contact">{t("contact")}</a></li>
     </ul>
   );
 };

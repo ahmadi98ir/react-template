@@ -1,46 +1,43 @@
+"use client";
+import { useTranslations } from "next-intl";
 import Counter from "./Counter";
 
 const About = () => {
+  const t = useTranslations("about");
+
   return (
-    <section dir="rtl" id="about" className="about-area rel z-1">
+    <section id="about" className="about-area rel z-1">
       <div className="for-bgc-black py-130 rpy-100">
         <div className="container">
           <div className="row gap-100 align-items-center">
             <div className="col-lg-7">
               <div className="about-content-part rel z-2 rmb-55">
                 <div className="section-title mb-35 wow fadeInUp delay-0-2s">
-                  <span className="sub-title mb-15">About Me</span>
-                  <h2>
-                  تخصص ما، رفع چالش‌های دیجیتال شماست.
-                  </h2>
-                  <p>
-                    At vero eos et accusamus etodio dignissimos ducimus
-                    praesentium voluptatum corrupti quos dolores quas molestias
-                    excepturi sint occaecati cupiditate provident qui officia
-                    deserunt mollitia animi, id est laborum et dolorum
-                  </p>
+                  <span className="sub-title mb-15">{t("subTitle")}</span>
+                  <h2>{t("title")}</h2>
+                  <p>{t("description")}</p>
                 </div>
                 <ul className="list-style-one two-column wow fadeInUp delay-0-2s">
-                  <li>Branding &amp; Design</li>
-                  <li>Digital Marketing</li>
-                  <li>Web Development</li>
-                  <li>Product Design</li>
+                  <li>{t("skill1")}</li>
+                  <li>{t("skill2")}</li>
+                  <li>{t("skill3")}</li>
+                  <li>{t("skill4")}</li>
                 </ul>
                 <div className="about-info-box mt-25 wow fadeInUp delay-0-2s">
                   <div className="info-box-item">
                     <i className="far fa-envelope" />
                     <div className="content">
-                      <span>Email Us</span>
+                      <span>{t("emailLabel")}</span>
                       <br />
-                      <a href="mailto:support@gmail.com">support@gmail.com</a>
+                      <a href="mailto:info@ahmadi98.ir">info@ahmadi98.ir</a>
                     </div>
                   </div>
                   <div className="info-box-item">
                     <i className="far fa-phone" />
                     <div className="content">
-                      <span>Make A Call</span>
+                      <span>{t("callLabel")}</span>
                       <br />
-                      <a href="callto:+000(123)45688">+880 (123) 456 88</a>
+                      <a href="tel:+989102413207" dir="ltr">+98 910 241 3207</a>
                     </div>
                   </div>
                 </div>
@@ -48,19 +45,19 @@ const About = () => {
             </div>
             <div className="col-lg-5">
               <div className="about-image-part wow fadeInUp delay-0-3s">
-                <img src="assets/images/about/about.jpg" alt="About Me" />
+                <img src="/assets/images/about/about.jpg" alt="About Me" />
                 <div className="about-btn btn-one wow fadeInRight delay-0-4s">
-                  <img src="assets/images/about/btn-image1.png" alt="Image" />
+                  <img src="/assets/images/about/btn-image1.png" alt="Image" />
                   <h6>Experience Designer</h6>
                   <i className="fas fa-arrow-right" />
                 </div>
                 <div className="about-btn btn-two wow fadeInRight delay-0-5s">
-                  <img src="assets/images/about/btn-image2.png" alt="Image" />
+                  <img src="/assets/images/about/btn-image2.png" alt="Image" />
                   <h6>Mark J. Collins</h6>
                   <i className="fas fa-arrow-right" />
                 </div>
                 <div className="dot-shape">
-                  <img src="assets/images/shape/about-dot.png" alt="Shape" />
+                  <img src="/assets/images/shape/about-dot.png" alt="Shape" />
                 </div>
               </div>
             </div>
@@ -68,16 +65,8 @@ const About = () => {
         </div>
       </div>
       <div className="bg-lines">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
+        <span /><span /><span /><span /><span />
+        <span /><span /><span /><span /><span />
       </div>
     </section>
   );
@@ -100,8 +89,8 @@ export const About2 = () => {
                   Introduction of Myself
                 </span>
                 <h2>
-                  i,m a digital <span>designer</span> studio connecting brands
-                  to people through
+                  I&apos;m a digital <span>designer</span> studio connecting
+                  brands to people through
                 </h2>
               </div>
               <div className="text pb-5">
@@ -142,7 +131,7 @@ export const About2 = () => {
                 <div className="col-lg-5 col-6">
                   <div className="counter-item counter-text-wrap wow fadeInDown delay-0-2s">
                     <Counter end={8} extraClass={"k"} />
-                    <span className="counter-title">Awward achievmentd</span>
+                    <span className="counter-title">Award achievements</span>
                   </div>
                 </div>
                 <div className="col-lg-5 col-6">
@@ -155,7 +144,7 @@ export const About2 = () => {
               <div className="counter-logo">
                 <img
                   className="wow zoomIn delay-0-2s"
-                  src="assets/images/shape/circle-logo.png"
+                  src="/assets/images/shape/circle-logo.png"
                   alt="Logo"
                 />
               </div>
