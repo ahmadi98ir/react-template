@@ -3,6 +3,9 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
+# Stub @better-auth/kysely-adapter dist files — they import kysely symbols that
+# don't exist in the installed kysely version, breaking Next.js externals-tracing.
+RUN node -e "const fs=require('fs');const dir='node_modules/@better-auth/kysely-adapter/dist/';if(fs.existsSync(dir)){fs.readdirSync(dir).filter(f=>f.endsWith('.mjs')||f.endsWith('.js')).forEach(f=>{fs.writeFileSync(dir+f,'export default {};\n');});}" || true
 
 # ─── Stage 2: Build ───────────────────────────────────────────────────────────
 FROM node:20-alpine AS builder

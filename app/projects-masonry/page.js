@@ -2,13 +2,7 @@ import PageBanner from "@/components/PageBanner";
 import NoxfolioLayout from "@/layout/NoxfolioLayout";
 import Link from "next/link";
 
-import dynamic from "next/dynamic";
-const ProjectMasonryIsotop = dynamic(
-  () => import("@/components/ProjectMasonryIsotop"),
-  {
-    ssr: false,
-  }
-);
+import ProjectMasonryIsotop from "@/components/ProjectMasonryIsotopClient";
 
 export const metadata = {
   title: "Projects Masonry",
