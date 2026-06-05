@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Nav, Tab } from "react-bootstrap";
+import { useState } from "react";
 
 const Pricing = ({ extraClass }) => {
   return (
@@ -124,13 +124,14 @@ const Pricing = ({ extraClass }) => {
 export default Pricing;
 
 export const Pricing2 = () => {
+  const [tab, setTab] = useState("monthly");
   return (
     <section
       id="pricing"
       className="pricing-area-two bgc-black pt-140 rpt-100 rel z-1"
     >
       <div className="container">
-        <Tab.Container defaultActiveKey={"monthly"}>
+        <div>
           <div className="row justify-content-center">
             <div className="col-xl-12">
               <div className="section-title text-center mb-25 wow fadeInUp delay-0-2s">
@@ -141,22 +142,14 @@ export const Pricing2 = () => {
                   amazing <span>pricing</span> plan
                 </h2>
               </div>
-              <Nav as={"ul"} className="nav pricing-tab mb-60" role="tablist">
-                <Nav.Item as={"li"}>
-                  <Nav.Link as={"button"} eventKey="monthly">
-                    Monthly
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item as={"li"}>
-                  <Nav.Link as={"button"} eventKey="yearly">
-                    Yearly
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
+              <ul className="nav pricing-tab mb-60" role="tablist">
+                <li><button className={`nav-link${tab==="monthly"?" active":""}`} onClick={()=>setTab("monthly")}>Monthly</button></li>
+                <li><button className={`nav-link${tab==="yearly"?" active":""}`} onClick={()=>setTab("yearly")}>Yearly</button></li>
+              </ul>
             </div>
           </div>
-          <Tab.Content className="tab-content wow fadeInUp delay-0-4s">
-            <Tab.Pane className="tab-pane fade" eventKey="monthly">
+          <div className="tab-content wow fadeInUp delay-0-4s">
+            <div className={`tab-pane fade${tab==="monthly"?" show active":""}`}>
               <div className="row">
                 <div className="col-xl-6">
                   <div className="pricing-item style-two">
@@ -261,8 +254,8 @@ export const Pricing2 = () => {
                   </div>
                 </div>
               </div>
-            </Tab.Pane>
-            <Tab.Pane className="tab-pane fade yearly" eventKey="yearly">
+            </div>
+            <div className={`tab-pane fade yearly${tab==="yearly"?" show active":""}`}>
               <div className="row">
                 <div className="col-xl-6">
                   <div className="pricing-item style-two wow fadeInUp delay-0-2s">
@@ -367,9 +360,9 @@ export const Pricing2 = () => {
                   </div>
                 </div>
               </div>
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="bg-lines">
         <span />

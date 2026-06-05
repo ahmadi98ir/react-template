@@ -1,105 +1,33 @@
 "use client";
-import { Accordion } from "react-bootstrap";
+import { useState } from "react";
+
+const faqs = [
+  { q: "What Service We Provide?", a: "To take a trivial example which undertakes laborious physical exercise except to obtain some advantage pleasure annoying consequences." },
+  { q: "How Many Years Of Experience?", a: "At vero eos et accusamus dignissimos ducimus voluptatum corrupti quos dolores quas molestias excepturie." },
+  { q: "Have Any Professional Team Member?", a: "To take a trivial example which undertakes laborious physical exercise except to obtain some advantage pleasure annoying consequences." },
+  { q: "Are You Awards Winning Agency?", a: "To take a trivial example which undertakes laborious physical exercise except to obtain some advantage pleasure annoying consequences." },
+];
 
 const Faq = () => {
+  const [open, setOpen] = useState(1);
   return (
-    <Accordion
-      defaultActiveKey="collapseTwo"
-      className="accordion wow fadeInUp delay-0-4s"
-      id="faq-accordion"
-    >
-      <div className="accordion-item">
-        <h5 className="accordion-header">
-          <Accordion.Toggle
-            as={"button"}
-            className="accordion-button"
-            eventKey="collapseOne"
-          >
-            What Service We Provide ?
-          </Accordion.Toggle>
-        </h5>
-        <Accordion.Collapse
-          eventKey="collapseOne"
-          className="accordion-collapse collapse"
-        >
-          <div className="accordion-body">
-            <p>
-              To take a trivial example which undertakes laborious physical
-              exercise except to obtain some advantage pleasure annoying
-              consequences
-            </p>
+    <div className="accordion wow fadeInUp delay-0-4s" id="faq-accordion">
+      {faqs.map((f, i) => (
+        <div className="accordion-item" key={i}>
+          <h5 className="accordion-header">
+            <button
+              className={`accordion-button${open === i ? "" : " collapsed"}`}
+              onClick={() => setOpen(open === i ? -1 : i)}
+            >
+              {f.q}
+            </button>
+          </h5>
+          <div className={`accordion-collapse collapse${open === i ? " show" : ""}`}>
+            <div className="accordion-body"><p>{f.a}</p></div>
           </div>
-        </Accordion.Collapse>
-      </div>
-      <div className="accordion-item">
-        <h5 className="accordion-header">
-          <Accordion.Toggle
-            as={"button"}
-            className="accordion-button collapsed"
-            eventKey="collapseTwo"
-          >
-            How Many Years Of Experience ?
-          </Accordion.Toggle>
-        </h5>
-        <Accordion.Collapse
-          eventKey="collapseTwo"
-          className="accordion-collapse"
-        >
-          <div className="accordion-body">
-            <p>
-              At vero eos et accusamus dignissimos ducimus voluptatum corrupti
-              quos dolores quas molestias excepturie
-            </p>
-          </div>
-        </Accordion.Collapse>
-      </div>
-      <div className="accordion-item">
-        <h5 className="accordion-header">
-          <Accordion.Toggle
-            as={"button"}
-            className="accordion-button collapsed"
-            eventKey="collapseThree"
-          >
-            Have Any Professional Team Member ?
-          </Accordion.Toggle>
-        </h5>
-        <Accordion.Collapse
-          eventKey="collapseThree"
-          className="accordion-collapse"
-        >
-          <div className="accordion-body">
-            <p>
-              To take a trivial example which undertakes laborious physical
-              exercise except to obtain some advantage pleasure annoying
-              consequences
-            </p>
-          </div>
-        </Accordion.Collapse>
-      </div>
-      <div className="accordion-item">
-        <h5 className="accordion-header">
-          <Accordion.Toggle
-            as={"button"}
-            className="accordion-button collapsed"
-            eventKey="collapseFour"
-          >
-            Are You Awards Winning Agency ?
-          </Accordion.Toggle>
-        </h5>
-        <Accordion.Collapse
-          eventKey="collapseFour"
-          className="accordion-collapse "
-        >
-          <div className="accordion-body">
-            <p>
-              To take a trivial example which undertakes laborious physical
-              exercise except to obtain some advantage pleasure annoying
-              consequences
-            </p>
-          </div>
-        </Accordion.Collapse>
-      </div>
-    </Accordion>
+        </div>
+      ))}
+    </div>
   );
 };
 export default Faq;

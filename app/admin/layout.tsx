@@ -1,9 +1,9 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import Link from 'next/link'
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import Link from 'next/link';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
     return (
       <div style={{ padding: 40 }}>
@@ -11,7 +11,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <p>برای دسترسی، ابتدا وارد شوید.</p>
         <Link href="/auth/login">ورود</Link>
       </div>
-    )
+    );
   }
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
@@ -32,6 +32,5 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       </aside>
       <main style={{ flex: 1, padding: 24 }}>{children}</main>
     </div>
-  )
+  );
 }
-
