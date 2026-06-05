@@ -42,7 +42,6 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Coolify deploy
-        if: ${{ secrets.COOLIFY_WEBHOOK != '' }}
         run: |
           curl -fsSL -X GET \
             -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
