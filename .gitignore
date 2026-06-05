@@ -4,3 +4,4 @@ public/uploads
 public/uploads/*
 .env*
 tsconfig.tsbuildinfo
+.env.deploy
