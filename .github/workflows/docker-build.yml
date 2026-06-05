@@ -56,7 +56,7 @@ jobs:
           SSH_HOST="${{ secrets.SSH_HOST }}"
           OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
-          echo "==> Streaming Docker image to server (this may take a few minutes)..."
+          echo "==> Streaming Docker image to server..."
           docker save "$IMAGE_TAG" | gzip | \
             sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
               'gzip -d | docker load'
@@ -70,12 +70,19 @@ jobs:
           SSH_USER="${{ secrets.SSH_USER || 'root' }}"
           SSH_HOST="${{ secrets.SSH_HOST }}"
           OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-          TOKEN="${{ secrets.COOLIFY_TOKEN }}"
-          UUID="${{ secrets.COOLIFY_APP_UUID }}"
+          WEBHOOK="${{ secrets.COOLIFY_WEBHOOK }}"
 
+          # Extract the path+query from the webhook URL (e.g. /api/v1/deploy?uuid=xxx)
+          # Then call it via localhost to bypass the external Host restriction
           sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
-            "for port in 8000 80; do
-               resp=\$(curl -sf -X GET \"http://localhost:\${port}/api/v1/deploy?uuid=${UUID}\" \
-                 -H \"Authorization: Bearer ${TOKEN}\" 2>&1) && echo \"Deploy triggered on port \${port}: \${resp}\" && exit 0
+            "WEBHOOK_PATH=\$(echo '${WEBHOOK}' | grep -oP '/api/v1/[^\"]+')
+             for port in 8000 80; do
+               resp=\$(curl -sf \"http://localhost:\${port}\${WEBHOOK_PATH}\" \
+                 -H 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}' 2>&1) \
+               && echo \"Deploy triggered on port \${port}: \${resp}\" && exit 0
              done
-             echo 'WARNING: Coolify API unreachable from localhost — redeploy manually in dashboard'"
+             # If localhost API fails, try the full webhook URL directly from server
+             curl -sf '${WEBHOOK}' \
+               -H 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}' \
+             && echo 'Deploy triggered via direct webhook' \
+             || echo 'WARNING: deploy trigger failed — redeploy manually in Coolify dashboard'"
