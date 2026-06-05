@@ -16,9 +16,6 @@ const nextConfig = {
   outputFileTracingIgnores: [
     '**/node_modules/@better-auth/kysely-adapter/**',
   ],
-  experimental: {
-    cacheComponents: true,
-  },
   webpack: (config) => {
     // Stub out both import paths for the kysely adapter.
     // @better-auth/kysely-adapter is NOT in serverExternalPackages so webpack
