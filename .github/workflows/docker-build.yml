@@ -42,7 +42,11 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Coolify deploy
+        continue-on-error: true
         run: |
           curl -fsSL -X GET \
+            --max-time 30 \
             -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-            "${{ secrets.COOLIFY_WEBHOOK }}"
+            "${{ secrets.COOLIFY_WEBHOOK }}" \
+          && echo "Coolify deploy triggered" \
+          || echo "Coolify unreachable — trigger redeploy manually from Coolify dashboard"
