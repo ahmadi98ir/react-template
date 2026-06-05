@@ -152,6 +152,16 @@ export const siteSettings = pgTable('site_settings', {
   updatedAt:          timestamp('updated_at').notNull().defaultNow().$onUpdate(() => new Date()),
 });
 
+// ─── Profile (single-row, editable via admin) ────────────────────────────────
+export const profile = pgTable('profile', {
+  id:          text('id').primaryKey().default('default'),
+  fullName:    text('full_name').notNull().default(''),
+  title:       text('title').notNull().default(''),
+  bioMarkdown: text('bio_markdown').notNull().default(''),
+  location:    text('location').notNull().default(''),
+  updatedAt:   timestamp('updated_at').notNull().defaultNow().$onUpdate(() => new Date()),
+});
+
 // ─── Relations ────────────────────────────────────────────────────────────────
 export const usersRelations = relations(users, ({ many }) => ({
   sessions: many(sessions),

@@ -1,18 +1,25 @@
-import { prisma } from '@/lib/prisma'
+import { db } from '@/drizzle/db'
+import { siteSettings } from '@/drizzle/schema'
+import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
 
 async function setSettings(formData: FormData) {
   'use server'
-  const theme = String(formData.get('theme') || 'system') as any
+  const theme = String(formData.get('theme') || 'system') as 'dark' | 'light' | 'system'
   const gtagId = String(formData.get('gtagId') || '')
-  await prisma.siteSetting.upsert({
-    where: { id: 'default-settings' },
-    update: { theme, gtagId },
-    create: { id: 'default-settings', theme, gtagId },
-  })
+  await db.insert(siteSettings)
+    .values({ id: 'default', theme, gtagId })
+    .onConflictDoUpdate({ target: siteSettings.id, set: { theme, gtagId } })
+  revalidatePath('/admin/settings')
 }
 
 export default async function SettingsAdmin() {
-  const s = await prisma.siteSetting.findUnique({ where: { id: 'default-settings' } })
+  let s: typeof siteSettings.$inferSelect | undefined
+  try {
+    const [found] = await db.select().from(siteSettings).where(eq(siteSettings.id, 'default')).limit(1)
+    s = found
+  } catch { /* DB not yet available */ }
+
   return (
     <div>
       <h1>تنظیمات</h1>
@@ -32,4 +39,3 @@ export default async function SettingsAdmin() {
     </div>
   )
 }
-
