@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const nextConfig = {
   output: 'standalone',
   experimental: {
-    ppr: 'incremental',
+    cacheComponents: true,
   },
   async headers() {
     return [
