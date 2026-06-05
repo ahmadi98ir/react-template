@@ -44,4 +44,6 @@ jobs:
       - name: Trigger Coolify deploy
         if: ${{ secrets.COOLIFY_WEBHOOK != '' }}
         run: |
-          curl -fsSL -X GET "${{ secrets.COOLIFY_WEBHOOK }}"
+          curl -fsSL -X GET \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            "${{ secrets.COOLIFY_WEBHOOK }}"
