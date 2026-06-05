@@ -10,7 +10,7 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
@@ -19,9 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -29,95 +26,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
+      - name: Build & push image
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: false
-          load: true
+          push: true
           tags: ${{ env.IMAGE_TAG }}
           build-args: |
             NEXT_PUBLIC_APP_URL=${{ vars.NEXT_PUBLIC_APP_URL || 'https://ahmadi98.ir' }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
-      - name: Push image to GHCR
-        run: docker push ${{ env.IMAGE_TAG }}
-
-      # ── SSH transfer ────────────────────────────────────────────────────────
-      # Fails fast (10s) if the server firewall blocks GitHub Actions IPs.
-      # continue-on-error so the GHCR push above is still the recorded outcome.
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
-      - name: Transfer image to server via SSH
-        id: ssh_transfer
-        continue-on-error: true
-        env:
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          SSH_PORT="${{ secrets.SSH_PORT || '22' }}"
-          SSH_USER="${{ secrets.SSH_USER || 'root' }}"
-          SSH_HOST="${{ secrets.SSH_HOST }}"
-          OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10"
-
-          echo "==> Testing SSH connectivity (10 s timeout)..."
-          if ! sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" 'echo connected' 2>&1; then
-            echo "::warning::SSH unreachable — server firewall may be blocking GitHub Actions IPs."
-            echo "::warning::Run ./deploy.sh from your local machine to complete the deploy."
-            exit 1
-          fi
-
-          echo "==> Streaming Docker image to server..."
-          docker save "$IMAGE_TAG" | gzip | \
-            sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
-              'gzip -d | docker load'
-          echo "image_loaded=true" >> "$GITHUB_OUTPUT"
-          echo "==> Image loaded on server."
-
-      # ── Coolify deploy trigger ───────────────────────────────────────────────
-      # Two attempts in priority order:
-      #   1. Via SSH localhost (only possible if SSH transfer succeeded)
-      #   2. Via direct webhook URL from GitHub Actions runner
       - name: Trigger Coolify deploy
-        continue-on-error: true
-        env:
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
-          SSH_PORT="${{ secrets.SSH_PORT || '22' }}"
-          SSH_USER="${{ secrets.SSH_USER || 'root' }}"
-          SSH_HOST="${{ secrets.SSH_HOST }}"
-          OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10"
-          WEBHOOK="${{ secrets.COOLIFY_WEBHOOK }}"
-          TOKEN="${{ secrets.COOLIFY_TOKEN }}"
-
-          TRIGGERED=false
-
-          # Attempt 1 — via SSH localhost (avoids Caddy host restriction)
-          if [ "${{ steps.ssh_transfer.outputs.image_loaded }}" = "true" ]; then
-            WEBHOOK_PATH="$(echo "$WEBHOOK" | grep -oP '/api/v1/[^\"]+')"
-            for port in 8000 80; do
-              resp=$(sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
-                "curl -sf \"http://localhost:${port}${WEBHOOK_PATH}\" \
-                   -H 'Authorization: Bearer ${TOKEN}'" 2>&1) && \
-                echo "Deploy triggered via SSH localhost:${port}: ${resp}" && \
-                TRIGGERED=true && break
-            done
-          fi
-
-          # Attempt 2 — direct webhook call from GitHub Actions runner
-          if [ "$TRIGGERED" = "false" ] && [ -n "$WEBHOOK" ]; then
-            echo "==> Trying direct webhook call from runner..."
-            resp=$(curl -sf "$WEBHOOK" \
-              -H "Authorization: Bearer ${TOKEN}" \
-              --max-time 30 2>&1) && \
-              echo "Deploy triggered via direct webhook: ${resp}" && \
-              TRIGGERED=true || true
-          fi
-
-          if [ "$TRIGGERED" = "false" ]; then
-            echo "::warning::Could not trigger Coolify deploy automatically."
-            echo "::warning::Options:"
-            echo "::warning::  1. Run ./deploy.sh from your local machine"
-            echo "::warning::  2. Click 'Deploy' in the Coolify dashboard"
-          fi
+          curl -sf "http://localhost:8000/api/v1/deploy?uuid=x56wabtgdodwgmf2q5y98v8c" \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
+            && echo "Deploy triggered!"
