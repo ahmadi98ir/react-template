@@ -29,7 +29,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image (load locally for SSH transfer)
+      - name: Build image
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -41,38 +41,41 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Push image to GHCR (backup/cache)
+      - name: Push image to GHCR (backup)
         run: docker push ${{ env.IMAGE_TAG }}
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p "${{ secrets.SSH_PORT || '22' }}" \
-            "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
-      - name: Transfer image to server and trigger Coolify deploy
+      - name: Transfer image to server
+        env:
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
           SSH_PORT="${{ secrets.SSH_PORT || '22' }}"
           SSH_USER="${{ secrets.SSH_USER || 'root' }}"
           SSH_HOST="${{ secrets.SSH_HOST }}"
+          OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
-          echo "==> Streaming Docker image to server..."
-          docker save "${{ env.IMAGE_TAG }}" | gzip | \
-            ssh -p "$SSH_PORT" -o StrictHostKeyChecking=no \
-              "${SSH_USER}@${SSH_HOST}" \
+          echo "==> Streaming Docker image to server (this may take a few minutes)..."
+          docker save "$IMAGE_TAG" | gzip | \
+            sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
               'gzip -d | docker load'
+          echo "==> Image loaded on server."
 
-          echo "==> Triggering Coolify deploy via localhost API..."
-          ssh -p "$SSH_PORT" -o StrictHostKeyChecking=no \
-            "${SSH_USER}@${SSH_HOST}" \
-            'curl -sf -X GET \
-               "http://localhost:8000/api/v1/deploy?uuid=${{ secrets.COOLIFY_APP_UUID }}" \
-               -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-             && echo "Deploy triggered successfully" \
-             || curl -sf -X GET \
-               "http://localhost:80/api/v1/deploy?uuid=${{ secrets.COOLIFY_APP_UUID }}" \
-               -H "Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}" \
-             && echo "Deploy triggered via port 80" \
-             || echo "WARNING: Coolify API not reached from localhost — manual deploy may be needed"'
+      - name: Trigger Coolify deploy from server localhost
+        env:
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          SSH_PORT="${{ secrets.SSH_PORT || '22' }}"
+          SSH_USER="${{ secrets.SSH_USER || 'root' }}"
+          SSH_HOST="${{ secrets.SSH_HOST }}"
+          OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          TOKEN="${{ secrets.COOLIFY_TOKEN }}"
+          UUID="${{ secrets.COOLIFY_APP_UUID }}"
+
+          sshpass -e ssh -p "$SSH_PORT" $OPTS "${SSH_USER}@${SSH_HOST}" \
+            "for port in 8000 80; do
+               resp=\$(curl -sf -X GET \"http://localhost:\${port}/api/v1/deploy?uuid=${UUID}\" \
+                 -H \"Authorization: Bearer ${TOKEN}\" 2>&1) && echo \"Deploy triggered on port \${port}: \${resp}\" && exit 0
+             done
+             echo 'WARNING: Coolify API unreachable from localhost — redeploy manually in dashboard'"
