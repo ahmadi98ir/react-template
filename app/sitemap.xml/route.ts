@@ -2,6 +2,8 @@ import { db } from '@/drizzle/db'
 import { projects, posts } from '@/drizzle/schema'
 import { eq } from 'drizzle-orm'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const base = process.env.NEXT_PUBLIC_APP_URL || 'https://ahmadi98.ir'
   const staticPaths = ['/', '/about', '/contact', '/projects', '/blog']

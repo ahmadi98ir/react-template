@@ -11,11 +11,6 @@ const nextConfig = {
     'drizzle-orm',
     'postgres',
   ],
-  // Exclude @better-auth/kysely-adapter from standalone output tracing —
-  // we use the Drizzle adapter so the Kysely adapter files are never needed at runtime.
-  outputFileTracingIgnores: [
-    '**/node_modules/@better-auth/kysely-adapter/**',
-  ],
   webpack: (config) => {
     // Stub out both import paths for the kysely adapter.
     // @better-auth/kysely-adapter is NOT in serverExternalPackages so webpack

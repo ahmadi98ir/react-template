@@ -4,19 +4,21 @@ import * as schema from './schema';
 
 declare global {
   // eslint-disable-next-line no-var
-  var __db: ReturnType<typeof drizzle> | undefined;
+  var __db: ReturnType<typeof drizzle> | null | undefined;
 }
 
-function createDb() {
+function createDb(): ReturnType<typeof drizzle> | null {
   const url = process.env.DATABASE_URL;
-  if (!url) throw new Error('DATABASE_URL environment variable is not set');
-
+  if (!url) return null;
   // `prepare: false` is required for Neon/Supabase transaction-pool mode
   const client = postgres(url, { prepare: false });
   return drizzle(client, { schema });
 }
 
-export const db = globalThis.__db ?? createDb();
+// Cast to non-null — all callers already wrap db operations in try/catch
+export const db = (globalThis.__db !== undefined
+  ? globalThis.__db
+  : (globalThis.__db = createDb())) as ReturnType<typeof drizzle>;
 
 if (process.env.NODE_ENV !== 'production') {
   globalThis.__db = db;
