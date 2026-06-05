@@ -10,6 +10,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+# NEXT_PUBLIC_* vars are baked into the client bundle at build time
+ARG NEXT_PUBLIC_APP_URL=https://ahmadi98.ir
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 RUN npm run build
 
 # ─── Stage 3: Runtime (minimal image) ─────────────────────────────────────────
