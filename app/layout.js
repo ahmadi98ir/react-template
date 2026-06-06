@@ -58,8 +58,8 @@ export const metadata = {
 
 const RTL_LOCALES = ['fa', 'ar'];
 
-export default function RootLayout({ children }) {
-  const cookieStore = cookies();
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
   const locale = cookieStore.get('NEXT_LOCALE')?.value || 'fa';
   const dir = RTL_LOCALES.includes(locale) ? 'rtl' : 'ltr';
 
