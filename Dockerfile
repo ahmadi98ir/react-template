@@ -3,6 +3,10 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
+# Stub only the three kysely dialect files that import symbols missing from the
+# installed kysely version. index.mjs is intentionally left intact so that
+# better-auth can still find createKyselyAdapter / getKyselyDatabaseType.
+RUN node -e "const fs=require('fs');const d='node_modules/@better-auth/kysely-adapter/dist/';const s={'bun-sqlite-dialect-DzNwOpKv.mjs':'export class BunSqliteDialect {}\nexport default {};\n','d1-sqlite-dialect-C2B7YsIT.mjs':'export class D1SqliteDialect {}\nexport default {};\n','node-sqlite-dialect.mjs':'export class NodeSqliteDialect {}\nexport default {};\n'};Object.entries(s).forEach(([f,c])=>{const p=d+f;if(fs.existsSync(p))fs.writeFileSync(p,c);});" || true
 
 # ─── Stage 2: Build ───────────────────────────────────────────────────────────
 FROM node:20-alpine AS builder

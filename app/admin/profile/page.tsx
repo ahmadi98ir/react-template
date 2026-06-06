@@ -1,4 +1,7 @@
-import { prisma } from '@/lib/prisma'
+import { db } from '@/drizzle/db'
+import { profile } from '@/drizzle/schema'
+import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
 
 async function saveProfile(formData: FormData) {
   'use server'
@@ -6,15 +9,19 @@ async function saveProfile(formData: FormData) {
   const title = String(formData.get('title') || '')
   const bioMarkdown = String(formData.get('bioMarkdown') || '')
   const location = String(formData.get('location') || '')
-  await prisma.profile.upsert({
-    where: { id: 'default-profile' },
-    update: { fullName, title, bioMarkdown, location },
-    create: { id: 'default-profile', fullName, title, bioMarkdown, location },
-  })
+  await db.insert(profile)
+    .values({ id: 'default', fullName, title, bioMarkdown, location })
+    .onConflictDoUpdate({ target: profile.id, set: { fullName, title, bioMarkdown, location } })
+  revalidatePath('/admin/profile')
 }
 
 export default async function ProfileAdmin() {
-  const p = await prisma.profile.findUnique({ where: { id: 'default-profile' } })
+  let p: typeof profile.$inferSelect | undefined
+  try {
+    const [found] = await db.select().from(profile).where(eq(profile.id, 'default')).limit(1)
+    p = found
+  } catch { /* DB not yet available */ }
+
   return (
     <div>
       <h1>Profile</h1>
@@ -28,4 +35,3 @@ export default async function ProfileAdmin() {
     </div>
   )
 }
-

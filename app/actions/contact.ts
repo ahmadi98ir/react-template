@@ -44,7 +44,8 @@ export async function submitContact(
       headerStore.get('x-real-ip') ??
       null;
 
-    await db.insert(contacts).values({ ...parsed.data, ipAddress: ip });
+    const { name, email, phone, subject, message, locale } = parsed.data;
+    await db.insert(contacts).values({ name, email, phone, subject, message, locale, ipAddress: ip });
     return { status: 'success' };
   } catch {
     return { status: 'serverError', message: 'Database error. Please try again.' };

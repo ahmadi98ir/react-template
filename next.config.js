@@ -7,20 +7,17 @@ const nextConfig = {
   output: 'standalone',
   serverExternalPackages: [
     'better-auth',
-    '@better-auth/kysely-adapter',
     'kysely',
     'drizzle-orm',
     'postgres',
   ],
-  experimental: {
-    cacheComponents: true,
-  },
   webpack: (config) => {
-    // Stub out @better-auth/kysely-adapter — it tries to import
-    // DEFAULT_MIGRATION_TABLE which is not a public export of kysely.
-    // We use the Drizzle adapter so the Kysely adapter is never called.
-    config.resolve.alias['@better-auth/kysely-adapter'] =
-      path.resolve(__dirname, 'lib/kysely-adapter-stub.js');
+    // Stub out both import paths for the kysely adapter.
+    // @better-auth/kysely-adapter is NOT in serverExternalPackages so webpack
+    // processes it via alias → empty stub instead of doing externals-tracing on it.
+    const stub = path.resolve(__dirname, 'lib/kysely-adapter-stub.js');
+    config.resolve.alias['better-auth/kysely-adapter'] = stub;
+    config.resolve.alias['@better-auth/kysely-adapter'] = stub;
     return config;
   },
   async headers() {

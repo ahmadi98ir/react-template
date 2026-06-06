@@ -2,13 +2,7 @@ import PageBanner from "@/components/PageBanner";
 import NoxfolioLayout from "@/layout/NoxfolioLayout";
 import Link from "next/link";
 
-import dynamic from "next/dynamic";
-const ProjectGridIsotop = dynamic(
-  () => import("@/components/ProjectGridIsotop"),
-  {
-    ssr: false,
-  }
-);
+import ProjectGridIsotop from "@/components/ProjectGridIsotopClient";
 
 export const metadata = {
   title: "Projects Grid",
