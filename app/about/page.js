@@ -43,11 +43,9 @@ const About = () => {
                   <li>توسعه دهنده وب</li>
                   <li>طراح و مجری پروژه ها</li>
                 </ul>
-                <Link legacyBehavior href="/">
-                  <a className="theme-btn wow fadeInUp delay-0-2s">
+                <Link href="/" className="theme-btn wow fadeInUp delay-0-2s">
                     جزئیات بیشتر  
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
             <div className="col-xl-5 col-lg-6">

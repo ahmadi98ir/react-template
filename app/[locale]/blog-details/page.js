@@ -19,7 +19,7 @@ const BlogDetails = () => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
                 <li className="breadcrumb-item">
-                  <Link legacyBehavior href="/">
+                  <Link href="/">
                     Home
                   </Link>
                 </li>
@@ -53,10 +53,10 @@ const BlogDetails = () => {
               <div className="blog-details-wrap">
                 <div className="content mt-35">
                   <div className="blog-meta mb-30 wow fadeInUp delay-0-2s">
-                    <Link legacyBehavior className="tag" href="/blog">
+                    <Link className="tag" href="/blog">
                       Design
                     </Link>
-                    <Link legacyBehavior className="tag" href="/blog">
+                    <Link className="tag" href="/blog">
                       Figma
                     </Link>
                   </div>
@@ -138,13 +138,13 @@ const BlogDetails = () => {
                     <div className="item">
                       <b>Tags</b>
                       <div className="tag-coulds">
-                        <Link legacyBehavior href="blog">
+                        <Link href="blog">
                           Design
                         </Link>
-                        <Link legacyBehavior href="blog">
+                        <Link href="blog">
                           Figma
                         </Link>
-                        <Link legacyBehavior href="blog">
+                        <Link href="blog">
                           Apps
                         </Link>
                       </div>
@@ -184,16 +184,16 @@ const BlogDetails = () => {
                         the moment
                       </p>
                       <div className="social-style-two mt-5">
-                        <Link legacyBehavior href="/contact">
+                        <Link href="/contact">
                           <i className="fab fa-facebook-f" />
                         </Link>
-                        <Link legacyBehavior href="/contact">
+                        <Link href="/contact">
                           <i className="fab fa-twitter" />
                         </Link>
-                        <Link legacyBehavior href="/contact">
+                        <Link href="/contact">
                           <i className="fab fa-linkedin-in" />
                         </Link>
-                        <Link legacyBehavior href="/contact">
+                        <Link href="/contact">
                           <i className="fab fa-instagram" />
                         </Link>
                       </div>
@@ -215,7 +215,7 @@ const BlogDetails = () => {
                           <a href="#">Sep 25, 2023</a>
                         </span>
                         <h6>
-                          <Link legacyBehavior href="blog-details">
+                          <Link href="blog-details">
                             Tips For Conducting Studie
                           </Link>
                         </h6>
@@ -234,7 +234,7 @@ const BlogDetails = () => {
                           <a href="#">Sep 25, 2023</a>
                         </span>
                         <h6>
-                          <Link legacyBehavior href="blog-details">
+                          <Link href="blog-details">
                             Usability With Participants
                           </Link>
                         </h6>

@@ -40,11 +40,9 @@ const About = () => {
                   <li>{t("skill3")}</li>
                   <li>{t("skill4")}</li>
                 </ul>
-                <Link legacyBehavior href={`/${locale}`}>
-                  <a className="theme-btn wow fadeInUp delay-0-2s">
+                <Link href={`/${locale}`} className="theme-btn wow fadeInUp delay-0-2s">
                     {t("moreDetails")}
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
             <div className="col-xl-5 col-lg-6">

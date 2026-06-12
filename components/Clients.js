@@ -14,86 +14,66 @@ const Clients = () => {
           </div>
         </div>
         <div className="client-logo-wrap">
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-2s">
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-2s">
               <img
                 src="assets/images/client-logos/client-logo1.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-3s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-3s">
               <img
                 src="assets/images/client-logos/client-logo2.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-4s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-4s">
               <img
                 src="assets/images/client-logos/client-logo3.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-5s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-5s">
               <img
                 src="assets/images/client-logos/client-logo4.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-6s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-6s">
               <img
                 src="assets/images/client-logos/client-logo5.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-2s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-2s">
               <img
                 src="assets/images/client-logos/client-logo6.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-3s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-3s">
               <img
                 src="assets/images/client-logos/client-logo7.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-4s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-4s">
               <img
                 src="assets/images/client-logos/client-logo8.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-5s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-5s">
               <img
                 src="assets/images/client-logos/client-logo9.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
-          <Link legacyBehavior href="contact">
-            <a className="client-logo-item wow fadeInUp delay-0-6s">
+            </Link>
+          <Link href="contact" className="client-logo-item wow fadeInUp delay-0-6s">
               <img
                 src="assets/images/client-logos/client-logo10.png"
                 alt="Client Logo"
               />
-            </a>
-          </Link>
+            </Link>
         </div>
       </div>
       <div className="bg-lines">
@@ -119,7 +99,6 @@ export const Clients2 = () => {
       <div className="container">
         <div className="client-logo-wrap style-two">
           <Link
-            legacyBehavior
             className="client-logo-item wow fadeInUp delay-0-2s"
             href="contact"
           >
@@ -129,7 +108,6 @@ export const Clients2 = () => {
             />
           </Link>
           <Link
-            legacyBehavior
             className="client-logo-item wow fadeInUp delay-0-3s"
             href="contact"
           >
@@ -139,7 +117,6 @@ export const Clients2 = () => {
             />
           </Link>
           <Link
-            legacyBehavior
             className="client-logo-item wow fadeInUp delay-0-4s"
             href="contact"
           >
@@ -149,7 +126,6 @@ export const Clients2 = () => {
             />
           </Link>
           <Link
-            legacyBehavior
             className="client-logo-item wow fadeInUp delay-0-5s"
             href="contact"
           >
@@ -159,7 +135,6 @@ export const Clients2 = () => {
             />
           </Link>
           <Link
-            legacyBehavior
             className="client-logo-item wow fadeInUp delay-0-6s"
             href="contact"
           >

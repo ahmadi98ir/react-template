@@ -15,37 +15,37 @@ const BlogSidebar = () => {
         <ul>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               طراحی وب
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               اپلیکیشن موبایل
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               داده کاوی
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               هوش مصنوعی
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               توسعه وب
             </Link>
           </li>
           <li>
             <i className="far fa-angle-right" />{" "}
-            <Link legacyBehavior href="blog">
+            <Link href="blog">
               دیجیتال مارکتینگ
             </Link>
           </li>
@@ -65,7 +65,7 @@ const BlogSidebar = () => {
                 </a>
               </div>
               <h5>
-                <Link legacyBehavior href="blog-details">
+                <Link href="blog-details">
                   Tips For Conducting Studie
                 </Link>
               </h5>
@@ -82,7 +82,7 @@ const BlogSidebar = () => {
                 </a>
               </div>
               <h5>
-                <Link legacyBehavior href="blog-details">
+                <Link href="blog-details">
                   Usability With Participants
                 </Link>
               </h5>
@@ -99,7 +99,7 @@ const BlogSidebar = () => {
                 </a>
               </div>
               <h5>
-                <Link legacyBehavior href="blog-details">
+                <Link href="blog-details">
                   Online Environment Work
                 </Link>
               </h5>
@@ -110,25 +110,25 @@ const BlogSidebar = () => {
       {/* <div className="widget widget-tag-cloud wow fadeInUp delay-0-2s">
         <h4 className="widget-title">Popular Tags</h4>
         <div className="tag-coulds">
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Design
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Figma
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Apps
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Branding
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Development
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Digital
           </Link>
-          <Link legacyBehavior href="blog">
+          <Link href="blog">
             Mobile Apps
           </Link>
         </div>
@@ -142,11 +142,9 @@ const BlogSidebar = () => {
         >
           <span className="sub-title">Get A Quote</span>
           <h4>Looking For Creative Web Designer</h4>
-          <Link legacyBehavior href="/contact">
-            <a className="theme-btn">
+          <Link href="/contact" className="theme-btn">
               Hire Me <i className="far fa-angle-right" />
-            </a>
-          </Link>
+            </Link>
         </div>
       </div> */}
     </div>

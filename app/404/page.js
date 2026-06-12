@@ -18,11 +18,9 @@ const E404 = () => {
               <h1>OPPS!</h1>
               <h2>This Page Are Can't be Found</h2>
             </div>
-            <Link legacyBehavior href="/">
-              <a className="theme-btn wow fadeInUp delay-0-2s">
+            <Link href="/" className="theme-btn wow fadeInUp delay-0-2s">
                 Go To Homepage <i className="far fa-angle-right" />
-              </a>
-            </Link>
+              </Link>
           </div>
         </div>
         <div className="bg-lines">

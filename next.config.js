@@ -5,6 +5,15 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  // next-intl's plugin writes this alias to experimental.turbo.resolveAlias,
+  // but Next 16 Turbopack only reads the top-level turbopack key — without
+  // this, next-intl can't find its request config at runtime and every
+  // [locale] page 500s with "Couldn't find next-intl config file".
+  turbopack: {
+    resolveAlias: {
+      'next-intl/config': './i18n/request.ts',
+    },
+  },
   serverExternalPackages: [
     'better-auth',
     'kysely',

@@ -16,11 +16,9 @@ const ProjectMasonry = () => {
         <div className="container">
           <ProjectMasonryIsotop />
           <div className="project-btn mt-25 text-center wow fadeInUp delay-0-2s">
-            <Link legacyBehavior href="/projects">
-              <a className="theme-btn">
+            <Link href="/projects" className="theme-btn">
                 View More Projects <i className="far fa-angle-right" />
-              </a>
-            </Link>
+              </Link>
           </div>
         </div>
         <div className="bg-lines">

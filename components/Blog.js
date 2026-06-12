@@ -23,15 +23,15 @@ const Blog = () => {
                 </div>
                 <div className="content">
                   <div className="blog-meta mb-35">
-                    <Link legacyBehavior className="tag" href="blog">
+                    <Link className="tag" href="blog">
                       Design
                     </Link>
-                    <Link legacyBehavior className="tag" href="blog">
+                    <Link className="tag" href="blog">
                       Figma
                     </Link>
                   </div>
                   <h5>
-                    <Link legacyBehavior href="blog-details">
+                    <Link href="blog-details">
                       Tips For Conductin See Usability Studies
                     </Link>
                   </h5>
@@ -51,15 +51,15 @@ const Blog = () => {
                 </div>
                 <div className="content">
                   <div className="blog-meta mb-35">
-                    <Link legacyBehavior className="tag" href="blog">
+                    <Link className="tag" href="blog">
                       Design
                     </Link>
-                    <Link legacyBehavior className="tag" href="blog">
+                    <Link className="tag" href="blog">
                       Figma
                     </Link>
                   </div>
                   <h5>
-                    <Link legacyBehavior href="blog-details">
+                    <Link href="blog-details">
                       Keyboard-Only Suppor Assistive Technology
                     </Link>
                   </h5>
@@ -114,27 +114,23 @@ export const Blog2 = () => {
             <div className="blog-item-two wow fadeInUp delay-0-2s">
               <div className="image">
                 <img src="assets/images/blog/blog-two1.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
+                <Link href="/blog-details" className="details-btn">
                     <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h4 className="title">
-                  <Link legacyBehavior href="project-details">
+                  <Link href="project-details">
                     Trending code settings for a nice portfolio
                   </Link>
                 </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
+                <Link href="/blog-details" className="read-more">
                     Read More{" "}
                     <img
                       src="assets/images/shape/details-arrow.png"
                       alt="Arrow"
                     />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>
@@ -142,27 +138,23 @@ export const Blog2 = () => {
             <div className="blog-item-two wow fadeInUp delay-0-4s">
               <div className="image">
                 <img src="assets/images/blog/blog-two2.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
+                <Link href="/blog-details" className="details-btn">
                     <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h4 className="title">
-                  <Link legacyBehavior href="project-details">
+                  <Link href="project-details">
                     Trending code settings for a nice portfolio
                   </Link>
                 </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
+                <Link href="/blog-details" className="read-more">
                     Read More{" "}
                     <img
                       src="assets/images/shape/details-arrow.png"
                       alt="Arrow"
                     />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>
@@ -170,27 +162,23 @@ export const Blog2 = () => {
             <div className="blog-item-two wow fadeInUp delay-0-6s">
               <div className="image">
                 <img src="assets/images/blog/blog-two3.jpg" alt="Blog" />
-                <Link legacyBehavior href="/blog-details">
-                  <a className="details-btn">
+                <Link href="/blog-details" className="details-btn">
                     <i className="fal fa-long-arrow-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h4 className="title">
-                  <Link legacyBehavior href="project-details">
+                  <Link href="project-details">
                     Trending code settings for a nice portfolio
                   </Link>
                 </h4>
-                <Link legacyBehavior href="/blog-details">
-                  <a className="read-more">
+                <Link href="/blog-details" className="read-more">
                     Read More{" "}
                     <img
                       src="assets/images/shape/details-arrow.png"
                       alt="Arrow"
                     />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>

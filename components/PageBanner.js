@@ -9,7 +9,7 @@ const PageBanner = ({ pageName }) => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
               <li className="breadcrumb-item">
-                <Link legacyBehavior href="/">
+                <Link href="/">
                  صفحه اصلی
                 </Link>
               </li>

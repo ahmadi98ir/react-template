@@ -111,9 +111,7 @@ export const Resume2 = () => {
             </div>
           </div>
           <div className="col-lg-4 text-lg-end">
-            <Link legacyBehavior href="/contact">
-              <a className="theme-btn mb-35">Contact Me</a>
-            </Link>
+            <Link href="/contact" className="theme-btn mb-35">Contact Me</Link>
           </div>
         </div>
         <div className="row no-gap">

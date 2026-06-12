@@ -85,16 +85,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-2s">
             <div className="project-image">
               <img src="assets/images/projects/project1.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Product Design</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h3>
@@ -105,16 +103,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-4s">
             <div className="project-image">
               <img src="assets/images/projects/project2.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Product Design</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Website Makeup Design
                 </Link>
               </h3>
@@ -125,16 +121,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-2s">
             <div className="project-image">
               <img src="assets/images/projects/project3.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Graphics Design</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Brand Identity and Motion Design
                 </Link>
               </h3>
@@ -145,16 +139,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-4s">
             <div className="project-image">
               <img src="assets/images/projects/project4.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Product Design</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h3>
@@ -165,16 +157,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-2s">
             <div className="project-image">
               <img src="assets/images/projects/project5.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Design &amp; Branding</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Creative Graphics Design
                 </Link>
               </h3>
@@ -185,16 +175,14 @@ const ProjectGridIsotop = () => {
           <div className="project-item style-two wow fadeInUp delay-0-4s">
             <div className="project-image">
               <img src="assets/images/projects/project6.jpg" alt="Project" />
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
             <div className="project-content">
               <span className="sub-title">Product Design</span>
               <h3>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Design &amp; Branding Mokeup
                 </Link>
               </h3>

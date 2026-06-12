@@ -55,11 +55,9 @@ const ServicePage = () => {
                   <li>Professional Web Designer</li>
                   <li>Mobile Apps Design</li>
                 </ul>
-                <Link legacyBehavior href="/about">
-                  <a className="theme-btn">
+                <Link href="/about" className="theme-btn">
                     Learn More <i className="far fa-angle-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>

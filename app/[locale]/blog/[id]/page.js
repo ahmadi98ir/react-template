@@ -46,10 +46,10 @@ const BlogDetails = async ({ params }) => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
                 <li className="breadcrumb-item">
-                  <Link legacyBehavior href={`/${locale}`}><a>Home</a></Link>
+                  <Link href={`/${locale}`}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                  <Link legacyBehavior href={`/${locale}/blog`}><a>Blog</a></Link>
+                  <Link href={`/${locale}/blog`}>Blog</Link>
                 </li>
                 <li className="breadcrumb-item active">{title}</li>
               </ol>

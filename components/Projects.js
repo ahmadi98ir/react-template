@@ -27,7 +27,7 @@ const Projects = () => {
             <div className="project-content wow fadeInRight delay-0-2s">
               <span className="sub-title">Product Design</span>
               <h2>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h2>
@@ -35,11 +35,9 @@ const Projects = () => {
                 Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
                 inventore veritatis architecto beatae
               </p>
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
           </div>
         </div>
@@ -53,7 +51,7 @@ const Projects = () => {
             <div className="project-content wow fadeInRight delay-0-2s">
               <span className="sub-title">Product Design</span>
               <h2>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Website Makeup Design
                 </Link>
               </h2>
@@ -61,11 +59,9 @@ const Projects = () => {
                 Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
                 inventore veritatis architecto beatae
               </p>
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
           </div>
         </div>
@@ -79,7 +75,7 @@ const Projects = () => {
             <div className="project-content wow fadeInRight delay-0-2s">
               <span className="sub-title">Product Design</span>
               <h2>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Brand Identity and Motion Design
                 </Link>
               </h2>
@@ -87,11 +83,9 @@ const Projects = () => {
                 Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
                 inventore veritatis architecto beatae
               </p>
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
           </div>
         </div>
@@ -105,7 +99,7 @@ const Projects = () => {
             <div className="project-content wow fadeInRight delay-0-2s">
               <span className="sub-title">Product Design</span>
               <h2>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Development
                 </Link>
               </h2>
@@ -113,20 +107,16 @@ const Projects = () => {
                 Sed ut perspiciatis unde omnin natus totam rem aperiam eaque
                 inventore veritatis architecto beatae
               </p>
-              <Link legacyBehavior href="/project-details">
-                <a className="details-btn">
+              <Link href="/project-details" className="details-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
             </div>
           </div>
         </div>
         <div className="project-btn text-center wow fadeInUp delay-0-2s">
-          <Link legacyBehavior href="/projects">
-            <a className="theme-btn">
+          <Link href="/projects" className="theme-btn">
               View More Projects <i className="far fa-angle-right" />
-            </a>
-          </Link>
+            </Link>
         </div>
       </div>
       <div className="bg-lines">
@@ -171,18 +161,14 @@ export const Projects2 = () => {
                   src="assets/images/projects/project-two1.jpg"
                   alt="Project"
                 />
-                <Link legacyBehavior href="/project-details">
-                  <a className="hover-box">
+                <Link href="/project-details" className="hover-box">
                     <span>View More</span>
                     <i className="far fa-arrow-up" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h5 className="title">
-                  <Link legacyBehavior href="/project-details">
-                    <a>Digital Marketing</a>
-                  </Link>
+                  <Link href="/project-details">Digital Marketing</Link>
                 </h5>
                 <span className="sub-title">Art , Direction</span>
               </div>
@@ -195,18 +181,14 @@ export const Projects2 = () => {
                   src="assets/images/projects/project-two2.jpg"
                   alt="Project"
                 />
-                <Link legacyBehavior href="/project-details">
-                  <a className="hover-box">
+                <Link href="/project-details" className="hover-box">
                     <span>View More</span>
                     <i className="far fa-arrow-up" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h5 className="title">
-                  <Link legacyBehavior href="/project-details">
-                    <a>Digital Marketing</a>
-                  </Link>
+                  <Link href="/project-details">Digital Marketing</Link>
                 </h5>
                 <span className="sub-title">Art , Direction</span>
               </div>
@@ -219,18 +201,14 @@ export const Projects2 = () => {
                   src="assets/images/projects/project-two3.jpg"
                   alt="Project"
                 />
-                <Link legacyBehavior href="/project-details">
-                  <a className="hover-box">
+                <Link href="/project-details" className="hover-box">
                     <span>View More</span>
                     <i className="far fa-arrow-up" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h5 className="title">
-                  <Link legacyBehavior href="/project-details">
-                    <a>Digital Marketing</a>
-                  </Link>
+                  <Link href="/project-details">Digital Marketing</Link>
                 </h5>
                 <span className="sub-title">Art , Direction</span>
               </div>
@@ -243,18 +221,14 @@ export const Projects2 = () => {
                   src="assets/images/projects/project-two4.jpg"
                   alt="Project"
                 />
-                <Link legacyBehavior href="/project-details">
-                  <a className="hover-box">
+                <Link href="/project-details" className="hover-box">
                     <span>View More</span>
                     <i className="far fa-arrow-up" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h5 className="title">
-                  <Link legacyBehavior href="/project-details">
-                    <a>Digital Marketing</a>
-                  </Link>
+                  <Link href="/project-details">Digital Marketing</Link>
                 </h5>
                 <span className="sub-title">Art , Direction</span>
               </div>
@@ -267,18 +241,14 @@ export const Projects2 = () => {
                   src="assets/images/projects/project-two5.jpg"
                   alt="Project"
                 />
-                <Link legacyBehavior href="/project-details">
-                  <a className="hover-box">
+                <Link href="/project-details" className="hover-box">
                     <span>View More</span>
                     <i className="far fa-arrow-up" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
               <div className="content">
                 <h5 className="title">
-                  <Link legacyBehavior href="/project-details">
-                    <a>Digital Marketing</a>
-                  </Link>
+                  <Link href="/project-details">Digital Marketing</Link>
                 </h5>
                 <span className="sub-title">Art , Direction</span>
               </div>
@@ -286,12 +256,10 @@ export const Projects2 = () => {
           </div>
           <div className="col-md-6 align-self-center">
             <div className="project-details-btn mb-50">
-              <Link legacyBehavior href="/project-details">
-                <a className="more-btn wow zoomIn delay-0-2s">
+              <Link href="/project-details" className="more-btn wow zoomIn delay-0-2s">
                   <span>More</span>
                   <i className="fal fa-arrow-up" />
-                </a>
-              </Link>
+                </Link>
             </div>
           </div>
         </div>

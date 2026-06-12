@@ -16,7 +16,7 @@
         "./public/assets/css/*"
       ]
     },
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "allowJs": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -37,7 +37,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

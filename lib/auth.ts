@@ -4,6 +4,18 @@ import { db } from '@/drizzle/db';
 import * as schema from '@/drizzle/schema';
 
 export const auth = betterAuth({
+  // Fall back to NEXTAUTH_* so existing Coolify env vars keep working.
+  // Without a secret better-auth throws at import time in production,
+  // crashing the whole server (every request 500s).
+  secret:
+    process.env.BETTER_AUTH_SECRET ??
+    process.env.NEXTAUTH_SECRET ??
+    process.env.JWT_SECRET,
+  baseURL:
+    process.env.BETTER_AUTH_URL ??
+    process.env.NEXTAUTH_URL ??
+    'https://ahmadi98.ir',
+
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {

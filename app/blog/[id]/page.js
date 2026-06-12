@@ -31,7 +31,7 @@ console.log(1)
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
                 <li className="breadcrumb-item">
-                  <Link legacyBehavior href="/">
+                  <Link href="/">
                     Home
                   </Link>
                 </li>
@@ -61,10 +61,10 @@ console.log(1)
               <div className="blog-details-wrap">
                 <div className="content mt-35">
                   <div className="blog-meta mb-30 wow fadeInUp delay-0-2s">
-                    <Link legacyBehavior className="tag" href="/blog">
+                    <Link className="tag" href="/blog">
                       Design
                     </Link>
-                    <Link legacyBehavior className="tag" href="/blog">
+                    <Link className="tag" href="/blog">
                       Figma
                     </Link>
                   </div>

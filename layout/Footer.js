@@ -31,11 +31,9 @@ const Footer1 = () => {
             <div className="col-lg-2 col-md-12">
               <div className="footer-widget widget_logo wow fadeInUp delay-0-2s">
                 <div className="footer-logo">
-                  <Link legacyBehavior href={base}>
-                    <a>
+                  <Link href={base}>
                       <img src="/assets/images/logos/logo.png" alt="Logo" />
-                    </a>
-                  </Link>
+                    </Link>
                 </div>
               </div>
             </div>
@@ -44,22 +42,22 @@ const Footer1 = () => {
                 <h6 className="footer-title">{t("quickLinks")}</h6>
                 <ul>
                   <li>
-                    <Link legacyBehavior href={`${base}/services`}>
+                    <Link href={`${base}/services`}>
                       {t("servicesLink")}
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href={`${base}/projects`}>
+                    <Link href={`${base}/projects`}>
                       {t("projectsLink")}
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href={`${base}/services#pricing`}>
+                    <Link href={`${base}/services#pricing`}>
                       {t("pricingLink")}
                     </Link>
                   </li>
                   <li>
-                    <Link legacyBehavior href={`${base}/contact`}>
+                    <Link href={`${base}/contact`}>
                       {t("contactLink")}
                     </Link>
                   </li>
@@ -180,21 +178,19 @@ export const Footer2 = () => {
           <div className="col-lg-3 col-md-5">
             <div className="footer-widget widget_logo text-center text-md-start wow fadeInUp delay-0-2s">
               <div className="footer-logo">
-                <Link legacyBehavior href="/">
-                  <a>
+                <Link href="/">
                     <img src="/assets/images/logos/logo.png" alt="Logo" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>
           <div className="col-lg-8 col-md-7">
             <div className="footer-widget widget_nav_menu me-0 wow fadeInUp delay-0-4s">
               <ul>
-                <li><Link legacyBehavior href="services">Services</Link></li>
-                <li><Link legacyBehavior href="projects">Projects</Link></li>
-                <li><Link legacyBehavior href="blog">Blog</Link></li>
-                <li><Link legacyBehavior href="contact">Contact</Link></li>
+                <li><Link href="services">Services</Link></li>
+                <li><Link href="projects">Projects</Link></li>
+                <li><Link href="blog">Blog</Link></li>
+                <li><Link href="contact">Contact</Link></li>
               </ul>
             </div>
           </div>
@@ -233,7 +229,7 @@ export const Footer2 = () => {
           <div className="copyright-text text-center">
             <p>
               Copyright @{date},{" "}
-              <Link legacyBehavior href="/">
+              <Link href="/">
                 Noxfolio
               </Link>{" "}
               All Rights Reserved

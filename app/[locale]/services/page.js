@@ -45,11 +45,9 @@ const ServicePage = () => {
                   <li>{t("feature2")}</li>
                   <li>{t("feature3")}</li>
                 </ul>
-                <Link legacyBehavior href={`/${locale}/about`}>
-                  <a className="theme-btn">
+                <Link href={`/${locale}/about`} className="theme-btn">
                     {t("learnMore")} <i className="far fa-angle-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>

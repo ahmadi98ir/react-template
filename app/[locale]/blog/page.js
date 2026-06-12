@@ -47,7 +47,7 @@ const BlogPage = async ({ params }) => {
                           </div>
                           <div className="content">
                             <h5>
-                              <Link legacyBehavior href={`/${locale}/blog/${post.id}`}>
+                              <Link href={`/${locale}/blog/${post.id}`}>
                                 {post.title?.[locale] ?? post.title?.en ?? post.title?.fa ?? ""}
                               </Link>
                             </h5>

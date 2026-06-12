@@ -46,7 +46,6 @@ const BlogPage = async () => {
                            {/*  {post.tags.map((tag, index) => (
                               <Link
                                 key={index}
-                                legacyBehavior
                                 className="tag"
                                 href={`/blog?tag=${tag}`}
                               >
@@ -55,7 +54,7 @@ const BlogPage = async () => {
                             ))} */}
                           </div>
                           <h5>
-                            <Link legacyBehavior href={`/blog/${post.id}`}>
+                            <Link href={`/blog/${post.id}`}>
                               {post.title}
                             </Link>
                           </h5>
@@ -73,12 +72,10 @@ const BlogPage = async () => {
 
                   <div className="col-md-6 item offset-md-6">
                     <div className="news-more-btn text-center mt-35 wow fadeInUp delay-0-2s">
-                      <Link legacyBehavior href="/blog">
-                        <a className="theme-btn">
+                      <Link href="/blog" className="theme-btn">
                           View More Projects{" "}
                           <i className="far fa-angle-right" />
-                        </a>
-                      </Link>
+                        </Link>
                     </div>
                   </div>
                 </div>

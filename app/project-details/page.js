@@ -125,13 +125,13 @@ const ProjectDetails = () => {
             <div className="item">
               <b>Tags</b>
               <div className="tag-coulds">
-                <Link legacyBehavior href="blog">
+                <Link href="blog">
                   Design
                 </Link>
-                <Link legacyBehavior href="blog">
+                <Link href="blog">
                   Figma
                 </Link>
-                <Link legacyBehavior href="blog">
+                <Link href="blog">
                   Apps
                 </Link>
               </div>
@@ -191,7 +191,7 @@ const ProjectDetails = () => {
                 <div className="project-content">
                   <span className="sub-title">Graphics Design</span>
                   <h4>
-                    <Link legacyBehavior href="/project-details">
+                    <Link href="/project-details">
                       Brand Identity Design
                     </Link>
                   </h4>
@@ -209,7 +209,7 @@ const ProjectDetails = () => {
                 <div className="project-content">
                   <span className="sub-title">Product Design</span>
                   <h4>
-                    <Link legacyBehavior href="/project-details">
+                    <Link href="/project-details">
                       Mobile Apps Design
                     </Link>
                   </h4>
@@ -227,7 +227,7 @@ const ProjectDetails = () => {
                 <div className="project-content">
                   <span className="sub-title">Product Design</span>
                   <h4>
-                    <Link legacyBehavior href="/project-details">
+                    <Link href="/project-details">
                       Dashboard Development
                     </Link>
                   </h4>

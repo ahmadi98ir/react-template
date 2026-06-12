@@ -90,14 +90,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -113,14 +111,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -136,14 +132,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -159,14 +153,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -182,14 +174,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -205,14 +195,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -228,14 +216,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -251,14 +237,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>
@@ -274,14 +258,12 @@ const ProjectMasonryIsotop = () => {
               />
             </div>
             <div className="project-content">
-              <Link legacyBehavior href="/project-details">
-                <a className="project-btn">
+              <Link href="/project-details" className="project-btn">
                   <i className="far fa-arrow-right" />
-                </a>
-              </Link>
+                </Link>
               <span className="sub-title">Product Design</span>
               <h4>
-                <Link legacyBehavior href="project-details">
+                <Link href="project-details">
                   Mobile Application Design
                 </Link>
               </h4>

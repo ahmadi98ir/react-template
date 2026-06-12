@@ -39,11 +39,9 @@ const Services = ({ extraClass }) => {
                   <h4>{service.title}</h4>
                   <p>{service.text}</p>
                 </div>
-                <Link legacyBehavior href="/#">
-                  <a className="details-btn">
+                <Link href="/#" className="details-btn">
                     <i className="fas fa-arrow-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           ))}
@@ -103,7 +101,7 @@ export const Services2 = () => {
           ))}
         </div>
         <div className="services-more-btn text-center pt-55 wow fadeInUp delay-0-2s">
-          <Link legacyBehavior href="services" className="theme-btn">
+          <Link href="services" className="theme-btn">
             Get more services
           </Link>
         </div>

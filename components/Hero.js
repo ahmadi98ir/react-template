@@ -53,17 +53,13 @@ const Hero = () => {
                 {t("description")}
               </p>
               <div className="hero-btns">
-                <Link legacyBehavior href={`/${locale}/about`}>
-                  <a className="theme-btn">
+                <Link href={`/${locale}/about`} className="theme-btn">
                     <b>{t("aboutBtn")}</b>{" "}
                     <i className="far fa-angle-right" />
-                  </a>
-                </Link>
-                <Link legacyBehavior href={`/${locale}/contact`}>
-                  <a className="read-more">
+                  </Link>
+                <Link href={`/${locale}/contact`} className="read-more">
                     {t("resumeBtn")} <i className="far fa-angle-right" />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
           </div>

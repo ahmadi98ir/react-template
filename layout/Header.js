@@ -37,30 +37,26 @@ const Header1 = ({ onePageMenu }) => {
           <div className="header-inner rel d-flex align-items-center">
             <div className="logo-outer">
               <div className="logo">
-                <Link legacyBehavior href={`/${locale}`}>
-                  <a>
+                <Link href={`/${locale}`}>
                     <img
                       src="/assets/images/logos/logo.png"
                       alt="Logo"
                       title="Logo"
                     />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
             <div className="nav-outer clearfix mx-auto">
               <nav className="main-menu navbar-expand-lg">
                 <div className="navbar-header">
                   <div className="mobile-logo my-15">
-                    <Link legacyBehavior href={`/${locale}`}>
-                      <a>
+                    <Link href={`/${locale}`}>
                         <img
                           src="/assets/images/logos/logo.png"
                           alt="Logo"
                           title="Logo"
                         />
-                      </a>
-                    </Link>
+                      </Link>
                   </div>
                   <button
                     type="button"
@@ -121,30 +117,26 @@ const Header2 = ({ onePageMenu }) => {
           <div className="header-inner rel d-flex align-items-center">
             <div className="logo-outer">
               <div className="logo">
-                <Link legacyBehavior href={`/${locale}`}>
-                  <a>
+                <Link href={`/${locale}`}>
                     <img
                       src="/assets/images/logos/logo.png"
                       alt="Logo"
                       title="Logo"
                     />
-                  </a>
-                </Link>
+                  </Link>
               </div>
             </div>
             <div className="nav-outer clearfix mx-auto">
               <nav className="main-menu navbar-expand-lg">
                 <div className="navbar-header">
                   <div className="mobile-logo my-15">
-                    <Link legacyBehavior href={`/${locale}`}>
-                      <a>
+                    <Link href={`/${locale}`}>
                         <img
                           src="/assets/images/logos/logo.png"
                           alt="Logo"
                           title="Logo"
                         />
-                      </a>
-                    </Link>
+                      </Link>
                   </div>
                   <button
                     type="button"
@@ -190,9 +182,7 @@ const Header2 = ({ onePageMenu }) => {
                   />
                 </button>
               </div>
-              <Link legacyBehavior href={`/${locale}/contact`}>
-                <a className="theme-btn">Let&apos;s talk</a>
-              </Link>
+              <Link href={`/${locale}/contact`} className="theme-btn">Let&apos;s talk</Link>
             </div>
           </div>
         </div>
