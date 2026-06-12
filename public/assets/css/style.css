@@ -37,7 +37,7 @@
     ## Sidebar Widgets
     ## Main Footer */
 /* -------------------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&display=swap");
+/* DM Sans is self-hosted via next/font/local in app/layout.js */
 /*******************************************************/
 /******************* ## Default Style *****************/
 /*******************************************************/

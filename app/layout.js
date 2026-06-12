@@ -1,4 +1,3 @@
-import { DM_Sans } from "next/font/google";
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { cookies } from 'next/headers';
@@ -41,11 +40,13 @@ const yekan = localFont({
   ],
 });
 
-const dm_sans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
+const dm_sans = localFont({
   variable: "--font-dm_sans",
   display: "swap",
+  src: [
+    { path: './fonts/dm-sans/dm-sans-latin-ext.woff2', style: 'normal', weight: '100 900' },
+    { path: './fonts/dm-sans/dm-sans-latin.woff2',     style: 'normal', weight: '100 900' },
+  ],
 });
 
 export const metadata = {

@@ -5,3 +5,4 @@ public/uploads/*
 .env*
 tsconfig.tsbuildinfo
 .env.deploy
+coolify-env.txt
