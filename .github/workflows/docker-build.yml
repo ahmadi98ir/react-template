@@ -46,25 +46,37 @@ jobs:
           COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
         run: |
-          if [ -n "$COOLIFY_WEBHOOK" ]; then
-            echo "Triggering Coolify deploy via webhook URL..."
-            curl -fsSL --max-time 15 "$COOLIFY_WEBHOOK" && echo "Deploy triggered OK" || echo "Webhook call failed (non-fatal)"
-            exit 0
+          TRIGGERED=false
+
+          # Option 1: public webhook URL (skip localhost — those only work from the server itself)
+          if [ -n "$COOLIFY_WEBHOOK" ] && ! echo "$COOLIFY_WEBHOOK" | grep -qE "localhost|127\.0\.0\.1"; then
+            echo "Triggering Coolify deploy via public webhook URL..."
+            curl -fsSL --max-time 15 "$COOLIFY_WEBHOOK" \
+              && { echo "Deploy triggered OK"; TRIGGERED=true; } \
+              || echo "Webhook call failed"
           fi
-          if [ -n "$COOLIFY_TOKEN" ]; then
-            echo "Discovering Coolify app UUID..."
+
+          # Option 2: bearer token → discover UUID via public API then deploy
+          if [ "$TRIGGERED" = "false" ] && [ -n "$COOLIFY_TOKEN" ]; then
+            echo "Discovering Coolify app UUID via bearer token..."
             for host in "https://cool.rpim.ir" "http://cool.rpim.ir:8000"; do
               RESP=$(curl -fsSL --max-time 15 "$host/api/v1/applications" \
                 -H "Authorization: Bearer $COOLIFY_TOKEN" 2>/dev/null) || continue
-              UUID=$(echo "$RESP" | jq -r '(if type=="array" then . else .data // [] end)[]
-                | select((.image // "") | contains("react-template")) | .uuid' 2>/dev/null | head -1)
+              UUID=$(echo "$RESP" | jq -r \
+                '(if type=="array" then . else (.data // []) end)[]
+                 | select((.image // "") | contains("react-template")) | .uuid' \
+                2>/dev/null | head -1)
               if [ -n "$UUID" ]; then
                 echo "Found UUID=$UUID on $host, triggering deploy..."
                 curl -fsSL --max-time 15 "$host/api/v1/deploy?uuid=$UUID&force=true" \
-                  -H "Authorization: Bearer $COOLIFY_TOKEN" && echo "Deploy triggered" && exit 0
+                  -H "Authorization: Bearer $COOLIFY_TOKEN" \
+                  && { echo "Deploy triggered"; TRIGGERED=true; break; } \
+                  || echo "Deploy call failed on $host"
               fi
             done
-            echo "Could not find react-template app via Coolify API (non-fatal)"
-            exit 0
           fi
-          echo "No COOLIFY_WEBHOOK or COOLIFY_TOKEN set — add one to repository secrets to enable auto-deploy"
+
+          if [ "$TRIGGERED" = "false" ]; then
+            echo "Auto-deploy skipped — COOLIFY_WEBHOOK is localhost-only and COOLIFY_TOKEN could not reach cool.rpim.ir"
+            echo "Manual action: log in to https://cool.rpim.ir and click Redeploy on the react-template app"
+          fi
