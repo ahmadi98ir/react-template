@@ -75,6 +75,33 @@
     0 0 100px rgba(0,243,255,0.15);
 }
 
+/* ── Cinematic buttons (high-contrast, glow on hover only) ── */
+.btn-cinema-primary {
+  background: #00f3ff;
+  color: #000;               /* BLACK text for maximum contrast */
+  border: 1px solid #00f3ff;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.btn-cinema-primary:hover {
+  background: #2af6ff;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 20px rgba(0,243,255,0.55),
+    0 0 45px rgba(0,243,255,0.25);
+}
+.btn-cinema-outline {
+  background: rgba(0,243,255,0.04);
+  color: #00f3ff;
+  border: 1px solid rgba(0,243,255,0.35);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.btn-cinema-outline:hover {
+  background: rgba(0,243,255,0.08);
+  border-color: rgba(0,243,255,0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(0,243,255,0.2);
+}
+
 /* ── Gradient text ── */
 .text-cinema-gradient {
   background: linear-gradient(135deg, #00f3ff 0%, #9d00ff 100%);
@@ -622,6 +649,11 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 html { scroll-behavior: smooth !important; }
+
+/* Vazirmatn as the global default for Persian-first UI (admin, auth, all routes) */
+body {
+  font-family: var(--font-vazirmatn), "Vazirmatn", system-ui, sans-serif;
+}
 
 /* Quill RTL helper (kept for admin) */
 .ql-align-right { direction: rtl; }

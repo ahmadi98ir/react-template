@@ -22,13 +22,11 @@ export function CinemaHero() {
   const subtitleRef = useRef(null);
   const badgeRef = useRef(null);
   const ctaRef = useRef(null);
-  const imgContainerRef = useRef(null);
 
   const { scrollY } = useScroll();
-  // Parallax: image moves up slower than scroll
-  const imgY = useTransform(scrollY, [0, 600], [0, -120]);
-  const imgScale = useTransform(scrollY, [0, 600], [1, 1.08]);
-  const overlayOpacity = useTransform(scrollY, [0, 400], [0, 0.7]);
+  // Parallax: portrait drifts up slower than scroll
+  const imgY = useTransform(scrollY, [0, 600], [0, -100]);
+  const imgScale = useTransform(scrollY, [0, 600], [1, 1.05]);
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -74,27 +72,24 @@ export function CinemaHero() {
       className="relative min-h-screen flex items-center overflow-hidden cinema-scanline"
       style={{ background: "#020617" }}
     >
-      {/* ── Ambient light blobs ── */}
+      {/* ── Structured ambient backdrop (no aggressive orbs) ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="drift-1 absolute -top-48 -start-48 w-[700px] h-[700px] rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #9d00ff 0%, transparent 65%)", filter: "blur(100px)" }}
-        />
-        <div className="drift-2 absolute top-1/3 -end-32 w-[500px] h-[500px] rounded-full opacity-25"
-          style={{ background: "radial-gradient(circle, #00f3ff 0%, transparent 65%)", filter: "blur(80px)" }}
-        />
-        <div className="drift-3 absolute -bottom-32 start-1/3 w-[400px] h-[400px] rounded-full opacity-15"
-          style={{ background: "radial-gradient(circle, #9d00ff 0%, transparent 65%)", filter: "blur(90px)" }}
-        />
-        {/* Grid */}
-        <div className="absolute inset-0 opacity-[0.04]"
+        {/* Fine grid */}
+        <div className="absolute inset-0 opacity-[0.025]"
           style={{
-            backgroundImage: "linear-gradient(rgba(0,243,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.6) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+            backgroundImage: "linear-gradient(rgba(0,243,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,243,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%)",
           }}
         />
-        {/* Vignette */}
+        {/* One soft directional wash — subtle, no blur-bomb */}
+        <div className="absolute top-0 inset-x-0 h-[420px]"
+          style={{ background: "radial-gradient(ellipse 70% 100% at 70% 0%, rgba(157,0,255,0.08), transparent 70%)" }}
+        />
+        {/* Deep base vignette */}
         <div className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse at center, transparent 40%, #020617 100%)" }}
+          style={{ background: "radial-gradient(ellipse at center, transparent 55%, rgba(2,6,23,0.6) 100%)" }}
         />
       </div>
 
@@ -112,72 +107,72 @@ export function CinemaHero() {
             </div>
 
             {/* Title with word-by-word stagger */}
-            <h1 ref={titleRef} className="mb-6">
+            <h1 ref={titleRef} className="mb-5">
               {isRtl ? (
-                <>
-                  <div className="overflow-hidden mb-1">
-                    <span className="hero-word block text-5xl sm:text-6xl lg:text-7xl font-black text-[#e2e8f0] opacity-0 leading-none">
-                      مهدی
-                    </span>
-                  </div>
-                  <div className="overflow-hidden">
-                    <span className="hero-word block text-5xl sm:text-6xl lg:text-7xl font-black text-cinema-gradient opacity-0 leading-none">
-                      احمدی
-                    </span>
-                  </div>
-                </>
+                <span className="flex flex-wrap items-baseline gap-x-4 justify-end">
+                  <span className="hero-word text-5xl sm:text-6xl lg:text-7xl font-black text-[#f1f5f9] opacity-0 leading-[1.1]">
+                    مهدی
+                  </span>
+                  <span className="hero-word text-5xl sm:text-6xl lg:text-7xl font-black opacity-0 leading-[1.1]" style={{ color: "#9d00ff" }}>
+                    احمدی
+                  </span>
+                </span>
               ) : (
-                <>
-                  <div className="overflow-hidden mb-1">
-                    <span className="hero-word block text-5xl sm:text-6xl lg:text-7xl font-black text-[#e2e8f0] opacity-0 leading-none en">
-                      Mahdi
-                    </span>
-                  </div>
-                  <div className="overflow-hidden">
-                    <span className="hero-word block text-5xl sm:text-6xl lg:text-7xl font-black text-cinema-gradient opacity-0 leading-none en">
-                      Ahmadi
-                    </span>
-                  </div>
-                </>
+                <span className="flex flex-wrap items-baseline gap-x-4">
+                  <span className="hero-word text-5xl sm:text-6xl lg:text-7xl font-black text-[#f1f5f9] opacity-0 leading-[1.1] en">
+                    Mahdi
+                  </span>
+                  <span className="hero-word text-5xl sm:text-6xl lg:text-7xl font-black opacity-0 leading-[1.1] en" style={{ color: "#9d00ff" }}>
+                    Ahmadi
+                  </span>
+                </span>
               )}
             </h1>
 
-            {/* Animated role pills */}
-            <div ref={subtitleRef} className="opacity-0 mb-8 flex flex-wrap gap-2">
-              {roles.map((role, i) => (
+            {/* Subtitle */}
+            <p className="text-lg sm:text-xl font-bold text-[#cbd5e1] mb-6">
+              {isRtl ? "توسعه‌دهنده فول‌استک و مدیر سیستم" : "Full-Stack Developer & Systems Administrator"}
+            </p>
+
+            {/* Description */}
+            <p ref={subtitleRef} className="opacity-0 text-slate-400 text-sm sm:text-base leading-loose mb-8 max-w-xl">
+              {isRtl
+                ? "مهندس توسعه‌دهنده فول‌استک و مدیر سیستم با تخصص در معماری اوبونتو ۲۴ و یکپارچه‌سازی مدل‌های زبانی (LLMs) در Next.js/PostgreSQL. تبدیل چالش‌های سازمانی به راهکارهای دیجیتال کارآمد."
+                : "Full-stack engineer and systems administrator specializing in Ubuntu 24 architecture and LLM integration across Next.js/PostgreSQL. Turning enterprise challenges into efficient digital solutions."
+              }
+            </p>
+
+            {/* Stack tags */}
+            <div className={`mb-9 flex flex-wrap gap-2 ${isRtl ? "justify-end" : ""}`}>
+              {["Next.js 16", "PostgreSQL 18", "Ubuntu 24", "LLM"].map((tech, i) => (
                 <span
-                  key={i}
-                  className="px-3 py-1.5 text-sm rounded-lg glass-sm text-slate-300"
+                  key={tech}
+                  className="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300"
                   style={{
-                    borderColor: i % 2 === 0 ? "rgba(0,243,255,0.15)" : "rgba(157,0,255,0.15)",
+                    background: "rgba(255,255,255,0.03)",
+                    border: `1px solid ${i % 2 === 0 ? "rgba(0,243,255,0.18)" : "rgba(157,0,255,0.18)"}`,
                   }}
                 >
-                  {role}
+                  {tech}
                 </span>
               ))}
             </div>
 
-            {/* Description */}
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-10 max-w-lg">
-              {isRtl
-                ? "در تلاقی معماری سرور Ubuntu 24، توسعه Next.js/PostgreSQL و یکپارچه‌سازی مدل‌های زبانی — راهکارهای سازمانی می‌سازم که واقعاً کار می‌کنند."
-                : "At the intersection of Ubuntu 24 server architecture, Next.js/PostgreSQL development and LLM integration — building enterprise solutions that actually work."
-              }
-            </p>
-
             {/* CTAs */}
-            <div ref={ctaRef} className="flex flex-wrap gap-4">
-              <a href="#projects" className="cta-item opacity-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-[#020617] bg-[#00f3ff] glow-cyan transition-all hover:scale-105">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 3l14 9-14 9V3z" />
+            <div ref={ctaRef} className={`flex flex-wrap gap-4 ${isRtl ? "justify-end" : ""}`}>
+              {/* Primary: solid cyan, BLACK text, glow only on hover */}
+              <a href="#projects" className="cta-item btn-cinema-primary opacity-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-extrabold">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M5 3l14 9-14 9V3z" />
                 </svg>
                 {isRtl ? "مشاهده پروژه‌ها" : "View Projects"}
               </a>
-              <a href="#contact" className="cta-item opacity-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-[#00f3ff] glass border border-[#00f3ff]/25 hover:border-[#00f3ff]/50 transition-all hover:scale-105">
+              {/* Secondary: outline only */}
+              <a href="#contact" className="cta-item btn-cinema-outline opacity-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {isRtl ? "تماس" : "Contact"}
+                {isRtl ? "تماس با من" : "Contact"}
               </a>
             </div>
 
@@ -201,81 +196,62 @@ export function CinemaHero() {
             </motion.div>
           </div>
 
-          {/* ── Right: Parallax Image ── */}
+          {/* ── Right: Structured portrait frame ── */}
           <div className={`order-1 lg:order-2 flex justify-center ${isRtl ? "lg:justify-start" : "lg:justify-end"}`}>
-            <div ref={imgContainerRef} className="relative">
-              {/* Outer glow ring */}
-              <motion.div
-                style={{ y: imgY, scale: imgScale }}
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96"
+            <motion.div
+              style={{ y: imgY, scale: imgScale }}
+              className="relative w-72 h-80 sm:w-80 sm:h-96 lg:w-[340px] lg:h-[420px]"
+            >
+              {/* Subtle outline glow — gradient border, NOT a solid orb */}
+              <div
+                className="absolute inset-0 rounded-3xl"
+                style={{
+                  background: "linear-gradient(150deg, rgba(0,243,255,0.5), rgba(157,0,255,0.35) 50%, rgba(255,255,255,0.04) 100%)",
+                  padding: "1px",
+                  boxShadow: "0 0 40px rgba(0,243,255,0.08), 0 0 80px rgba(157,0,255,0.06)",
+                }}
               >
-                {/* Rotating gradient ring */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: "conic-gradient(from 0deg, #00f3ff, #9d00ff, transparent, #00f3ff)",
-                    padding: "2px",
-                  }}
-                >
-                  <div className="w-full h-full rounded-full" style={{ background: "#020617" }} />
-                </motion.div>
-
-                {/* Inner glow */}
-                <div className="absolute inset-2 rounded-full"
-                  style={{
-                    background: "radial-gradient(circle, rgba(157,0,255,0.2) 0%, rgba(0,243,255,0.1) 50%, transparent 70%)",
-                  }}
-                />
-
-                {/* Profile image placeholder — cinematic frame */}
+                {/* Inner panel */}
                 <div
-                  className="absolute inset-3 rounded-full overflow-hidden glass"
-                  style={{ border: "1px solid rgba(0,243,255,0.15)" }}
+                  className="w-full h-full rounded-3xl overflow-hidden relative"
+                  style={{ background: "linear-gradient(165deg, #0a1230 0%, #020617 70%)" }}
                 >
-                  {/* Try to load actual image, fallback to monogram */}
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{
-                      background: "radial-gradient(circle at 40% 35%, rgba(157,0,255,0.3), rgba(0,243,255,0.1), rgba(2,6,23,0.8))",
-                    }}
-                  >
-                    <div className="text-center">
-                      <div className="text-5xl sm:text-6xl font-black text-cinema-gradient mb-1 en">MA</div>
-                      <div className="text-xs text-slate-500 tracking-widest uppercase en">Portfolio</div>
-                    </div>
+                  {/* Corner accent ticks */}
+                  <span className="absolute top-4 start-4 w-5 h-5 border-t border-s rounded-tl" style={{ borderColor: "rgba(0,243,255,0.4)" }} />
+                  <span className="absolute bottom-4 end-4 w-5 h-5 border-b border-e rounded-br" style={{ borderColor: "rgba(157,0,255,0.4)" }} />
+
+                  {/* Monogram placeholder (swap for portrait <Image/> later) */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <div className="text-6xl sm:text-7xl font-black text-cinema-gradient en leading-none">MA</div>
+                    <div className="mt-2 text-[10px] text-slate-500 tracking-[0.35em] uppercase en">Portfolio</div>
                   </div>
+
+                  {/* Soft top sheen */}
+                  <div className="absolute top-0 inset-x-0 h-24" style={{ background: "linear-gradient(180deg, rgba(0,243,255,0.06), transparent)" }} />
                 </div>
+              </div>
 
-                {/* Floating cards */}
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className={`absolute -bottom-4 ${isRtl ? "-start-8" : "-end-8"} glass-sm px-4 py-2`}
-                  style={{ borderColor: "rgba(0,243,255,0.2)" }}
-                >
-                  <div className="text-xs text-slate-400">{isRtl ? "پروژه‌ها" : "Projects"}</div>
-                  <div className="text-lg font-black text-[#00f3ff] en">22+</div>
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className={`absolute -top-4 ${isRtl ? "-end-8" : "-start-8"} glass-sm px-4 py-2`}
-                  style={{ borderColor: "rgba(157,0,255,0.2)" }}
-                >
-                  <div className="text-xs text-slate-400">{isRtl ? "تجربه" : "Experience"}</div>
-                  <div className="text-lg font-black text-[#9d00ff] en">13Y</div>
-                </motion.div>
+              {/* Floating stat cards */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className={`absolute -bottom-5 ${isRtl ? "-start-6" : "-end-6"} glass-sm px-4 py-2.5`}
+                style={{ borderColor: "rgba(0,243,255,0.2)" }}
+              >
+                <div className="text-[11px] text-slate-400">{isRtl ? "پروژه‌ها" : "Projects"}</div>
+                <div className="text-lg font-black text-[#00f3ff] en leading-tight">22+</div>
               </motion.div>
 
-              {/* Dark scroll overlay as user scrolls */}
               <motion.div
-                style={{ opacity: overlayOpacity, background: "#020617" }}
-                className="absolute inset-0 rounded-full pointer-events-none"
-              />
-            </div>
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className={`absolute -top-5 ${isRtl ? "-end-6" : "-start-6"} glass-sm px-4 py-2.5`}
+                style={{ borderColor: "rgba(157,0,255,0.2)" }}
+              >
+                <div className="text-[11px] text-slate-400">{isRtl ? "تجربه" : "Experience"}</div>
+                <div className="text-lg font-black text-[#9d00ff] en leading-tight">13Y</div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>

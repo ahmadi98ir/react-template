@@ -11,8 +11,8 @@ const FALLBACK_EN = [
     title: "BEEWAZ Platform",
     category: "E-commerce & CRM",
     description:
-      "A full-scale e-commerce and CRM platform built on Next.js 16, Tailwind 4, and PostgreSQL. Features complex payment gateway integration, automated SMS workflows, multi-vendor support, and a real-time analytics dashboard.",
-    stack: ["Next.js 16", "PostgreSQL", "Tailwind 4", "SMS Gateway", "Payment API"],
+      "A comprehensive e-commerce and CRM platform built on Next.js 16 and PostgreSQL 18 infrastructure. Includes dynamic payment systems and integrated SMS gateway services.",
+    stack: ["Next.js 16", "PostgreSQL 18", "Payment Gateway", "SMS System", "CRM"],
     color: "#00f3ff",
     accent: "rgba(0,243,255,0.12)",
     projectUrl: null,
@@ -56,8 +56,8 @@ const FALLBACK_FA = [
     title: "پلتفرم BEEWAZ",
     category: "فروشگاه اینترنتی و CRM",
     description:
-      "یک پلتفرم فروشگاه اینترنتی و CRM کامل بر پایه Next.js 16، Tailwind 4 و PostgreSQL. شامل یکپارچه‌سازی درگاه پرداخت پیچیده، گردش‌کار خودکار SMS، پشتیبانی از چند فروشنده و داشبورد تحلیل زنده.",
-    stack: ["Next.js 16", "PostgreSQL", "Tailwind 4", "درگاه SMS", "API پرداخت"],
+      "پلتفرم جامع تجارت الکترونیک و CRM با زیرساخت Next.js 16 و PostgreSQL 18. شامل سیستم‌های داینامیک پرداخت و ادغام سیستم‌های پیامکی.",
+    stack: ["Next.js 16", "PostgreSQL 18", "درگاه پرداخت", "سامانه پیامک", "CRM"],
     color: "#00f3ff",
     accent: "rgba(0,243,255,0.12)",
     projectUrl: null,

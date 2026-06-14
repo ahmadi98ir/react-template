@@ -276,7 +276,7 @@ export function CinemaContact() {
                     disabled={loading}
                     whileHover={loading ? {} : { scale: 1.02 }}
                     whileTap={loading ? {} : { scale: 0.98 }}
-                    className="w-full py-3.5 rounded-xl text-sm font-bold text-[#020617] bg-[#00f3ff] glow-cyan transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="btn-cinema-primary w-full py-3.5 rounded-xl text-sm font-extrabold disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {loading
                       ? (isRtl ? "در حال ارسال…" : "Sending…")

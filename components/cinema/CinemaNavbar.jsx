@@ -145,7 +145,7 @@ export function CinemaNavbar() {
               {/* CTA */}
               <a
                 href="#contact"
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-[#020617] bg-[#00f3ff] glow-cyan hover:scale-105 transition-transform"
+                className="btn-cinema-primary hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-extrabold"
               >
                 {isRtl ? "تماس" : "Hire Me"}
               </a>
