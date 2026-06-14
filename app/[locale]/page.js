@@ -1,21 +1,21 @@
-import { Navbar } from "@/components/portfolio/Navbar";
-import { Hero } from "@/components/portfolio/Hero";
-import { About } from "@/components/portfolio/About";
-import { Services } from "@/components/portfolio/Services";
-import { Projects } from "@/components/portfolio/Projects";
-import { Contact } from "@/components/portfolio/Contact";
-import { Footer } from "@/components/portfolio/Footer";
+import { CinemaNavbar } from "@/components/cinema/CinemaNavbar";
+import { CinemaHero } from "@/components/cinema/CinemaHero";
+import { CinemaAbout } from "@/components/cinema/CinemaAbout";
+import { CinemaProjects } from "@/components/cinema/CinemaProjects";
+import { CinemaSkills } from "@/components/cinema/CinemaSkills";
+import { CinemaContact } from "@/components/cinema/CinemaContact";
+import { CinemaFooter } from "@/components/cinema/CinemaFooter";
 
 export default function Home() {
   return (
-    <main className="portfolio-page">
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Projects />
-      <Contact />
-      <Footer />
+    <main className="cinema-page">
+      <CinemaNavbar />
+      <CinemaHero />
+      <CinemaAbout />
+      <CinemaProjects />
+      <CinemaSkills />
+      <CinemaContact />
+      <CinemaFooter />
     </main>
   );
 }

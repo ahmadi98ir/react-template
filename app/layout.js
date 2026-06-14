@@ -1,4 +1,4 @@
-import { Vazirmatn } from 'next/font/google';
+import { Vazirmatn, Urbanist } from 'next/font/google';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { cookies } from 'next/headers';
@@ -14,6 +14,13 @@ import "./globals.css";
 const vazirmatn = Vazirmatn({
   subsets: ['arabic', 'latin'],
   variable: '--font-vazirmatn',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+});
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  variable: '--font-urbanist',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
@@ -56,7 +63,7 @@ export default async function RootLayout({ children }) {
     <html
       lang={locale}
       dir={dir}
-      className={`${vazirmatn.variable} ${yekan.variable} ${dm_sans.variable} scroll-smooth`}
+      className={`${vazirmatn.variable} ${urbanist.variable} ${yekan.variable} ${dm_sans.variable} scroll-smooth`}
     >
       <body>
         {process.env.GTAG_ID ? (
