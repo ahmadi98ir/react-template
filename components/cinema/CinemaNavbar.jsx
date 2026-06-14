@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
 import gsap from "gsap";
@@ -56,6 +56,11 @@ export function CinemaNavbar() {
   }, []);
 
   const links = isRtl ? NAV_LINKS.fa : NAV_LINKS.en;
+
+  const switchLocale = useCallback((l) => {
+    document.cookie = `NEXT_LOCALE=${l};path=/;max-age=31536000;SameSite=Lax`;
+    window.location.href = `/${l}`;
+  }, []);
 
   return (
     <>
@@ -123,9 +128,9 @@ export function CinemaNavbar() {
               {/* Language toggle */}
               <div className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg glass-sm text-xs">
                 {["fa", "en"].map((l) => (
-                  <a
+                  <button
                     key={l}
-                    href={`/${l}`}
+                    onClick={() => switchLocale(l)}
                     className={`px-2 py-0.5 rounded transition-all en ${
                       locale === l
                         ? "bg-[#00f3ff]/10 text-[#00f3ff]"
@@ -133,7 +138,7 @@ export function CinemaNavbar() {
                     }`}
                   >
                     {l.toUpperCase()}
-                  </a>
+                  </button>
                 ))}
               </div>
 
@@ -201,9 +206,9 @@ export function CinemaNavbar() {
               ))}
               <div className="mt-2 pt-2 border-t border-white/5 flex gap-2">
                 {["fa", "en"].map((l) => (
-                  <a
+                  <button
                     key={l}
-                    href={`/${l}`}
+                    onClick={() => { setMobileOpen(false); switchLocale(l); }}
                     className={`flex-1 text-center py-2 rounded-lg text-xs en transition-colors ${
                       locale === l
                         ? "bg-[#00f3ff]/10 text-[#00f3ff]"
@@ -211,7 +216,7 @@ export function CinemaNavbar() {
                     }`}
                   >
                     {l === "fa" ? "فارسی" : "English"}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+
 import { useLocale } from "next-intl";
 
 const CONTACT_CARDS_EN = [
@@ -58,12 +59,27 @@ export function CinemaContact() {
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const cards = isRtl ? CONTACT_CARDS_FA : CONTACT_CARDS_EN;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In production: POST to API route
-    setSent(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+      if (!res.ok) throw new Error("send_failed");
+      setSent(true);
+    } catch {
+      setError(isRtl ? "ارسال ناموفق بود. لطفاً دوباره امتحان کنید." : "Failed to send. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -252,13 +268,19 @@ export function CinemaContact() {
                       onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; e.target.style.boxShadow = "none"; }}
                     />
                   </div>
+                  {error && (
+                    <p className="text-xs text-red-400 text-center">{error}</p>
+                  )}
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-3.5 rounded-xl text-sm font-bold text-[#020617] bg-[#00f3ff] glow-cyan transition-all"
+                    disabled={loading}
+                    whileHover={loading ? {} : { scale: 1.02 }}
+                    whileTap={loading ? {} : { scale: 0.98 }}
+                    className="w-full py-3.5 rounded-xl text-sm font-bold text-[#020617] bg-[#00f3ff] glow-cyan transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {isRtl ? "ارسال پیام" : "Send Message"}
+                    {loading
+                      ? (isRtl ? "در حال ارسال…" : "Sending…")
+                      : (isRtl ? "ارسال پیام" : "Send Message")}
                   </motion.button>
                 </form>
               )}

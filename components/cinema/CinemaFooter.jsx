@@ -2,6 +2,11 @@
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 
+function switchLocale(l) {
+  document.cookie = `NEXT_LOCALE=${l};path=/;max-age=31536000;SameSite=Lax`;
+  window.location.href = `/${l}`;
+}
+
 export function CinemaFooter() {
   const locale = useLocale();
   const isRtl = locale === "fa" || locale === "ar";
@@ -35,9 +40,9 @@ export function CinemaFooter() {
           {/* Language toggle */}
           <div className="flex items-center gap-1 text-xs">
             {["fa", "en"].map((l) => (
-              <a
+              <button
                 key={l}
-                href={`/${l}`}
+                onClick={() => switchLocale(l)}
                 className={`px-3 py-1.5 rounded-lg transition-colors en ${
                   locale === l
                     ? "text-[#00f3ff] bg-[#00f3ff]/08"
@@ -45,7 +50,7 @@ export function CinemaFooter() {
                 }`}
               >
                 {l === "fa" ? "فارسی" : "English"}
-              </a>
+              </button>
             ))}
           </div>
         </div>
