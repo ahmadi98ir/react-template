@@ -33,21 +33,48 @@ export async function generateMetadata({ params }) {
       locale: locale === "fa" ? "fa_IR" : "en_US",
       type: "website",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: m.title,
-      description: m.description,
-    },
+    twitter: { card: "summary_large_image", title: m.title, description: m.description },
   };
 }
 
-export default function Home() {
+async function getPublishedProjects() {
+  try {
+    // Dynamic import keeps the DB out of the Edge bundle
+    const { db } = await import("@/drizzle/db");
+    const { projects } = await import("@/drizzle/schema");
+    const { asc, eq, and } = await import("drizzle-orm");
+
+    return await db
+      .select({
+        id: projects.id,
+        slug: projects.slug,
+        title: projects.title,
+        description: projects.description,
+        category: projects.category,
+        tags: projects.tags,
+        projectUrl: projects.projectUrl,
+        githubUrl: projects.githubUrl,
+        coverImageUrl: projects.coverImageUrl,
+        featured: projects.featured,
+        order: projects.order,
+      })
+      .from(projects)
+      .where(and(eq(projects.published, true)))
+      .orderBy(asc(projects.order));
+  } catch {
+    return [];
+  }
+}
+
+export default async function Home() {
+  const dbProjects = await getPublishedProjects();
+
   return (
     <main className="cinema-page">
       <CinemaNavbar />
       <CinemaHero />
       <CinemaAbout />
-      <CinemaProjects />
+      <CinemaProjects dbProjects={dbProjects} />
       <CinemaSkills />
       <CinemaContact />
       <CinemaFooter />
