@@ -27,10 +27,19 @@ if [ -z "$COOLIFY_TOKEN" ]; then
   exit 1
 fi
 
-# Find app UUID
+# Find app UUID — search by name since .image may be null for source-based apps
+# Hardcoded fallback UUID for ahmadi98.ir (veqq7052vw0zjhal6ubztog6)
 UUID=$(curl -fs "$COOLIFY_API/applications" \
   -H "Authorization: Bearer $COOLIFY_TOKEN" | \
-  jq -r '.[] | select((.image // "") | contains("react-template")) | .uuid' 2>/dev/null | head -1)
+  jq -r '(if type=="array" then . else (.data // []) end)[]
+    | select(
+        ((.name // "") | ascii_downcase | contains("react-template"))
+        or ((.image // "") | contains("react-template"))
+        or (.uuid == "veqq7052vw0zjhal6ubztog6")
+      ) | .uuid' 2>/dev/null | head -1)
+
+# Fallback to known UUID if API search fails
+UUID="${UUID:-veqq7052vw0zjhal6ubztog6}"
 
 if [ -z "$UUID" ]; then
   echo "$LOG_PREFIX ERROR: react-template app not found in Coolify"

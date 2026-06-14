@@ -64,8 +64,13 @@ jobs:
                 -H "Authorization: Bearer $COOLIFY_TOKEN" 2>/dev/null) || continue
               UUID=$(echo "$RESP" | jq -r \
                 '(if type=="array" then . else (.data // []) end)[]
-                 | select((.image // "") | contains("react-template")) | .uuid' \
+                 | select(
+                     ((.name // "") | ascii_downcase | contains("react-template"))
+                     or ((.image // "") | contains("react-template"))
+                   ) | .uuid' \
                 2>/dev/null | head -1)
+              # Fallback to hardcoded UUID if API search fails
+              UUID="${UUID:-veqq7052vw0zjhal6ubztog6}"
               if [ -n "$UUID" ]; then
                 echo "Found UUID=$UUID on $host, triggering deploy..."
                 curl -fsSL --max-time 15 "$host/api/v1/deploy?uuid=$UUID&force=true" \
