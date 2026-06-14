@@ -1,4 +1,20 @@
 "use client";
+import ReactDOM from "react-dom";
+// findDOMNode was removed in React 19; patch it for react-slick compatibility
+if (typeof window !== "undefined" && !ReactDOM.findDOMNode) {
+  ReactDOM.findDOMNode = function (inst) {
+    if (inst == null) return null;
+    if (inst.nodeType === 1) return inst;
+    var fiber = inst._reactInternals;
+    if (!fiber) return null;
+    var node = fiber.child;
+    while (node) {
+      if (node.stateNode instanceof Element) return node.stateNode;
+      node = node.child;
+    }
+    return null;
+  };
+}
 import { noxfolioSlider } from "@/utility/sliderProps";
 import { Component } from "react";
 import Slider from "react-slick";
